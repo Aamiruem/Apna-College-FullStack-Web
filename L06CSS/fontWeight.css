@@ -7,6 +7,9 @@ h1{
     border: solid;
     text-decoration: wavy black underline;
     letter-spacing: 20px;
+    font-size: 25px;
+    font-family: arial;
+    font-family: avant garde, didot, sans serif;
 }
 
 h2{
@@ -24,11 +27,13 @@ h3{
 h4{
     font-weight: lighter;
     text-decoration: double blue overline;
+    font-family: impact;
 }
 
 
 a{
     text-decoration: none;
+    /* font-family: impact; */
 }
 
 p{
@@ -36,4 +41,6 @@ p{
     font-weight:400;
     text-indent: 30px;
     line-height: 2.5;
+    font-size: 20px;
+    
 }
