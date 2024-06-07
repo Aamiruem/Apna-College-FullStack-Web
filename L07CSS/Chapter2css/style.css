@@ -1,5 +1,6 @@
 * {
     font-family: "Courier New";
+    /* background-color:blue; */
 }
 
 
@@ -37,5 +38,27 @@ h1, h3  {
 
 .upvote {
     background-color: green;
+    color: blue;
+}
+
+
+/* descendent selector */
+.post {
+    background-color: green;
+    color: blue;
+}
+
+
+nav ul li a{
+    color:blue
+}
+
+p + h3{
+    text-decoration: underline;
+}
+
+
+.upvote + button{
+    background-color: cornflowerblue;
     color: blue;
 }
