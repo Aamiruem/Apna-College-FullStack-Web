@@ -123,4 +123,44 @@ button:active {
   background-color: hotpink;
 }
 
+p:active {
+    font-weight: bold;
+    color: white;
+}
 
+input[type="radio"]:checked + label{
+    color: red;
+    font-weight: bold;
+}
+
+
+
+div:nth-of-type(2n){
+    background-color: yellow;
+}
+
+
+h1::first-letter {
+    color: black;
+}
+
+
+p::first-line {
+    color: #0cb92c;
+}
+
+
+p::selection{
+    background-color: #b90c0c;
+    color: white;
+}
+
+
+h3  {
+    background-color:rgb(17, 255, 0)
+}
+
+h3 {
+    color: rgb(17, 255, 0)
+    background-color aqua;
+}
