@@ -1,15 +1,15 @@
+h3  {
+    background-color: purple !important;
+}
 * {
   font-family: "Courier New";
-  /* background-color:blue;- */
+  /* background-color:blue; */
 }
 
 /* h1  {
     color: #b92b27;
 } */
 
-/* h3  {
-    color: purple;
-} */
 
 h1,
 h3 {
