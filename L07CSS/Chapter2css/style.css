@@ -53,6 +53,9 @@ nav ul li a{
     color:blue
 }
 
+nav + a{
+    color:red;
+}
 p + h3{
     text-decoration: underline;
 }
@@ -61,4 +64,73 @@ p + h3{
 .upvote + button{
     background-color: cornflowerblue;
     color: blue;
+}
+
+
+.upvote + button:hover{
+    background-color: blue;
+    color: cornflowerblue;
+}
+
+.upvote + button:active{
+    background-color: blue;
+    color: cornflowerblue;
+}
+
+.upvote + button:focus{
+    background-color: blue;
+    color: cornflowerblue;
+}
+
+.upvote + button:visited{
+    background-color: blue;
+    color: cornflowerblue;
+}
+
+.upvote + button:link{
+    background-color: blue;
+    color: cornflowerblue;
+}
+div> input{
+    background-color: darksalmon;
+    color: cornflowerblue;
+}
+
+
+/* Atribute selector
+*/
+
+input[type="text"]{
+    color: red;
+}
+
+input[type="password"]{
+    background-color: rgb(17, 255, 0);
+    color:red;
+}
+
+input[type="submit"]{
+    background-color: blue;
+    color: white;
+}
+
+input[type]{
+    background-color: blue;
+    color: white;
+}
+
+
+/* pseudo-class */
+button:hover{
+    background-color: black;
+    color: white;
+}
+
+h3:hover{
+    text-decoration: overline;
+}
+
+
+button:active{
+    background-color: hotpink;
 }
