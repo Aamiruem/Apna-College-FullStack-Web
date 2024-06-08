@@ -1,33 +1,29 @@
 * {
-    font-family: "Courier New";
-    /* background-color:blue;- */
+  font-family: "Courier New";
+  /* background-color:blue;- */
 }
-
-
 
 /* h1  {
     color: #b92b27;
 } */
 
-
 /* h3  {
     color: purple;
 } */
 
-
-h1, h3  {
-    color: #b92b27;
-} 
+h1,
+h3 {
+  color: #b92b27;
+}
 
 /* ID Selector */
 #login {
-    background-color: white;
-
+  background-color: white;
 }
 
 #signup {
-    background-color: #b92b27;
-    color: white;
+  background-color: #b92b27;
+  color: white;
 }
 
 /* class selector */
@@ -35,102 +31,96 @@ h1, h3  {
     property:value;
 } */
 
-
 .upvote {
-    background-color: green;
-    color: blue;
+  background-color: green;
+  color: blue;
 }
-
 
 /* descendent selector */
 .post {
-    background-color: green;
-    color: blue;
+  background-color: green;
+  color: blue;
 }
 
-
-nav ul li a{
-    color:blue
+nav ul li a {
+  color: blue;
 }
 
-nav + a{
-    color:red;
+nav + a {
+  color: red;
 }
-p + h3{
-    text-decoration: underline;
-}
-
-
-.upvote + button{
-    background-color: cornflowerblue;
-    color: blue;
+p + h3 {
+  text-decoration: underline;
 }
 
-
-.upvote + button:hover{
-    background-color: blue;
-    color: cornflowerblue;
+.upvote + button {
+  background-color: cornflowerblue;
+  color: blue;
 }
 
-.upvote + button:active{
-    background-color: blue;
-    color: cornflowerblue;
+.upvote + button:hover {
+  background-color: blue;
+  color: cornflowerblue;
 }
 
-.upvote + button:focus{
-    background-color: blue;
-    color: cornflowerblue;
+.upvote + button:active {
+  background-color: blue;
+  color: cornflowerblue;
 }
 
-.upvote + button:visited{
-    background-color: blue;
-    color: cornflowerblue;
+.upvote + button:focus {
+  background-color: blue;
+  color: cornflowerblue;
 }
 
-.upvote + button:link{
-    background-color: blue;
-    color: cornflowerblue;
-}
-div> input{
-    background-color: darksalmon;
-    color: cornflowerblue;
+.upvote + button:visited {
+  background-color: blue;
+  color: cornflowerblue;
 }
 
+.upvote + button:link {
+  background-color: blue;
+  color: cornflowerblue;
+}
+div > input {
+  background-color: darksalmon;
+  color: cornflowerblue;
+}
 
 /* Atribute selector
 */
 
-input[type="text"]{
-    color: red;
+input[type="text"] {
+  color: red;
 }
 
-input[type="password"]{
-    background-color: rgb(17, 255, 0);
-    color:red;
+input[type="password"] {
+  background-color: rgb(17, 255, 0);
+  color: red;
 }
 
-input[type="submit"]{
-    background-color: blue;
-    color: white;
+input[type="submit"] {
+  background-color: blue;
+  color: white;
 }
 
-input[type]{
-    background-color: blue;
-    color: white;
+input[type] {
+  background-color: blue;
+  color: white;
 }
-
 
 /* pseudo-class */
-button:hover{
-    background-color: black;
-    color: white;
+button:hover {
+  background-color: black;
+  color: white;
 }
 
-h3:hover{
-    text-decoration: overline;
+h3:hover {
+  text-decoration: overline;
+}
+
+button:active {
+  background-color: hotpink;
 }
 
 
-button:active{
-    background-color: hotpink;
-}
