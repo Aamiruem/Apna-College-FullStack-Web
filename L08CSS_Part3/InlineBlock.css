@@ -1,0 +1,9 @@
+div{
+    height: 200px;
+    width: 500px;
+    background-color: greenyellow;
+    border: 2px solid black;
+    padding: 20px;
+    margin: 5px;
+    /* display: inline-block; */
+}
