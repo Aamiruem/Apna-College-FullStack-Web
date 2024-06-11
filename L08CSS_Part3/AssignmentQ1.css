@@ -1,0 +1,16 @@
+#box{
+    text-align:center;
+    height: 150px;
+    width: 300px;
+    background-color: grey;
+    border: 5px dotted black;
+    margin: 20px 1em 40px 2em;
+    /* margin-right: 1em;
+    margin-bottom: 2em; */
+    padding: 1em;
+}
+   
+div{
+    text-align:center;
+        
+}
