@@ -1,0 +1,24 @@
+div{
+    height: 100px;
+    width: 100px;
+    background-color: #4dff00ff;
+    margin: 0 auto;
+    margin-top: 10px;
+    transition: margin-top 2s ease-in 0.2s;
+
+
+
+    /* transition-duration: 2s;
+    transition-delay: 1s; */
+}
+
+/* div:hover{
+    background-color: black;
+    border-radius: 50%;
+} */
+
+
+div:hover{
+    margin-top: 400px;
+    background-color: pink;
+}
