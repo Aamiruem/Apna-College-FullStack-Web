@@ -33,11 +33,11 @@
     display: flex;
     justify-content: flex-start;
     align-content: center;
-    align-items: center;
+    /* align-items: center;
     margin-left: 100px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding-left: 10px;
+    padding-left: 10px; */
 }
 
 
@@ -49,7 +49,7 @@
     margin-left: 5px;
     font-size: 24px;
     line-height: 50px;
-    text-align: center;
+    /* text-align: center;
     background-color: lightblue;
-    border: 2px solid black;
+    border: 2px solid black; */
 }
