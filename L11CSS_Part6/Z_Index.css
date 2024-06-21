@@ -1,0 +1,22 @@
+.box{
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    background-color: pink;
+}
+
+.one{
+    background-color:aquamarine;
+    z-index: -1;
+}
+
+.two{
+    background-color: darksalmon;
+    position:relative;
+    bottom: 50px;
+    top: 50px;
+    left: 50px;
+    z-index: -2;
+    
+}
+   
