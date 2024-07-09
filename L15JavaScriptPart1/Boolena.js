@@ -62,3 +62,13 @@ if (isAdult) {
 } else {
   console.log("You are not an adult.");
 }
+
+
+
+
+let a = 5;
+console.log(typeof a)
+
+a = true;
+console.log(a)
+console.log(typeof a)
