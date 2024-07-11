@@ -146,7 +146,7 @@ body {
 .sidebar {
     background-color: #121212;
     width: 350px;
-    border-radius: 1rem;
+    border-radius: 1rem; /* = 16px */
 }
 
 .main-content {
