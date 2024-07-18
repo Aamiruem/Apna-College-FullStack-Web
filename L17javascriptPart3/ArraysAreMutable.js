@@ -33,3 +33,17 @@ nums[1] = 3;
 console.log(nums);
 
 nums[2] = 5;
+
+console.log(nums);
+
+
+
+let name = "rohit";
+name[0] = 'm';
+console.log(name);
+
+
+
+let fruits1 = ["mango", "apple", "litchi"];
+
+console.log(fruits1);
