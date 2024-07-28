@@ -3,7 +3,10 @@ function outerFunc(){
     let y = 6;
 
     function innerFunc(){
-        let z = 7;
-        console.log(x, y, z);
+        console.log(x);
     }
+
+    innerFunc();
+
+    console.log(y);
 }
