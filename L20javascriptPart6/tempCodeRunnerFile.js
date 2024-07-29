@@ -1,9 +1,3 @@
-function outerFunc(){
-    let x = 5;
-    let y = 6;
+console.log(calculator.factorial(-5)); // Output: Error: Input must be a non-negative integer
 
-    function innerFunc(){
-        let z = 7;
-        console.log(x, y, z);
-    }
-}
+// console.log(calculator.logarithm(0, 10)); // Output: Error: Base and argument must be positive
