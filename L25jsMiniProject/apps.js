@@ -18,12 +18,22 @@ btn.addEventListener("click", function () {
 });
 
 
-let delBtns = document.querySelectorAll(".delete");
-for(delBtn of delBtns){
-    delBtn.addEventListener("click", function () {
-        delBtn.parentNode.remove();
-        let par = this.parentElement;
-        console.log(par);
-        par.remove();
-    });
-}
+ul.addEventListener("clicked", function (event){
+    if(event.target.nodeName == "Button"){
+        let listItem = event.target.parentElement;
+        console.log(listItem);
+        console.log("delete");
+        listItem.remove();
+        // console.log("button clicked");
+    }
+});
+
+// let delBtns = document.querySelectorAll(".delete");
+// for(delBtn of delBtns){
+//     delBtn.addEventListener("click", function () {
+//         delBtn.parentNode.remove();
+//         let par = this.parentElement;
+//         console.log(par);
+//         par.remove();
+//     });
+// }
