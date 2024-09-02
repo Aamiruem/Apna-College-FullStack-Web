@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        img{
-            width: 200px;
-            height: 200px;
-        }
-    </style>
-</head>
-
+<%- include(includes/head.ejs); %>
 <body>
     <h1>This is an instagram page belong to: @<%= data.name %>
     </h1>
@@ -28,5 +14,5 @@
             Likes: <%= post.likes %><br>Comments: <%= post.comments %></p>
     <%} %>
 </body>
-
+<script src="/apps.js"></script>
 </html>
