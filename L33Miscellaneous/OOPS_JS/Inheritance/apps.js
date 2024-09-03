@@ -53,6 +53,10 @@ class Cat extends Mammal { //child
         console.log("I am sleeping....");
     }
 
+    eat() {
+        console.log("Dog am eating....");
+    }
+
     walk() {
         console.log("I am walking....");
     }
