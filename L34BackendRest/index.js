@@ -4,7 +4,7 @@ const port = 8080;
 
 const path = require("path");
 const { v4: uuidv4 } = require('uuid');
-uuidv4();
+
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
@@ -16,31 +16,31 @@ app.use(express.static(path.join(__dirname, "public")));
 
 let posts = [
     {
-        id: "1a",
+        id: uuidv4(),
         username: "apna college",
         content: "I love coding"
     },
 
     {
-        id:"2b",
+        id: uuidv4(),
         username: "kamran",
         content: "Hard work is important to achieve a success! "
     },
 
     {
-        id: "3c",
+        id: uuidv4(),
         username: "Aamir",
         content: "I love Data science"
     },
 
     {
-        id: "4d",
+        id: uuidv4(),
         username: "Adam khan",
         content: "I got selected for first my internship "
     },
 
     {
-        id: "5e",
+        id: uuidv4(),
         username: "apna college",
         content: "I love coding"
     }
@@ -67,6 +67,13 @@ app.post("/posts", (req, res) => {
 });
 
 
+app.post("/posts", (req, res) => {
+    let { username, content } = req.body;
+    posts.push({id, username, content });
+    res.redirect("/posts");
+});
+
+
 
 app.get("/posts/:id", (req, res) => {
     let {id} = req.params;
@@ -75,6 +82,31 @@ let post = posts.find((p) => id === p.id);
     res.render("show.ejs", { post });
     
 });
+
+
+app.patch("/posts/:id", (req, res) => {
+    let { id } = req.params;
+    let newContent = req.body.content;
+    console.log(newContent)
+    console.log(id)
+    res.send("patch request is working ")
+    let post = posts.find((p) => id === p.id);
+    post.content = newContent;
+    res.redirect(`/posts/${id}`);
+    console.log(post);
+
+    res.render("show.ejs", { post });
+    
+});
+
+
+app.patch("/posts/:id:/edit", (req, res) => {
+    let { id } = req.params;
+    let post = posts.find((p) => id === p.id);
+    res.render("edit.ejs", { post });
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
