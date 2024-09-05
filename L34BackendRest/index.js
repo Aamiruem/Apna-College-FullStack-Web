@@ -5,12 +5,12 @@ const port = 8080;
 const path = require("path");
 const { v4: uuidv4 } = require('uuid');
 
-const methodoverride = require("method-override");
+const methodOverride = require("method-override");
 
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
-app.use(methodoverride("_method"));
+app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -95,20 +95,31 @@ app.patch("/posts/:id", (req, res) => {
     res.send("patch request is working ")
     let post = posts.find((p) => id === p.id);
     post.content = newContent;
-    res.redirect(`/posts/${id}`);
     console.log(post);
+    // res.redirect(`/posts/${id}`);
+    res.redirect("/posts");
 
     res.render("show.ejs", { post });
     
 });
 
 
-app.patch("/posts/:id:/edit", (req, res) => {
+app.get("/posts/:id/edit", (req, res) => {
     let { id } = req.params;
     let post = posts.find((p) => id === p.id);
     res.render("edit.ejs", { post });
 });
 
+app.delete("/posts/:id", (req, res) => {
+    let {id} = req.params;
+    posts = posts.filter((p) => id !== p.id);
+    res.redirect("/posts");
+
+    // res.render("show.ejs", { post });
+
+    res.send("post deleted successfully");
+    
+});
 
 
 app.listen(port, () => {
