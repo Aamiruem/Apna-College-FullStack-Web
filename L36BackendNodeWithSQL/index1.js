@@ -66,3 +66,12 @@ connection.query(sql, values, (err, results) => {
 
 // Close the connection
 connection.end();
+
+let getRandomUser = () => {
+    return [
+        faker.datatype.uuid(),
+        faker.internet.userName(),
+        faker.internet.email(),
+        faker.internet.password(),
+    ];
+}
