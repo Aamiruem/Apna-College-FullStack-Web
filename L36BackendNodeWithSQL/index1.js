@@ -1,32 +1,68 @@
-const { faker } = require("@faker-js/faker");
+// const { faker } = require("@faker-js/faker");
+
+// const mysql = require('mysql2');
+
+// // create the connection to database
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     database: 'delta_app',
+//     password: 'Aamir@786'
+// });
+
+// //inserting New Data
+
+// let q = "INSERT INTO user (id, useRname, email, password) VALUES (?, ?, ?, ?)";
+// let user = ["123", "234_newuser", "abc@gmail.come", "abc"];
+// try {
+//     connection.query(q, (err, result) => {
+//     if (err) throw err;
+//     console.log(result);
+// });
+// } catch (err) {
+//     console.log(err);
+// }
+// connection.end();
+// // create the connection to database
+
+// let getRandomUser = ()=> {
+//     return {
+//     id: faker.string.uuid(),
+//     username: faker.internet.userName(),
+//     email: faker.internet.email(),
+//     password: faker.internet.password(),
+//     };
+// }
+
+
+
+
+
 
 const mysql = require('mysql2');
 
-// create the connection to database
+// Create a connection to the database
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    database: 'delta_app',
-    password: 'Aamir@786'
+    password: 'yourpassword',
+    database: 'yourdatabase'
 });
 
-let q = "SHOW TABLES";
-try {
-    connection.query(q, (err, result) => {
+// Connect to the database
+connection.connect(err => {
     if (err) throw err;
-    console.log(result);
+    console.log('Connected to the database.');
 });
-} catch (err) {
-    console.log(err);
-}
-connection.end();
-// create the connection to database
 
-let getRandomUser = ()=> {
-    return {
-    id: faker.string.uuid(),
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-    };
-}
+// Insert data
+const sql = 'INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)';
+const values = ['101', 'OliviaBarrett', 'olivia@example.com', 'password123'];
+
+connection.query(sql, values, (err, results) => {
+    if (err) throw err;
+    console.log('Record inserted:', results);
+});
+
+// Close the connection
+connection.end();
