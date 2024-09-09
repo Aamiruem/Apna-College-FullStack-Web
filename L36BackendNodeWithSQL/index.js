@@ -21,6 +21,13 @@
 
 const { faker } = require("@faker-js/faker");
 const mysql = require('mysql2');
+const express = require('express');
+const app = express();
+const path = require('path');
+
+app.set("view engine ", "ejs");
+app.use("views", path.join(__dirname, "/views"));
+app.use(express.static("public"));
 
 // create the connection to database
 const connection = mysql.createConnection({
@@ -33,21 +40,47 @@ const connection = mysql.createConnection({
 
 let q = "INSERT INTO user (id, username, email, password) VALUES ?";
 
-let getRandomUser = ()=> {
+let getRandomUser = () => {
     return [
-    faker.string.uuid(),
-    faker.internet.userName(),
-    faker.internet.email(),
-    faker.internet.password(),
+        faker.string.uuid(),
+        faker.internet.userName(),
+        faker.internet.email(),
+        faker.internet.password(),
     ];
+};
+
+
+
+app.get("/", (req, res) => {
+    let q = `SELECT count(*) From user`;
+});
+
+try {
+    connection.query(q, (err, result) => {
+    if (err) throw err;
+        console.log(result);
+        res.send(result);
+        // console.log(result[0]);
+        // console.log(result[0].id);
+});
+} catch (err) {
+    console.log(err);
+    res.send("some err in database");
 }
+// connection.end();
 
-let data = [];
 
-for (let i = 1; i < 100; i++) {
-    data.push(getRandomUser());
+
+
+
+
+
+// let data = [];
+
+// for (let i = 1; i < 100; i++) {
+//     data.push(getRandomUser());
     // console.log(getRandomUser());
-}
+// }
 
 
 
@@ -60,17 +93,16 @@ for (let i = 1; i < 100; i++) {
 
 
 
-try {
-    connection.query(q, [data], (err, result) => {
-    if (err) throw err;
-        console.log(result.length);
-        console.log(result[0]);
-        console.log(result[0].id);
+
+
+app.get('/', (req, res) => {
+    res.send('Hello from Delta App Server! welcome to home page');
 });
-} catch (err) {
-    console.log(err);
-}
-connection.end();
+app.listen("8080", () => {
+    console.log("Server is running on port 8080");  // server is running on port 8080
+});
+
+
 
 
 
