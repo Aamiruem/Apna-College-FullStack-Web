@@ -11,7 +11,9 @@
   "description": "",
   "dependencies": {
     "@faker-js/faker": "^9.0.0",
+    "express": "^4.19.2",
     "method-override": "^3.0.0",
-    "mysql2": "^3.11.0"
+    "mysql2": "^3.11.0",
+    "uuid": "^10.0.0"
   }
 }
