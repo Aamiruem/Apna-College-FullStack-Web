@@ -25,6 +25,14 @@
 
 
 
-const someValue = require("./math");
+// const someValue = require("./math");
 
-console.log(someValue);
+// console.log(someValue);
+// console.log(someValue.add(5, 6));
+// console.log(someValue.subtract(5, 6));
+
+
+const math = require("./math");
+console.log(math);
+console.log(math.add(5, 6));
+console.log(math.subtract(5, 6));

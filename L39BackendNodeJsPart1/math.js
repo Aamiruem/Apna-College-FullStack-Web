@@ -24,20 +24,41 @@ const PI = 3.14;
 
 
 
-module.exports = {
-    sum,
-    subtract,
-    multiply,
-    divide,
-    mod,
-    pow,
-    cube,
-    square,
-    abs,
-    sqrt,
-    cubeRoot,
-    g,
-    PI
-}
+// module.exports = {
+//     sum,
+//     subtract,
+//     multiply,
+//     divide,
+//     mod,
+//     pow,
+//     cube,
+//     square,
+//     abs,
+//     sqrt,
+//     cubeRoot,
+//     g,
+//     PI
+// }
 
-module.exports = 123
+// module.exports = "Hello Kamran";
+
+// module.exports = {};
+
+
+
+let obj = {
+    sum: sum,
+    subtract: subtract,
+    multiply: multiply,
+    divide: divide,
+    mod: mod,
+    pow: pow,
+    cube: cube,
+    square: square,
+    abs: abs,
+    sqrt: sqrt,
+    cubeRoot: cubeRoot,
+    g: g,
+    PI: PI
+}
+module.exports = obj;
