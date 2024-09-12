@@ -40,4 +40,4 @@ module.exports = {
     PI
 }
 
-module.exports = 123;
+module.exports = 123
