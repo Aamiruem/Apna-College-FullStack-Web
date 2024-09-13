@@ -1,0 +1,15 @@
+{
+  "name": "import",
+  "version": "1.0.0",
+  "main": "math.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kamran",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "random-words": "^2.0.1"
+  }
+}
