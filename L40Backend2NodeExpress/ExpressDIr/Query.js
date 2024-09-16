@@ -13,18 +13,30 @@ app.get("/", (req, res) => {
 
 
 app.get("/:username", (req, res) => {
-    console.log("Params: ", req.params);
-    res.send("Hello i am root path");
-    console.log("Request received")
+    // console.log("Params: ", req.params);
+    // res.send("Hello i am root path");
+    // console.log("Request received")
 });
 
 
 app.get("/:username/:id", (req, res) => {
-    let { username, id } = req.params;
+    // let { username, id } = req.params;
     // res.send(`welcome to the page of @username: ${username} and id: ${id}`);
     // console.log("Params: ", req.params);
     // res.send("Hello i am root path");
     let htmlStr = `<h1>welcome to the page of @username: ${username} and id: ${id}</h1>`
     res.send(htmlStr);
     console.log("Request received")
+});
+
+
+
+app.get("/search", (req, res) => {
+    // console.log("Search request received", req.query);
+    let { q } = req.query;
+
+    if (!q) {
+        res.send("nothing search to find the result");
+    }
+    res.send(`<h1>search result for query: ${q}</h1>`);
 });
