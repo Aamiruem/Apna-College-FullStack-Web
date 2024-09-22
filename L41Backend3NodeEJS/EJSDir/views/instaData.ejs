@@ -6,7 +6,7 @@
     <title>Instagram</title>
 </head>
 <body>
-    <h1>This page belongs to: @<%= username  %></h1>
+    <h1>This page belongs to: @<%= data  %></h1>
     <button>Follow</button>
     <button>Message</button>
     <button>Share</button>
@@ -17,5 +17,6 @@
             <li> <%= name%> </li>
         <% } %>
     </ul>
+    <%- include("includes/footer.ejs") %>
 </body>
 </html>
