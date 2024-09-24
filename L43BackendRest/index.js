@@ -61,8 +61,8 @@ app.get("/posts/new", (req, res) => {
 });
 
 app.post("/posts", (req, res) => {
-    // console.log(req.body);
-    // res.send("post request working");
+    console.log(req.body);
+    res.send("post request working");
 
     let { username, content } = req.body;
     posts.push({ username, content });
@@ -72,16 +72,18 @@ app.post("/posts", (req, res) => {
 
 app.post("/posts", (req, res) => {
     let { username, content } = req.body;
+    let id = uuidv4();
     posts.push({id, username, content });
     res.redirect("/posts");
+    res.render("index.ejs", {posts});
 });
 
 
 
 app.get("/posts/:id", (req, res) => {
-    let {id} = req.params;
+    let { id } = req.params;
+    console.log(id);
 let post = posts.find((p) => id === p.id);
-
     res.render("show.ejs", { post });
     
 });
@@ -96,7 +98,7 @@ app.patch("/posts/:id", (req, res) => {
     let post = posts.find((p) => id === p.id);
     post.content = newContent;
     console.log(post);
-    // res.redirect(`/posts/${id}`);
+    res.redirect(`/posts/${id}`);
     res.redirect("/posts");
 
     res.render("show.ejs", { post });
@@ -114,8 +116,7 @@ app.delete("/posts/:id", (req, res) => {
     let {id} = req.params;
     posts = posts.filter((p) => id !== p.id);
     res.redirect("/posts");
-
-    // res.render("show.ejs", { post });
+    res.render("show.ejs", { post });
 
     res.send("post deleted successfully");
     
