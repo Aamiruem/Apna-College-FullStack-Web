@@ -46,7 +46,20 @@ let posts = [
         id: uuidv4(),
         username: "apna college",
         content: "I love coding"
-    }
+    },
+
+    {
+        id: uuidv4(),
+        username: "kamran",
+        content: "Hard work is important to achieve a success! "
+    },
+
+    {
+        id: uuidv4(),
+        username: "Aamir",
+        content: "I love Data science"
+    },
+
 ];
 
 
