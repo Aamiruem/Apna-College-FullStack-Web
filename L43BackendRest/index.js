@@ -111,10 +111,9 @@ app.patch("/posts/:id", (req, res) => {
     let post = posts.find((p) => id === p.id);
     post.content = newContent;
     console.log(post);
-    res.redirect(`/posts/${id}`);
     res.redirect("/posts");
-
-    res.render("show.ejs", { post });
+    // res.render("show.ejs", { post });
+    // res.redirect(`/posts/${id}`);
     
 });
 
@@ -128,12 +127,13 @@ app.get("/posts/:id/edit", (req, res) => {
 app.delete("/posts/:id", (req, res) => {
     let {id} = req.params;
     posts = posts.filter((p) => id !== p.id);
-    res.redirect("/posts");
     res.render("show.ejs", { post });
-
     res.send("post deleted successfully");
+    res.redirect("/posts");
     
 });
+
+
 
 
 app.listen(port, () => {
