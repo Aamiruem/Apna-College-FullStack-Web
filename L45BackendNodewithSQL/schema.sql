@@ -5,7 +5,8 @@ SHOW TABLES;
 -- mysql> USE delta_app;
 -- Database changed
 -- mysql> SOURCE schema.sql;
-
+USE delta_app;
+DROP TABLE user;
 CREATE TABLE user(
     id INT PRIMARY KEY,
     username VARCHAR(100) UNIQUE,
