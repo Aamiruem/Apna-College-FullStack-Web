@@ -3,6 +3,11 @@ const mysql = require('mysql2');
 
 const express = require('express');
 const app = express();
+const path = require('path');
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
+app.use(express.urlencoded({ extended: true }));
 
 
 const connection = mysql.createConnection({
@@ -88,18 +93,32 @@ let getRandomUser = () => {
 
 
 
+// app.get("/", (req, res) => {
+//     res.send("Hello i am root path welcome to home page");
+//     console.log("Request received")
+// });
+
 app.get("/", (req, res) => {
-    res.send("Hello i am root path welcome to home page");
-    console.log("Request received")
+    let q = `SELECT count(*) FROM user1`;
+    try {
+    connection.query(q,(err, result) => {
+        if (err) throw err;
+        console.log(result[0]["count(*)"]);
+        res.send(`Total number of users: ${result[0]["count(*)"]}`);
+        // res.send(`Total number of users: ${result[0].count}`);
+        // console.log(result.length);
+        // console.log(result[0]);
+    })
+} catch (err) {
+        console.log(err);
+        res.send("some error in database connection")
+}
 });
 
-
 console.dir();
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 let port = 8080;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-})
+});
