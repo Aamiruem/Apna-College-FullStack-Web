@@ -4,10 +4,17 @@ const mysql = require('mysql2');
 const express = require('express');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
+
+app.use(methodOverride('_method'));
+
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.urlencoded({ extended: true }));
+// console.dir();
+// app.use(express.json());
 
 
 const connection = mysql.createConnection({
@@ -98,26 +105,82 @@ let getRandomUser = () => {
 //     console.log("Request received")
 // });
 
+//Home Rout
 app.get("/", (req, res) => {
-    let q = `SELECT count(*) FROM user1`;
+    let q = `SELECT count(*) FROM user`;
     try {
     connection.query(q,(err, result) => {
         if (err) throw err;
         console.log(result[0]["count(*)"]);
-        res.send(`Total number of users: ${result[0]["count(*)"]}`);
+        res.send(`Total number of user: ${result[0]["count(*)"]}`);
         // res.send(`Total number of users: ${result[0].count}`);
         // console.log(result.length);
         // console.log(result[0]);
+        res.render("home.ejs")
     })
 } catch (err) {
         console.log(err);
-        res.send("some error in database connection")
+        res.render("some error in database connection");
 }
 });
 
-console.dir();
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+//show route
+app.get("/user", (req, res) => {
+    // res.send("Success");
+    let q = `SELECT * FROM user`;
+    try {
+        connection.query(q,(err, users) => {
+            if (err) throw err;
+            // console.log(result);
+            // res.send(result);
+            res.render("showusers.ejs", {users})
+        })
+    } catch (err) {
+            console.log(err);
+            res.render("some error in database connection");
+    }
+});
+
+//Edit route
+app.get("/user/:id/edit", (req, res) => {
+    let {id} = req.params;
+    let q = `SELECT * FROM user WHERE id = '${id}'`;
+
+
+    try {
+        connection.query(q,(err, result) => {
+            if (err) throw err;
+            // console.log(result);
+            // res.send(result);
+            let user = result[0];
+            res.render("edit.ejs",{ user });
+        })
+    } catch (err) {
+            console.log(err);
+            res.render("some error in database connection");
+    }
+});
+
+//Update db route
+
+app.patch("/user/:id", (req, res) => {
+    let {id} = req.params;
+    let {username, email, password} = req.body;
+
+    let q = `UPDATE user SET username='${username}', email='${email}', password='${password}' WHERE id='${id}'`;
+
+    try {
+        connection.query(q,(err, result) => {
+            if (err) throw err;
+            console.log(result);
+            res.send(`User with id ${id} has been updated successfully`);
+        })
+    } catch (err) {
+            console.log(err);
+            res.render("some error in database connection");
+    }
+});
+
 let port = 8080;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

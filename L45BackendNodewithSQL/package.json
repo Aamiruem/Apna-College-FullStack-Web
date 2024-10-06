@@ -3,6 +3,7 @@
     "@faker-js/faker": "^9.0.3",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
+    "method-override": "^3.0.0",
     "mysql2": "^3.11.3",
     "nodemon": "^3.1.7",
     "uuid": "^10.0.0"
