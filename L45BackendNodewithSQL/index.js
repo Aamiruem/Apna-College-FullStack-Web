@@ -165,13 +165,24 @@ app.get("/user/:id/edit", (req, res) => {
 
 app.patch("/user/:id", (req, res) => {
     let {id} = req.params;
-    let {username, email, password} = req.body;
+    let { username, email, password } = req.body;
+    let { password: formPass, username: newUsername } = req.body;
+    let q = `SELECT * FROM user WHERE id='${id}'`;
 
-    let q = `UPDATE user SET username='${username}', email='${email}', password='${password}' WHERE id='${id}'`;
+    // let q = `UPDATE user SET username='${username}', email='${email}', password='${password}' WHERE id='${id}'`;
 
     try {
         connection.query(q,(err, result) => {
             if (err) throw err;
+            let user = result[0];
+            if (formPass != user.password) {
+                res.send("WRONG Password entered!");
+
+                return res.status(404).send("User not found");
+            }
+            else {
+                let q = `UPDATE user SET username='${newUsername}', email='${email}', password='${password}' WHERE id='${id}'`;
+            }
             console.log(result);
             res.send(`User with id ${id} has been updated successfully`);
         })
