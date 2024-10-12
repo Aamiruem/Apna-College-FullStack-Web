@@ -16,43 +16,6 @@ const userSchema = new mongoose.Schema({
     age: Number,
 });
 
-// const Employee = mongoose.model("Employee", userSchema);
-// const Employee1 = new Employee({
-//     name: "Aamir",
-//     email: "aamir@123",
-//     age: 23,
-// });
-
-
-
-
-// const User = mongoose.model("User", userSchema);
-// const user1 = new User({
-//     name: "Aamir",
-//     email: "aamir@123",
-//     age: 23,
-// });
-
-// user1.save();
-
-// const user2 = new User({
-//     name: "kamran",
-//     email: "kamran@123",
-//     age: 23,
-// });
-
-// user2.save().then((res) => {
-//     console.log(res);
-// })
-//     .catch((err) => {
-//         console.log(err);
-//     });
-
-
-
-
-
-
 const User = mongoose.model("User", userSchema);
 
 User.insertMany([
