@@ -33,7 +33,31 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    category: {
+        type: String,
+        enum: ["fiction", "non-fiction"]
+    },
+    genre: {
+        type: String,
+        enum: ["classic", "contemporary", "fantasy"],
+        default: "classic"
     }
 });
 
 const Book = mongoose.model("Book", bookSchema);
+let book1 = new Book({
+    title: "Holiday",
+    author: "J.D. Salinger",
+    price: 19.99,
+    stock: 100,
+    category: "fiction",
+    genre: "classic"
+});
+
+book1.save().then((res) => {
+    console.log("Book saved successfully");
+})
+    .catch((err) => {
+    console.log(err);
+});

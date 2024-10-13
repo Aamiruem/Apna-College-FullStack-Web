@@ -14,7 +14,7 @@ const bookSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     },
     author: {
         type: String,
@@ -29,7 +29,7 @@ const bookSchema = new mongoose.Schema({
 const Book = mongoose.model("Book", bookSchema);
 
 let Book1 = new Book({
-    title: "Mathematics",
+    title: "Mathematics xii",
     author: "RD SHARMA",
     price: 1200
 });
@@ -42,7 +42,7 @@ Book1.save().then(() => {
     });
 
     let Book2 = new Book({
-    title: "Physics",
+    title: "Physics1",
     author: "Aamir Hussain",
     price: 1500
     });
@@ -55,7 +55,7 @@ Book1.save().then(() => {
     });
 
     let Book3 = new Book({
-    title: "Practical Math",
+    title: "Practical Math1",
     author: "Ramanujan",
     price: 1800
     });
@@ -68,7 +68,7 @@ Book1.save().then(() => {
     });
     
 let Book4 = new Book({
-        title: "Chemistry",
+        title: "Chemistry1",
         author: "s chand",
         price: 1500
 });
