@@ -25,11 +25,12 @@ async function main() {
 }
 
 let chat1 = new Chat({
-    form: "neha",
+    from: "neha",
     to: "kamran",
     msg: "Hello kamran send me your exam sheet!",
     created_at: new Date()
 });
+
 chat1.save().then((res) => {
     console.log(res);
 });
