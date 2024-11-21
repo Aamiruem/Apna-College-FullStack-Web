@@ -14,6 +14,39 @@
     font-size: 2rem;
 }
 
-.nav-link{
-    color: #222222 !important;
+.nav-links{
+    color: #222222;
+} 
+.f-info-links a{
+    color: #222222;
+    text-decoration: none;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+    color: #fe424d;
+}
+.f-info-links,
+.f-info-socials, .f-info-brand{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials {
+    width: 100%;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    height: 8rem;
+    background-color: #ebebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+
+    text-align: center;
 }
