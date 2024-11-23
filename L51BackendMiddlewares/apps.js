@@ -1,7 +1,13 @@
+const { log } = require("console");
 const express = require("express");
+const { lchown } = require("fs");
 const app = express();
-app.use(() => {
+app.use((req, res) => {
+    let query = req.query;
+    console.log(query);
+    let querystring = Object.keys(query).map(key => `${key}=${query[key]}`).map (key => `${key}`).join("&");
     console.log("Hello, I am Middleware!");
+    res.send("Hello, I am  finished middleware!");
 })
 
 app.get("/", (req, res) => {
