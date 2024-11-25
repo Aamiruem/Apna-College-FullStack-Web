@@ -18,18 +18,66 @@ const app = express();
 //     next();
 // });
 
-app.use((req, res, next) => {
-    req.time = Date.now();
-    console.log(req.method, req.hostname, req.path, req.time, req.query);
-    next();
+//logger
+// app.use((req, res, next) => {
+//     req.time = Date (Date.now()).toString();
+//     console.log(req.method, req.hostname, req.path, req.time, req.query);
+//     next();
+// });
+
+//404
+// app.use((req, res) => {
+//     res.status(404).send("Not Found");
+//     res.send("page Not Found!");
+// });
+// app.use((req, res, next) => {
+//     console.log("I am only for random");
+//     next();
+// });
+    
+// app.get("/api", (req, res, next) => {
+//     let { token } = req.query;
+//     if (token === "giveaccess") {
+//         res.send("Access Granted!");
+//     } else {
+//         res.status(401).send("Access Denied!");
+//     }
+// });
+
+
+
+// const checkToken = (req, res, next) => {
+//     let { token } = req.query;
+//     if (token === "giveaccess") {
+//         res.send("Access Granted!");
+//     } else {
+//         res.status(401).send("Access Denied!");
+//     }
+// };
+
+
+
+const checkToken = (req, res, next) => {
+    let { token } = req.query;
+    if (token === "giveaccess") {
+        res.send("Access Granted!");
+        next();
+    } else {
+        throw new Error("Access Denied!");
+    }
+};
+
+
+app.get("/wrong", (req, res) => {
+    res.status(404).send("Not Found");
+})
+
+app.get("/api", (checkToken, req, res) => {
+    res.send("data");
 });
 
 app.get("/", (req, res) => {
     res.send("HI, I am root!");
-});
-
-app.get("/", (req, res) => {
-    res.send("Welcome to my API!");
 });
 
 app.get("/random", (req, res) => {
