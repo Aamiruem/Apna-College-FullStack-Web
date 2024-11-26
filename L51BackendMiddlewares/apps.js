@@ -34,7 +34,6 @@ const app = express();
 //     console.log("I am only for random");
 //     next();
 // });
-    
 // app.get("/api", (req, res, next) => {
 //     let { token } = req.query;
 //     if (token === "giveaccess") {

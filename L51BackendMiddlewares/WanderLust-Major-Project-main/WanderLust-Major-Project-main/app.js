@@ -20,6 +20,14 @@ if (process.env.NODE_ENV != "production") {
   const reviewRouter = require("./routes/review.js");
   const userRouter = require("./routes/user.js");
   
+
+// const mapboxClient = require('@mapbox/mapbox-sdk');
+// require('dotenv').config();
+// const mapboxClient = require('@mapbox/mapbox-sdk');
+// const client = mapboxClient({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
+
+
+  
   // set and use
   app.set("view engine", "ejs");
   app.set("views", path.join(__dirname, "views"));
