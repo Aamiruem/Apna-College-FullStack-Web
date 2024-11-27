@@ -34,6 +34,11 @@ app.get("/err", (req, res) => {
     abcd = abcd;
 });
 
+app.use((err, req, res) => {
+    console.log("-----ERROR -----");
+    // res.status(500).send("Internal Server Error");
+});
+
 app.get("/random", (req, res) => {
     res.send("This is the about page.");
 });
