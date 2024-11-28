@@ -1,28 +1,24 @@
 const  log = require("console");
 const express = require("express");
 const app = express();
-
-
-
-
+const ExpressError = require("./ExpressError");
 
 
 const checkToken = (req, res, next) => {
     let { token } = req.query;
     if (token === "giveaccess") {
-        res.send("Access Granted!");
+        res.send("401, Access Granted!");
         next();
-    } else {
-        throw new Error("Access Denied!");
-    }
+    } 
+        throw new ExpressError("Access Denied!");
 };
 
 
-app.get("/wrong", (req, res) => {
-    res.status(404).send("Not Found");
-})
+// app.get("/wrong", (req, res) => {
+//     res.status(404).send("Not Found");
+// });
 
-app.get("/api", (checkToken, req, res) => {
+app.get("/api", checkToken, (req, res) => {
     res.send("data");
 });
 
@@ -30,14 +26,47 @@ app.get("/", (req, res) => {
     res.send("HI, I am root!");
 });
 
-app.get("/err", (req, res) => {
+app.get("/random", (req, res) => {
+    res.send("This is a random page.");
+});
+
+app.get("/err", (req, res, abcd) => {
     abcd = abcd;
 });
 
-app.use((err, req, res) => {
-    console.log("-----ERROR -----");
-    // res.status(500).send("Internal Server Error");
+
+
+
+app.use((err, req, res, next) => {
+    let {status, message} = err;
+    res.status(status).end(message);
 });
+
+
+// app.use((err, req, res, next) => {
+//     console.log("-----ERROR -----");
+    // res.status(500).send("Internal Server Error");
+//     next();
+// });
+
+// app.use((err, req, res, next) => {
+//     res.status(404).send("Page Not Found");
+//     console.log("-----ERROR -----");
+//     next(err);
+// });
+
+
+// app.use((err, req, res, next) => {
+//     console.log("-----ERROR -----");
+//     res.send(err);
+// });
+
+// app.use((err, req, res, next) => {
+//     console.log("-----ERROR2 Middleware -----");
+//     next(err);
+// });
+
+
 
 app.get("/random", (req, res) => {
     res.send("This is the about page.");
