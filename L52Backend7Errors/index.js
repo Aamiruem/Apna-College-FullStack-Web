@@ -4,9 +4,10 @@ const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const Chat = require("../models/chat.js");
-
-
 const methodOverride = require("method-override");
+const ExpressError = require("expressError");
+
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs")
 
@@ -38,6 +39,7 @@ app.get("/chats", async (req, res) => {
 
 //New Route
 app.get("/chats/new", (req, res) => {
+    throw new ExpressError(404, "page not found some random error");
     res.render("new.ejs");
 });
 
@@ -67,13 +69,18 @@ res.redirect("/chats");
 
 
 
-//Show Route
-
-
+//NEW - Show Route
+app.get("/chats/:id", async (req, res, next) => {
+    let { id } = req.params;
+    let chat = await Chat.findById(id);
+    if (!chat) {
+        throw new ExpressError(404, "CHAT not found some random error");
+    }
+    res.render("edit.ejs", { chat });
+});
 
 
 // Edit Routes 
-
 app.get("/chats/:id/edit", async (req, res) => {
     let { id } = req.params;
     let chat = await Chat.findById(id);
@@ -114,6 +121,13 @@ app.delete("/chats/:id", async (req, res) => {
 
 app.get("/", (req, res) => {
     res.send("Welcome to the API!");
+});
+
+
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+    let { status = 500, message = "some Error occurred" } = err;
+    res.status(status).send(message, "Something broke!");
 });
 
 app.listen(8080, () => {
