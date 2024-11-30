@@ -30,8 +30,12 @@ app.get("/random", (req, res) => {
     res.send("This is a random page.");
 });
 
-app.get("/err", (req, res, abcd) => {
+app.get("/err", (req, res) => {
     abcd = abcd;
+});
+
+app.get("/admin", (req, res) => {
+    throw new ExpressError(403, "Access to admin is forbidden");
 });
 
 
