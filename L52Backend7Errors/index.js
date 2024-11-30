@@ -3,7 +3,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-const Chat = require("../models/chat.js");
+// const Chat = require("./models/chat.js");
+const chat = require('./models/chat.js');
+// const chat = require('../../models/chat.js');
+
 const methodOverride = require("method-override");
 const ExpressError = require("expressError");
 
@@ -45,27 +48,37 @@ app.get("/chats/new", (req, res) => {
 
 
 
-
 //Create Route
-app.post("/chats", (req, res) => {
-    let { from, to, msg } = req.body;
-    let newChat = new Chat({
-        from: from,
-        to: to,
-        msg: msg,
-        created_at: new Date()
-    });
-
-    newChat
-    .save()
-    .then((res) => {
-        console.log("chat was saved");
-    })
-    .catch((err) => { 
-        console.log(err)
-});
-res.redirect("/chats");
-    });
+app.post("/chats", async (req, res) => {
+    try {
+        let { from, to, msg } = req.body;
+        let newChat = new Chat({
+            from: from,
+            to: to,
+            msg: msg,
+            created_at: new Date()
+        });
+        
+        
+        newChat
+            .save()
+            .then((res) => {
+                console.log("chat was saved");
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+        await newChat
+            .save();
+        res.redirect("/chats");
+    
+    } catch (err) {
+        // console.log(err);
+        next(err);
+    }
+ });
+    
+    
 
 
 
@@ -74,7 +87,7 @@ app.get("/chats/:id", async (req, res, next) => {
     let { id } = req.params;
     let chat = await Chat.findById(id);
     if (!chat) {
-        throw new ExpressError(404, "CHAT not found some random error");
+        throw new ExpressError(500, "CHAT not found some random error");
     }
     res.render("edit.ejs", { chat });
 });
