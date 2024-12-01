@@ -3,12 +3,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-// const Chat = require("./models/chat.js");
-const chat = require('./models/chat.js');
-// const chat = require('../../models/chat.js');
-
+const Chat = require("./models/chat.js");
 const methodOverride = require("method-override");
-const ExpressError = require("expressError");
+const ExpressError = require("./ExpressError");
 
 
 app.set("views", path.join(__dirname, "views"));
@@ -33,10 +30,15 @@ async function main() {
 }
 
 // index Route
-app.get("/chats", async (req, res) => {
+app.get("/chats", async (req, res, next) => {
+    try {
     let chats = await Chat.find();
     // console.log(chats);
     res.render("index.ejs", { chats });
+    } catch (err) {
+        // console.log(err);
+        next(err);
+    }
 });
 
 
@@ -45,7 +47,6 @@ app.get("/chats/new", (req, res) => {
     throw new ExpressError(404, "page not found some random error");
     res.render("new.ejs");
 });
-
 
 
 //Create Route
@@ -58,7 +59,6 @@ app.post("/chats", async (req, res) => {
             msg: msg,
             created_at: new Date()
         });
-        
         
         newChat
             .save()
@@ -79,9 +79,6 @@ app.post("/chats", async (req, res) => {
  });
     
     
-
-
-
 //NEW - Show Route
 app.get("/chats/:id", async (req, res, next) => {
     let { id } = req.params;
@@ -95,9 +92,14 @@ app.get("/chats/:id", async (req, res, next) => {
 
 // Edit Routes 
 app.get("/chats/:id/edit", async (req, res) => {
-    let { id } = req.params;
-    let chat = await Chat.findById(id);
-    res.render("edit.ejs", { chat });
+    try {
+        
+        let { id } = req.params;
+        let chat = await Chat.findById(id);
+        res.render("edit.ejs", { chat });
+    } catch (err) {
+        next(err);
+        }
 });
 
 //Update Route
