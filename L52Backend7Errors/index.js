@@ -44,7 +44,8 @@ app.get("/chats", async (req, res, next) => {
 
 //New Route
 app.get("/chats/new", (req, res) => {
-    throw new ExpressError(404, "page not found some random error");
+    // throw new ExpressError(404, "page not found some random error");
+    res.status(404).send('Page Not Found');
     res.render("new.ejs");
 });
 
@@ -59,7 +60,6 @@ app.post("/chats", async (req, res) => {
             msg: msg,
             created_at: new Date()
         });
-        
         newChat
             .save()
             .then((res) => {
@@ -93,7 +93,6 @@ app.get("/chats/:id", async (req, res, next) => {
 // Edit Routes 
 app.get("/chats/:id/edit", async (req, res) => {
     try {
-        
         let { id } = req.params;
         let chat = await Chat.findById(id);
         res.render("edit.ejs", { chat });
