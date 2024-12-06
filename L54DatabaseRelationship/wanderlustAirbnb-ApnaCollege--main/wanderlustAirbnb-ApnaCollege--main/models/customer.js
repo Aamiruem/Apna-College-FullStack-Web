@@ -155,7 +155,7 @@ main()
     .then(() => console.log('connection successful'));
     // .catch ((err) => console.log(err));
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+    await mongoose.connect("mongodb://127.0.0.1:27017/relationDemo");
 }
 
 const orderSchema = new Schema({
@@ -176,11 +176,11 @@ const customerSchema = new Schema({
 
 
 
-// const findCustomer = async () => {
-//     const customer = await Customer.find().populate("orders").exec();
-//     console.log(customer);
+const findCustomers = async () => {
+    const customer = await Customer.find().populate("orders").exec();
+    console.log(customer);
 
-
+};
 const Order = mongoose.model("Order", orderSchema);
 const Customer = mongoose.model("Customer", customerSchema);
 
@@ -190,40 +190,91 @@ const addCustomer = async () => {
     });
 
 
-    // const addOrders = async () => {
-    // let order = new Customer({
-    //     name: "Afroz Hussain",
-    // });
+    const addOrders = async () => {
+        let order = new Customer({
+            name: "Afroz Hussain",
+        });
+    }
 
     let order1 = await Order.findOne({ item: "Chips" });
     let order2 = await Order.findOne({ item: "Burger" });
     let order3 = await Order.findOne({ item: "Chocolate" });
 
-    // cust1.orders.push(order1);
-    // cust1.orders.push(order2);
-    // cust1.orders.push(order3);
-    // let result = await cust1.save();
-    // console.log(result);
+    cust1.orders.push(order1);
+    cust1.orders.push(order2);
+    cust1.orders.push(order3);
+    let results = await cust1.save();
+    console.log(results);
 
 
 //this is a wrong  code
-    // let result = await Customer.findOneAndUpdate({ name: "kamran Hussain" }, { $push: { orders: order1._id, orders: order2._id, orders: order3._id } }, { new: true });
-    // console.log(result);
+    let result2 = await Customer.findOneAndUpdate({ name: "kamran Hussain" }, { $push: { orders: order1._id, orders: order2._id, orders: order3._id } }, { new: true });
+    console.log(result2);
     
 
 
-    // let result = await Customer.find({});
-    // console.log(result);
+    let result = await Customer.find({});
+    console.log(result);
 
 
 
 
 
-  
-        let result = await Customer.findOne({ name: "kamran Hussain" });
-        console.log(result);
+    // //Function
+    // const findCustomer = async () => {
+    //     const customer = await Customer.find().populate("orders").exec();
+    //     console.log(customer);
+    // }
+    // let result = await Customer.findOne({ name: "kamran Hussain" });
+    //     console.log(result);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Function
+    const findCustomer = async () => {
+        let result = await Customer.find({}).populate("orders");
+        console.log(result[0]);
+    }
+    let result1 = await Customer.findOne({ name: "kamran Hussain" });
+        console.log(result1);
 };
+
+const addCust = async () => {
+    let newCust = new Customer({
+        name: "kamran Hussain",
+        email: "kamranhussain@gmail.com",
+
+    });
+    let newOrder = new Order({
+        item: "Pizza",
+        price: 20,
+        quantity: 2,
+    });
+
+    newCust.orders.push(newOrder);
+    await newOrder.save();
+    await newCust.save();
+
+    console.log("Customer Added");
+};
+
+const deleteCust = async () => {
+    let data = await Customer.findByAndDelete("6752d1961ca4355192b1573a");
+    console.log(data);
+};
+
+addCust();
 
 // addOrders();
 // addCustomer();
-    findCustomer();
+    // findCustomer();
