@@ -175,12 +175,36 @@ const customerSchema = new Schema({
 });
 
 
+// customerSchema.pre("findOneAndDelete", async () => {
+//     console.log("PRE MIDDLEWARE");
+// });
+
+// customerSchema.post("findOneAndDelete", async () => {
+//     console.log("POST MIDDLEWARE");
+// });
+
+
+
+
+
+customerSchema.post("findOneAndDelete", async (customer) => {
+    if (customer.orders.length) {
+        let res = await Order.deleteMany({ _id: { $in: customer.orders } });
+        console.log(res);
+    }
+});
+
+
+
 
 const findCustomers = async () => {
     const customer = await Customer.find().populate("orders").exec();
     console.log(customer);
 
 };
+
+
+
 const Order = mongoose.model("Order", orderSchema);
 const Customer = mongoose.model("Customer", customerSchema);
 
@@ -194,7 +218,12 @@ const addCustomer = async () => {
         let order = new Customer({
             name: "Afroz Hussain",
         });
+
+        let order2 = new Customer({
+            name: "Aamir Hussain",
+        });
     }
+
 
     let order1 = await Order.findOne({ item: "Chips" });
     let order2 = await Order.findOne({ item: "Burger" });
@@ -208,13 +237,13 @@ const addCustomer = async () => {
 
 
 //this is a wrong  code
-    let result2 = await Customer.findOneAndUpdate({ name: "kamran Hussain" }, { $push: { orders: order1._id, orders: order2._id, orders: order3._id } }, { new: true });
+    let result2 = await Customer.findOneAndUpdate({ name: "Aamir Hussain" }, { $push: { orders: order1._id, orders: order2._id, orders: order3._id } }, { new: true });
     console.log(result2);
     
 
 
     let result = await Customer.find({});
-    console.log(result);
+    console.log(result2);
 
 
 
@@ -245,13 +274,13 @@ const addCustomer = async () => {
         let result = await Customer.find({}).populate("orders");
         console.log(result[0]);
     }
-    let result1 = await Customer.findOne({ name: "kamran Hussain" });
+    let result1 = await Customer.findOne({ name: "Shahbaj Hussain" });
         console.log(result1);
 };
 
 const addCust = async () => {
     let newCust = new Customer({
-        name: "kamran Hussain",
+        name: "Adam Hussain",
         email: "kamranhussain@gmail.com",
 
     });
@@ -262,18 +291,35 @@ const addCust = async () => {
     });
 
     newCust.orders.push(newOrder);
+    newCust.save();
     await newOrder.save();
+    await newCust.save();
+
+
+
+    // console.log("Customer Added");
+
+
+    let newOrders = new Order({
+        item: "Burger",
+        price: 20,
+        quantity: 2,
+    });
+
+    newCust.orders.push(newOrder);
+    await newOrders.save();
     await newCust.save();
 
     console.log("Customer Added");
 };
 
-const deleteCust = async () => {
-    let data = await Customer.findByAndDelete("6752d1961ca4355192b1573a");
+const delCust = async () => {
+    let data = await Customer.findByIdAndDelete("6753efdd578ff96c6b21359a");
     console.log(data);
 };
 
-addCust();
+// addCust();
+delCust();
 
 // addOrders();
 // addCustomer();
