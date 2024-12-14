@@ -1,8 +1,15 @@
 const express = require("express");
 const app = (express);
-const users = require("./routes/user.js");
-const posts = require(". /routes/post.js");
+const users = require("../routes/user.js");
+const posts = require("../routes/post.js");
 const session = require("express-session");
+
+app.get("/register", (req, res) => {
+    let { name = "anonymous", age = 0 } = req.query;
+    req.session.name = name;
+    res.send(name + age);
+    console.log(name, age);
+})
 
 app.use(session({
     secret: "mysupersecretstring", 
