@@ -3,6 +3,15 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
+
+// const mapboxClient = require('@mapbox/mapbox-sdk/services/geocoding');
+// const geocodingClients = mapboxClient({ accessToken: 'your_mapbox_access_token_here' });
+// require('dotenv').config();
+// const mapboxClient = require('@mapbox/mapbox-sdk/services/geocoding');
+// const geocodingClient = mapboxClient({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
+
+
+
 module.exports.index = async (req,res) => {
     const allListings =  await Listing.find({});
     res.render("./listings/index.ejs",{allListings});

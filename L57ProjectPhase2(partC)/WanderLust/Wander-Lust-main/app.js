@@ -89,18 +89,18 @@ app.use((req,res,next) => {
     next();
 });
 
-//demo useer
+//demo user
 // app.get("/demouser", async (req , res ) => {
 //     let fakeUser = new User({
 //         email :"student@gmail.com",
 //         username :"Harsh"
 //     });
-//     let registerdUser=  await User.register(fakeUser, "helloworld");
-//     res.send(registerdUser);
+//     let registeredUser=  await User.register(fakeUser, "helloworld");
+//     res.send(registeredUser);
 // });
 
 
-//Restructuirng listings 
+//Restructuring listings 
 app.use("/listings",listingRouter);
 //Restructuring reviews
 app.use("/listings/:id/reviews" ,reviewRouter);
