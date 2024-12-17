@@ -62,7 +62,7 @@
 //         secret : process.env.SECRET,
 //     },
 //     touchAfter : 24 *3600,
-    
+
 // });
 // store.on("error",() => {
 //     console.log("ERROR in mongo session store",err);
@@ -78,7 +78,7 @@
 //         maxAge :  7*24*60 *60*1000,
 //         httpOnly : true,
 //     }, 
-    
+
 // };
 
 
@@ -96,7 +96,7 @@
 //     res.locals.success = req.flash("success");
 //     res.locals.error = req.flash("error");
 //     res.locals.currUser = req.user;
-    
+
 //     next();
 // });
 
@@ -177,15 +177,15 @@ const userRouter = require("./routes/user.js");
 const MONGO_URL = `mongodb://127.0.0.1:27017/wanderlust`;
 
 main()
-  .then(() => {
-    console.log(`DB CONNECTED!`);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+    .then(() => {
+        console.log(`DB CONNECTED!`);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+    await mongoose.connect(MONGO_URL);
 }
 
 app.set("view engine", "ejs");
@@ -197,18 +197,18 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(cookieParser("signedCookie"));
 
 const sessionOptions = {
-  secret: "mysupersecretcode",
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-  },
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    },
 };
 
 app.get("/", (req, res) => {
-  res.send(`Hii I'm Root!`);
+    res.send(`Hii I'm Root!`);
 });
 
 app.use(session(sessionOptions));
@@ -222,10 +222,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.currUser = req.user;
-  next();
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
+    next();
 });
 
 app.use("/listings", listingRouter);
@@ -233,29 +233,28 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 app.all("*", (req, res, next) => {
-  next(new ExpressError(404, "Page not Found!"));
+    next(new ExpressError(404, "Page not Found!"));
 });
 
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "something went wrong!" } = err;
-  res.status(statusCode).render("error.ejs", { err });
+    let { statusCode = 500, message = "something went wrong!" } = err;
+    res.status(statusCode).render("error.ejs", { err });
 });
 
 
 app.get("/testListing", async (req, res) => {
-let sampleListing = new Listing({
-title: "My New Villa",
-description: "By the beach",
-price: 1200,
-location: "Calangute, Goa",
-country: "India",
-});
-await sampleListing.save();
-console.log("sample was saved");
-res.send("successful testing");
+    let sampleListing = new Listing({
+        title: "My New Villa",
+        description: "By the beach",
+        price: 1200,
+        location: "Calangute, Goa",
+        country: "India",
+    });
+    await sampleListing.save();
+    console.log("sample was saved");
+    res.send("successful testing");
 });
 
 app.listen(port, () => {
-  console.log(`App is running on port ${port}`);
+    console.log(`App is running on port ${port}`);
 });
-
