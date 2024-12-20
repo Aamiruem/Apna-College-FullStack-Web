@@ -28,7 +28,7 @@ const userRouter = require("./routes/user.js");
 const mbxClient = require('@mapbox/mapbox-sdk'); // Import Mapbox SDK
 // Replace 'YOUR_MAPBOX_ACCESS_TOKEN' with your actual token
 require('dotenv').config();
-const mbxClient = require('@mapbox/mapbox-sdk');
+mbxClient = require('@mapbox/mapbox-sdk');
 
 const mapboxClient = mbxClient({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
 
