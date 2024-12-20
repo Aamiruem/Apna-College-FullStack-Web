@@ -1,8 +1,7 @@
 <% layout("/layouts/boilerplate.ejs") %>
     <script>
-        const mapToken = "<%= process.env.MAP_TOKEN %>";
-        //const listing = <%- JSON.stringify(listing) %>; //CORRECT
-        const listing = "<%- JSON.stringify(listing) %>"; //WRONG 
+        let mapToken = "<%= process.env.MAP_TOKEN %>";
+        let listing = <% - JSON.stringify(listing) %>;
     </script>
     <div class="row mt-3">
         <div class="col-8 offset-3">
@@ -25,8 +24,6 @@
                 </p>
             </div>
         </div>
-
-
         <br>
         <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
             <div class="btns">
@@ -37,9 +34,6 @@
                 </form>
             </div>
             <% } %>
-
-
-
                 <div class="col-8 offset-3 mb-3">
                     <br>
 
@@ -110,6 +104,14 @@
 
                     </div>
                 </div>
-
     </div>
     <script src="/js/map.js"></script>
+
+    <!-- <script>
+	let mapToken = "<%= process.env.MAP_TOKEN"%>;
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [-74.5, 40], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 9 // starting zoom
+    });
+</script> -->

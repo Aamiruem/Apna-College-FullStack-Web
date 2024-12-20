@@ -1,6 +1,9 @@
 
 
-	mapboxgl.accessToken = mapToken;
+import mapboxgl from'mapbox-gl';
+
+
+mapboxgl.accessToken = mapToken;
     const map = new mapboxgl.Map({
    container: 'map', // container ID
      center: listing.geometry.coordinates, // starting position [lng, lat]
@@ -11,7 +14,7 @@
    
     // Create a new marker.
     const marker = new mapboxgl.Marker({color : "red"})
-    .setLngLat(listing.geometry.coordinates) //listing/geomertyu / coordinatre
+    .setLngLat(listing.geometry.coordinates) //listing/geometry / coordinate
     .setPopup(new mapboxgl.Popup({offset: 25})
     
     .setHTML(`<h4>${listing.title}</h4><p>Exact location provided after booking!</p>`))
