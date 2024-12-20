@@ -2,7 +2,7 @@
 <script>
 let mapToken = "<%= process.env.MAP_TOKEN %>";
     let listing =  <%- JSON.stringify(listing )%>;
- 
+
 </script>
 
   <div class="row mt-3">
@@ -44,7 +44,7 @@ let mapToken = "<%= process.env.MAP_TOKEN %>";
         <button class="btn btn-dark offset-5">Delete</button>
       </form>
     </div>
-   <% } %>
+    <% } %>
 
 
 
@@ -101,8 +101,7 @@ let mapToken = "<%= process.env.MAP_TOKEN %>";
               <div class="card-text">
                 <%= review.comment %>
               </div>
-             
-             
+
             </div>
             <form class="mb-3" method="post"
               action="/listings/<%= listing.id %>/reviews/<%= review.id %>?_method=DELETE">
@@ -121,4 +120,3 @@ let mapToken = "<%= process.env.MAP_TOKEN %>";
     </div>
   </div>
 <script src="/js/map.js"> </script>
-
