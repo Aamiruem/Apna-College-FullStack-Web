@@ -3,10 +3,10 @@ import "./Product.css";
 function Product() {
     return (
         <div className="product">
-            <h1>Product</h1>
+            <h2>Product Title</h2>
             <p>Product Description</p>
-        </div>
+        </div>    
     );
 }
-
 export default Product;
+// export { Product };
