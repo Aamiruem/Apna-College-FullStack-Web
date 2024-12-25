@@ -41,7 +41,7 @@
 
 
 
-import './App.css';
+import "./App.css";
 import { Title } from "./Title.jsx";
 import ProductTab from './ProductTab.jsx';
 import { Product } from './Product.jsx';
@@ -54,18 +54,27 @@ function Description() {
 
 function App() {
   return (
-    <div className="mainbox">
+    <div className="App">
       <Title />
       <Description />
-      <Title />
       <ProductTab />
-      <Title />
-      <Title />
       <Product />
       <Title />
-    <p>This is a paragraph.</p>
-    <button>Click Me</button>
-  </div>
+    </div>
+
+
+  //   <div className="mainbox">
+  //     <Title />
+  //     <Description />
+  //     <Title />
+  //     <ProductTab />
+  //     <Title />
+  //     <Title />
+  //     <Product />
+  //     <Title />
+  //   <p>This is a paragraph.</p>
+  //   <button>Click Me</button>
+  // </div>
   );
 }
 export default App;
