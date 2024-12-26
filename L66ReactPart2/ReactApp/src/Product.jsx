@@ -10,7 +10,8 @@ function Product(title, price, features) {
             <h5>Price: {price}</h5>
             <h1>Product</h1>
             <p>Product Description</p>
-            <p>{features} </p>
+            <p>{features.map((feature) => <li>{feature}</li>)} </p>
+
         </div>
     );
 }
