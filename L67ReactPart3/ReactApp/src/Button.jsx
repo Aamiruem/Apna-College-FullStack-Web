@@ -7,5 +7,5 @@ export default function Button() {
         <div>
             <button onClick={printHello}>Click me</button>
         </div>
-    )
+    );
 }

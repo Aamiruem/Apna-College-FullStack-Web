@@ -41,9 +41,10 @@
 
 import "./App.css";
 import "./Product.css";
-import Title from "./Title.jsx";
+// import Title from "./Title.jsx";
 import ProductTab from "./ProductTab.jsx";
 import Product from "./Product.jsx";
+import "./Button.jsx"; 
 
 function App() {
   return (
@@ -51,7 +52,6 @@ function App() {
       
       <ProductTab />
       <Product />
-      <Title />
       <features />
 
     </>
