@@ -67,6 +67,46 @@ export default function TodoList() {
         setTodos(todos.map((todo) => todo.id === id? {...todo, completed: true} : todo));
     };
 
+    // let upperCaseAll = () => {
+    //     let newArr = todos.map((todo) => {
+    //         return {
+    //             ...todo,
+    //             task: todo.task.toUpperCase(),
+    //         };
+    //     });
+    //     console.log(newArr);
+    //     setTodos(newArr);
+    //        }
+            
+        
+
+    let upperCaseAll = () => {
+        setTodos((prevTodos) => {
+            return prevTodos.map((todo) => {
+                return {
+                    ...todo,
+                    task: todo.task.toUpperCase(),
+                };
+            });
+        });
+    };
+
+
+    let upperCaseOne = (id) => {
+        setTodos((todos) =>
+    todos.map((todo) =>{
+        if(todo.id === id){
+            return {
+                ...todo,
+                task: todo.task.toUpperCase(),
+            };
+        } else {
+            return todo;
+        }
+    })
+);
+};
+
 
     return (
         <div>
@@ -88,12 +128,22 @@ export default function TodoList() {
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                         &nbsp; &nbsp; &nbsp; &nbsp;
+                        <br />
+                        <br />
 
                         <button onClick={() => markAsCompleted(todo.id)}>Mark As Completed</button>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <br />
+                        <br />
+                        <button onClick={() => upperCaseAll(todo.id)}>Upper Case All</button>
+
+                        <button onClick={() => upperCaseOne(todo.id)}>Upper Case One</button>
                     </li>
                 ))}
             </ul>
             
+            <br />
+            <button onClick={upperCaseAll}>upperCaseAll</button>
             
         </div>
     );
