@@ -40,11 +40,11 @@
 import { useState } from "react";
 import {v4 as uuidv4} from "uuid";
 export default function TodoList() {
-    let [todos, setTodos] = useState([{task: "sample Task", id: uuidv4()}]);
+    let [todos, setTodos] = useState([{task: "sample Task", id: uuidv4(), isDone: false}]);
     let [newTodo, setNewTodo] = useState("");
     let addNewTask = () => {
         setTodos((prevTodos) => {
-            return [...prevTodos, {task: newTodo, id: uuidv4()}];
+            return [...prevTodos, {task: newTodo, id: uuidv4(), isDone: false}];
         })
         console.log("we have to add new Task at Todo ");
         setTodos([...todos, {task: newTodo, id: uuidv4()}], [...newTodo]);
@@ -92,13 +92,14 @@ export default function TodoList() {
     };
 
 
-    let upperCaseOne = (id) => {
+    let markAsDone = (id) => {
         setTodos((todos) =>
     todos.map((todo) =>{
         if(todo.id === id){
             return {
                 ...todo,
-                task: todo.task.toUpperCase(),
+                isDone: true,
+                
             };
         } else {
             return todo;
@@ -128,19 +129,21 @@ export default function TodoList() {
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                         &nbsp; &nbsp; &nbsp; &nbsp;
+                        
                         <br />
                         <br />
-
                         <button onClick={() => markAsCompleted(todo.id)}>Mark As Completed</button>
                         &nbsp; &nbsp; &nbsp; &nbsp;
+                        
                         <br />
                         <br />
                         <button onClick={() => upperCaseAll(todo.id)}>Upper Case All</button>
 
-                        <button onClick={() => upperCaseOne(todo.id)}>Upper Case One</button>
+                        <button onClick={() => markAsDone(todo.id)}>Mark As Done</button>
                     </li>
                 ))}
             </ul>
+            <br />
             
             <br />
             <button onClick={upperCaseAll}>upperCaseAll</button>
