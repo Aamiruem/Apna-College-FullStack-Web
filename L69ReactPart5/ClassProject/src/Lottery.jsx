@@ -135,25 +135,30 @@
 import { useState } from "react";
 import "./Lottery.css";
 import { genTicket, sum } from "./helper";
+import Ticket from "./Ticket";
 
+export default function Lottery({ n, winningSum }) {
+    // Initialize tickets as an array of n tickets
+    const [tickets, setTickets] = useState(Array.from({ length: n }, () => genTicket()));
 
+    // Check if any ticket is a winning ticket
+    const isWinning = tickets.some(ticket => sum(ticket) === winningSum);
 
-export default function Lottery() {
-    let [tickets, setTickets] = useState(genTicket(3));
-    let isWinning = sum(tickets) === 15;
-    let buyTicket = () => {
-        setTickets(genTicket(3));
-    }
-    
+    // Function to add a new ticket
+    const buyTicket = () => {
+        setTickets([...tickets, genTicket()]);
+    };
+
     return (
         <div>
             <h1>Lottery Game</h1>
             <div className="tickets">
-                <span>{tickets[0]}</span>
-                <span>{tickets[1]}</span><span>{tickets[2]}</span>
+                {tickets.map((ticket, index) => (
+                    <Ticket key={index} ticket={ticket} />
+                ))}
             </div>
-            <br />
             <button onClick={buyTicket}>Buy Ticket</button>
+            <h3>Current Balance: {tickets.length}</h3>
             <h3>{isWinning && "Congratulations: You won!"}</h3>
         </div>
     );

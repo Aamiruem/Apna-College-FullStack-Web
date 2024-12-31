@@ -13,3 +13,14 @@
     display: flex;
     flex-direction: column;
 }
+
+.button{
+    background-color: #d30f15;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    
+}
