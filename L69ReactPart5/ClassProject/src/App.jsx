@@ -11,7 +11,6 @@ function App() {
       <Lottery n={3} winningSum={15}/>
       <TicketNum />
       <Ticket /> 
-       
     </>
   )
 }
