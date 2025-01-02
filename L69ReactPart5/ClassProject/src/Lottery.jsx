@@ -172,7 +172,6 @@
 
 
 
-
 import { useState } from "react";
 import { genTicket, sum } from "./helper";
 import Ticket from "./Ticket";
@@ -194,7 +193,6 @@ export default function Lottery({ n = 3, winCondition }){
             
             <h1>Lottery Game</h1>
             
-
             <Ticket ticket={ticket} />
             <div className="ticket">
                 {ticket.map((ticket, idx) => (
