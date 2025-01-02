@@ -1,4 +1,4 @@
-.tickets{
+/* .ticket{
     display: flex;
     justify-content: space-between;
     margin: 10px;
@@ -23,4 +23,13 @@
     cursor: pointer;
     margin: 10px;
     
+} */
+
+
+
+
+
+.ticket{
+border: 1px solid pink;
+border-radius: 14px;
 }

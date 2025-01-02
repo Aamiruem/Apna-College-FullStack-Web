@@ -2,7 +2,6 @@ import TicketNum from "./TicketNum";
 import "./Ticket.css";
 import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
 export default function Ticket({ ticket }) {
 
     return (
