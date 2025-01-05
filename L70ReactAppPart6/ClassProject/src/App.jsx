@@ -25,15 +25,20 @@
 
 
 
-import "./App.css";  // Importing the CSS file for styling
-// import Form from "./Form"; // Uncomment when you need to use Form component
-// import CommentsForm from "./CommentsForm"; // Uncomment when you need to use CommentsForm component
-import Comment from "./Comment";  // The main component displaying and managing comments
+import "./App.css";  
+// import Form from "./Form"; 
+// import CommentsForm from "./CommentsForm"; 
+// import Comment from "./Comment";  
+// import Counter from "./Counter";
+
+import Joker from "./Joker";
 
 function App() {
   return (
     <>
-      <Comment />  {/* Rendering the Comment component to manage and display comments */}
+      <Joker/>
+      {/* <Counter /> */}
+      {/* <Comment />  Rendering the Comment component to manage and display comments */}
       {/* Uncomment these components when you need to use them */}
       {/* <CommentsForm /> */}
       {/* <Form /> */}
