@@ -12,21 +12,21 @@ export default function InfoBox() {
 
     const info = {
         city: "Delhi",
-        country: "India ",
-        description: "Cloudy",
-        icon: "04d",
-        sunrise: "16:20",
         feelslike: 24.84,
         temp: 25.05,
         tempMin: 25.05,
         tempMax: 25.05,
         humidity: 47,
-        weather: "Haze",
+        weather: "haze",
+        country: "India ",
+        description: "Cloudy",
+        icon: "04d",
+        sunrise: "16:20",
     };
 
     return (
-        <div className="InfoBox" style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
-            <h1>Weather Info</h1>
+        <div className="InfoBox">
+            <h1>WeatherInfo - {info.weather}</h1>
             <Card sx={{ maxWidth: 345 }}>
                 <CardMedia
                     sx={{ height: 140 }}
@@ -43,7 +43,21 @@ export default function InfoBox() {
                         <strong>Feels Like:</strong> {info.feelslike}°C<br />
                         <strong>Min Temp:</strong> {info.tempMin}°C<br />
                         <strong>Max Temp:</strong> {info.tempMax}°C<br />
-                        <strong>Humidity:</strong> {info.humidity}%
+                        <strong>Humidity:</strong> {info.humidity}% <br />
+                        <strong>Description:</strong> {info.description}<br />
+                        <strong>Sunrise:</strong> {info.sunrise} <br />
+
+                        
+
+                        <strong>
+                            <a href={`https://www.weather-forecast.com/locations/${info.city}/forecast`} target="_blank" rel="noopener noreferrer">
+                                More Details
+                            </a>
+                        </strong>
+                        <strong>Icon:</strong> <img src={`http://openweathermap.org/img/wn/${info.icon}@2x.png`} alt={info.weather} />
+                        <p>
+                            The weather can be described as <i>{info.weather}</i> and feels like {""}
+                        </p>
                     </Typography>
                 </CardContent>
                 <CardActions>
