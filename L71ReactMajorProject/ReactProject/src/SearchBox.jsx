@@ -39,27 +39,31 @@ export default function SearchBox() {
                 sunset: new Date(jsonResponse.sys.sunset * 1000).toLocaleTimeString(),
             };
             console.log(result);
+            return result;
+            // updateInfo(result);
         } catch (error) {
             console.error("Failed to fetch weather information:", error);
         }
     };
 
-    const handleChange = (event) => {
+    const handleChange = async(event) => {
         setCity(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (city.trim()) {
-            getWeatherInfo();
             setCity(""); // Clear input field after submission
+            await getWeatherInfo();
+
+
         } else {
             console.warn("City name cannot be empty.");
         }
     };
 
     return (
-        <div className="SearchBox">
+        <div className="SearchBox" style={{ textAlign: "center", color: "red" }}>
             <h3>Search for the Weather</h3>
             <form onSubmit={handleSubmit}>
                 <TextField
