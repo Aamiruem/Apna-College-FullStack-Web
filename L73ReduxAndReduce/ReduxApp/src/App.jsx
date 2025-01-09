@@ -1,8 +1,7 @@
-import Todo from "./components/todo";
 import './App.css'
+import Todo from "./components/todo";
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import
 
 function App() {
 
@@ -11,7 +10,6 @@ function App() {
       <Provider store={store} >
         <Todo />
       </Provider>
-        <h1>My Todo App</h1>
     </>
   )
 }

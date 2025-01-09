@@ -5,7 +5,7 @@ export default function Todo() {
     console.log(todos);
     return (
         <>
-            <h3>Todos</h3>
+            <h2>Todos</h2>
         </>
     )
 }
