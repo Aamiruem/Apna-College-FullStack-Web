@@ -22,7 +22,7 @@ const dispatch = useDispatch();
             onSubmit={handleSubmit}
         >
             <input type="text" onChange={handleChange}  value={task} />
-            <button type="submit" >AddTask</button>
+            <button type="submit" >Add Task</button>
         </form>
     );
 }
