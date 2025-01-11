@@ -1,38 +1,39 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-    todo: [{ id: "abc", task: "demo-task", isDone: false }],
+    todos: [{ id: "abc", task: "demo-task", isDone: false }],
 };
  export const todoSlice = createSlice({
     name: "todo",
     initialState,
     reducers: {
         addTodo: (state, action) => {
-            state.todo.push(action.payload);
             const newTodo = {
-                id: nanoid,
+                id: nanoid(),
                 task: action.payload,
                 isDone: false,
-            }
+            };
+            state.todos.push(action.payload);
             state.todos.push(newTodo);
         },
         deleteTodo: (state, action) => {
-            state.todo = state.todo.filter((todo) => todo.id !== action.payload);
+            state.todos = state.todos.filter((todo) => todo.id != action.payload);
         },
         markAsDone: (state, action) => {
-            state.todo = state.todo.map((todo) => {
+            state.todos = state.todos.map((todo) => {
                 if (todo.id === action.payload) {
-                    return { ...todo, isDone: true };
+                    // return { ...todo, isDone: true };
+                    todo.isDone = true;
                 }
-                return todo;
+                // return todo;
             });
         },
         toggleTodo: (state, action) => {
-            state.todo = state.todo.map((todo) => {
-                if (todo.id === action.payload) {
-                    return { ...todo, isDone: !todo.isDone };
+            state.todos = state.todos.map((todos) => {
+                if (todos.id === action.payload) {
+                    return { ...todos, isDone: !todos.isDone };
                 }
-                return todo;
+                return todos;
             });
         },
     }
@@ -40,39 +41,3 @@ const initialState = {
 
 export const { addTodo, deleteTodo, markAsDone, toggleTodo } = todoSlice.actions;
 export default todoSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { createSlice } from '@reduxjs/toolkit';
-
-// const todoSlice = createSlice({
-//   name: 'todos',
-//   initialState: [
-//     { id: 1, task: 'Learn Redux', completed: false },
-//     { id: 2, task: 'Build a Todo App', completed: false },
-//   ],
-//   reducers: {
-//     addTodo: (state, action) => {
-//       state.push(action.payload);
-//     },
-//   },
-// });
-
-// export const { addTodo, deleteTodo, markAsDone, toggleTodo } = todoSlice.actions;
-// export default todoSlice.reducer;

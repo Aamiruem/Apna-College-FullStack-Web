@@ -14,6 +14,8 @@ const dispatch = useDispatch();
         e.preventDefault();
         console.log(task);
         dispatch(addTodo(task));
+        setTask("");
+        
     };
     
 
