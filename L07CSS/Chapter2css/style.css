@@ -1,6 +1,8 @@
 h3  {
     background-color: purple !important;
 }
+
+/* Universal Selector  => select everything */
 * {
   font-family: "Courier New";
   /* background-color:blue; */
@@ -10,13 +12,14 @@ h3  {
     color: #b92b27;
 } */
 
+/* Element Selector => select specific element or tag name same type */
 
 h1,
 h3 {
   color: #b92b27;
 }
 
-/* ID Selector */
+/* ID Selector => select an element base d on the value of the  element 's id attribute or select single particular element */
 #login {
   background-color: white;
 }
@@ -26,7 +29,7 @@ h3 {
   color: white;
 }
 
-/* class selector */
+/* class selector => select an element base d on the value of the element 's class attribute */
 /* .myclass {
     property:value;
 } */
@@ -36,16 +39,23 @@ h3 {
   color: blue;
 }
 
-/* descendent selector */
-.post {
+
+/* descendent selector => select all elements that are descendants(child class) of another element */
+.post a {
   background-color: green;
   color: blue;
 }
 
+/* child selector => select all elements that are direct children of another element */
+p a{
+  color: purple;
+  background-color: yellow;
+  text-decoration: underline;
+}
 nav ul li a {
   color: blue;
 }
-
+/* Adjacent sibling Combinator=> select all elements that are adjacent(same level) to another element */
 nav + a {
   color: red;
 }
@@ -82,13 +92,13 @@ p + h3 {
   background-color: blue;
   color: cornflowerblue;
 }
+/* Child Combinator => select all elements that are direct children(change something inner level)  of another element */
 div > input {
   background-color: darksalmon;
   color: cornflowerblue;
 }
 
-/* Atribute selector
-*/
+/* Atribute selector => select elements based on the presence or value of a given attribute */
 
 input[type="text"] {
   color: red;
@@ -109,7 +119,7 @@ input[type] {
   color: white;
 }
 
-/* pseudo-class */
+/* pseudo-class => select elements that are in a certain state */
 button:hover {
   background-color: black;
   color: white;
