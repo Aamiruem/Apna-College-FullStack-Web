@@ -9,8 +9,10 @@ div{
     border-width: 4px;
     border-style: solid;
     border-color: black;
-    margin: 20px 11em 40px 2em;
+     /* top, right, bottom, left */
+    /* margin: 40px 11em 40px 2em; */
     padding: 1em;
+   
     box-shadow: 10px 10px 5px grey;
     /* border sides */
     /* border-top-style: solid;
@@ -33,6 +35,18 @@ div{
     padding-bottom: 20px;
     padding-left: 20px; */
     padding-left: 50px;
+
+
+
+    /* margin */
+    /* margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px; */
+    /* margin-top: 50px; */
+    /* margin-left: 10%;
+    margin-right: 10%; */
+    margin: 50px 50px 50px 30%;
 }
 
 h1 {
