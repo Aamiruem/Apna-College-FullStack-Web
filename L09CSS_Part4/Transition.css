@@ -8,17 +8,19 @@ div{
 
 
 
-    /* transition-duration: 2s;
-    transition-delay: 1s; */
+    transition-duration: 2s;
+    transition-delay: 1s;
+
+    transition-timing-function: linear;
 }
 
-/* div:hover{
+div:hover{
     background-color: black;
     border-radius: 50%;
-} */
+}
 
 
 div:hover{
     margin-top: 400px;
-    background-color: pink;
+    background-color: rgb(24, 14, 222);
 }

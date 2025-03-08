@@ -40,6 +40,9 @@ div:nth-of-type(2n){
 }
 
 /* scale */
+#two{
+    transform: scale(0.5, 2.5);
+}
 #five{
     transform: scaleX(0.5);
     transform: scaleY(0.5);
@@ -48,7 +51,7 @@ div:nth-of-type(2n){
 /* translate */
 
 #three{
-    /* transform: translate(100px, 50px); */
+    /* transform: translate(100px, 100px); */
     transform: translateX(1000px);
     transform: translateY(5px);
 }
@@ -62,4 +65,31 @@ div:nth-of-type(2n){
 
 #three{
     transform: rotate(30deg) translateX(150px);
+}
+
+#four{
+    transform: rotate(30deg) translateY(150px);
+}
+
+#six{
+    transform: translate(500px, 500px);
+}
+
+
+/* rotateX, rotateY */
+#seven{
+    transform: rotateX(90deg);
+}
+
+#eight{
+    transform: rotateY(90deg);
+}
+
+#nine{
+    transform: rotateX(90deg) rotateY(90deg);
+}
+
+/* perspective */
+#ten{
+    transform: perspective(100px) rotateX(90deg);
 }

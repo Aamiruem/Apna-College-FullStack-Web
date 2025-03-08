@@ -1,12 +1,13 @@
 .card{
     width: 200px;
-    height: 200px;
+    height: 300px;
     border: 2px solid black;
     display: inline-block;
     margin: 10px;
     border-radius: 5px;
     box-shadow: 2px 4px 8px black;
-    transition: 1s;
+    transition: box-shadow 0.3s;
+    text-align: center;
 }
 
 .desc{

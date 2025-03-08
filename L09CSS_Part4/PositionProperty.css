@@ -45,3 +45,12 @@ div {
     top: 100px;
     left: 100px;
 }
+
+#sticky{
+    background-color: rgb(222, 109, 128);
+    position: sticky;
+    top: 100px;
+    left: 100px;
+    position: sticky;
+top: 20px;
+}
