@@ -41,6 +41,10 @@ div:nth-of-type(2n){
 
 /* scale */
 #two{
+    transform: scale(0.5);
+    transform: scale(1.5, 1.5);
+    transform: scale(1.5, 2.5);
+    transform: scale(2.5, 1.5);
     transform: scale(0.5, 2.5);
 }
 #five{

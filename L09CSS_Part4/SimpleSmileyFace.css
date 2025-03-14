@@ -30,8 +30,8 @@ body {
 }
 
 .left-eye, .right-eye{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: black;
     border-radius: 50%;
     position: absolute;
@@ -42,14 +42,18 @@ body {
 
 
 .right-eye {
-    left: 250px;
+    left: 240px;
     /* top: 200px; */
 }
 
+.left-eye{
+    left: 75px;
+}
 .nose {
     position: absolute;
-    top: 30%; /* Adjust vertical position */
+    top: 45%; /* Adjust vertical position */
     left: 50%; /* Adjust horizontal position */
+    right: 43%;
     transform: translate(-50%, -50%); /* Centers the nose */
     font-size: 40px; /* Adjust nose size */
 }
