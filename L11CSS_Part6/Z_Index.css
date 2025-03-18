@@ -16,7 +16,25 @@
     bottom: 50px;
     top: 50px;
     left: 50px;
-    z-index: -2;
+    z-index: 1/200px;
     
 }
-   
+
+.three{
+    background-color: darkseagreen;
+    position:relative;
+    bottom: 100px;
+    top: 100px;
+    left: 100px;
+    z-index: -3;
+    
+}
+
+.four{
+    background-color: darkslategray;
+    position:relative;
+    bottom: 150px;
+    top: 150px;
+    left: 150px;
+    z-index: -9;
+}
