@@ -14,3 +14,6 @@ console.log(names.replaceAll("a", "o")); // "opnoColleoge"
 console.log(names.repeat(2)); // "ApnaCollegeApnaCollege"
 
 console.log(names.slice(4, 9)); // "Colle"
+
+
+console.log(names.slice(4).replace('l', 't').replace('l', 't')); // "otot"
