@@ -1,4 +1,6 @@
-let msg = "apna college";
+let msg = "apnacollege";
+console.log(msg.slice(-1)); //11-1 = 10 => e
+console.log(msg.slice(-2)); //11-2 = 9 => ge
 
 console.log(msg.slice(0,5));
 console.log(msg.slice(0,5).toUpperCase());

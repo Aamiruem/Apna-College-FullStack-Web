@@ -177,18 +177,18 @@ const age = 25;
 console.log(`Hello, ${name}! You are ${age} years old.`);
 // Output: "Hello, Alice! You are 25 years old."
 Summary Table of Key String Methods
-Method	Description	Example
-length	Get string length	str.length
-charAt()	Get character at index	str.charAt(0)
-indexOf()	Find first occurrence	str.indexOf("World")
-includes()	Check if substring exists	str.includes("Hello")
-slice()	Extract substring	str.slice(0, 5)
-toUpperCase()	Convert to uppercase	str.toUpperCase()
-trim()	Remove whitespace	str.trim()
-replace()	Replace substring	str.replace("World", "Universe")
-split()	Split into array	str.split(", ")
-padStart()	Pad start of string	"5".padStart(3, "0")
-repeat()	Repeat string	"Ha".repeat(3)
+Method Description Example
+length Get string length str.length
+charAt() Get character at index str.charAt(0)
+indexOf() Find first occurrence str.indexOf("World")
+includes() Check if substring exists str.includes("Hello")
+slice() Extract substring str.slice(0, 5)
+toUpperCase() Convert to uppercase str.toUpperCase()
+trim() Remove whitespace str.trim()
+replace() Replace substring str.replace("World", "Universe")
+split() Split into array str.split(", ")
+padStart() Pad start of string "5".padStart(3, "0")
+repeat() Repeat string "Ha".repeat(3)
 When to Use Which Method?
 ✅ Need to find a substring? → indexOf(), includes()
 ✅ Extract part of a string? → slice(), substring()
