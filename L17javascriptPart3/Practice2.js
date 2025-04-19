@@ -1,13 +1,8 @@
-let start = ["january", "july", "march", "august"];
+let Months = ["january", "july", "march", "august"];
 let final = ["december", "june", "april", "september"];
 
-console.log(start.concat(final));
+console.log(Months.concat(final));
 
-console.log(start.splice(0, 2, "july", "june"));
+console.log(Months.splice(0, 2, "july", "june"));
 
-console.log(start);
-
-
-
-
-
+console.log(Months);
