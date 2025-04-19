@@ -1,7 +1,2 @@
-let str = prompt("Please enter a string ");
-
-if(str.length == 0){
-    console.log("Empty String");
-} else{
-    console.log("Not Empty String");
-}
+console.log(months.shift()) //july
+// console.log(months) // [march, august]

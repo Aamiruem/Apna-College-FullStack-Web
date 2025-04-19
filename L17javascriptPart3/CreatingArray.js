@@ -10,7 +10,9 @@ console.log("Info = ", info[0][1]);
 console.log(info[0].length);
 
 
-
+console.log(`Hello sir =  ${info[0][0]}`); 
+console.log(`Hello sir =  ${info[0][1]}`); 
+console.log(`Hello sir =  ${info[1][0]}`);
 
 
 //Empty array
@@ -20,3 +22,6 @@ console.log(newArr.length);
 console.log(typeof(newArr));
 console.log(newArr[0]);//undefined
 console.log(newArr[1]);//undefined
+
+
+console.log([].length);
