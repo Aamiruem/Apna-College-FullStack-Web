@@ -13,7 +13,7 @@
 //write a javascript program to test whether the character at the given (character) index is lower case.
 
 let str = "ApNaCoLlEgE";
-let idx = 3;
+let idx = 4;
 
 if(str[idx] == str[idx].toLocaleLowerCase()){
     console.log("The character is a lowercase letter.");
