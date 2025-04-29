@@ -2,12 +2,12 @@ const favMovie = 'avatar';
 
 let guess = prompt("Guess my favorite movie");
 
-while((guess != favMovie) && (Guess != "quit")){
-    guess = prompt("wrong guess. please try again ");
+while((guess != favMovie) && (guess != "quit")){
+    guess = prompt("Wrong guess. Please try again or type 'quit' to exit.");
 }
 
 if(guess == favMovie){
-    alert("congrats!!");
-} else{
-    alert("goodbye");
+    alert("Congrats!!");
+} else {
+    alert("Goodbye");
 }
