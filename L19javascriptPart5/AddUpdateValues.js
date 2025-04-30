@@ -15,7 +15,7 @@ student["name"] = "kamran hussain";
 
 console.log(student);
 
-student["city"] = "Bangaluru";
+student["city"] = "Bengaluru";
 
 console.log(student);
 
@@ -76,3 +76,38 @@ const student2 = {
 };
 
 console.log(student2);
+
+
+
+
+
+
+let student = {
+    name: "shradha",
+    age: 23,
+    marks: 94.4,
+    city: "Delhi"
+};
+
+console.log(student.city);        // Output: 'Delhi'
+
+// 🔁 Update existing property
+student.city = "Mumbai";          // city updated to 'Mumbai'
+
+// ➕ Add a new property
+student.gender = "female";        // gender added
+
+console.log(student.gender);      // Output: 'female'
+
+// ✅ Final object after update and addition
+console.log(student);
+
+/*
+{
+  name: "shradha",
+  age: 23,
+  marks: 94.4,
+  city: "Mumbai",     // updated
+  gender: "female"    // added
+}
+*/
