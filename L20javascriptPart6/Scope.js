@@ -52,10 +52,10 @@ console.log(claSum(1, 2));
 
 
 
-let sum = 54; // Global Scope
+let sum = 54; // Global Scope => we can use anywhere in the program
 
 function printSum(a, b){
-    // let sum = a + b;  //function scope
+    // let sum = a + b;  //function scope => we can use only in this function and more convenient to use it becouse it is not used in the global scope it is close to the functionSum
     console.log(sum);
 }
 console.log(sum); // Global Scope
