@@ -9,7 +9,9 @@ console.log(result);
 
 console.log(sum(sum(1, 2), 3));
 
-
+//sum(1, 2) = 3
+//sum(3, 3) = 6
+// function is a block of code that performs a specific task.
 
 // return keyword is used to exit the function and return the value to the function caller.
 // if we don't use return keyword then function will return undefined.
