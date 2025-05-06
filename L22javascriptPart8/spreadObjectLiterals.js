@@ -5,7 +5,7 @@ const data = {
 };
 console.log(data);
 
-const dataCopy = {...data, id: 123};
+const dataCopy = {...data, id: 123, age: 25, name: "aamir khan", country: "India"};
 
 console.log(dataCopy);
 
