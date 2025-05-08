@@ -32,32 +32,32 @@ Document
         └── p
             └── "This is a paragraph."
 2. Types of DOM Nodes
-Node Type	Description	Example
-Document	The root node representing the entire document	document
-Element	HTML elements (<div>, <p>, <h1>, etc.)	<div id="myDiv">
-Attribute	Attributes of an element (id, class, href, etc.)	id="myDiv"
-Text	Text content inside an element	"Hello, World!"
-Comment	HTML comments	<!-- This is a comment -->
+Node Type Description Example
+Document The root node representing the entire document document
+Element HTML elements (<div>, <p>, <h1>, etc.) <div id="myDiv">
+Attribute Attributes of an element (id, class, href, etc.) id="myDiv"
+Text Text content inside an element "Hello, World!"
+Comment HTML comments <!-- This is a comment -->
 3. How JavaScript Interacts with the DOM
 Accessing DOM Elements
-Method	Description	Example
-document.getElementById()	Gets an element by its id	document.getElementById("myDiv")
-document.querySelector()	Gets the first matching element using CSS selectors	document.querySelector(".myClass")
-document.querySelectorAll()	Gets all matching elements as a NodeList	document.querySelectorAll("p")
-document.getElementsByTagName()	Gets elements by tag name	document.getElementsByTagName("div")
-document.getElementsByClassName()	Gets elements by class name	document.getElementsByClassName("myClass")
+Method Description Example
+document.getElementById() Gets an element by its id document.getElementById("myDiv")
+document.querySelector() Gets the first matching element using CSS selectors document.querySelector(".myClass")
+document.querySelectorAll() Gets all matching elements as a NodeList document.querySelectorAll("p")
+document.getElementsByTagName() Gets elements by tag name document.getElementsByTagName("div")
+document.getElementsByClassName() Gets elements by class name document.getElementsByClassName("myClass")
 Modifying DOM Elements
-Method	Description	Example
-element.innerHTML	Gets/sets HTML content inside an element	div.innerHTML = "<p>New content</p>"
-element.textContent	Gets/sets text content (no HTML parsing)	p.textContent = "New text"
-element.setAttribute()	Sets an attribute	img.setAttribute("src", "image.jpg")
-element.style	Modifies CSS styles	div.style.color = "red"
+Method Description Example
+element.innerHTML Gets/sets HTML content inside an element div.innerHTML = "<p>New content</p>"
+element.textContent Gets/sets text content (no HTML parsing) p.textContent = "New text"
+element.setAttribute() Sets an attribute img.setAttribute("src", "image.jpg")
+element.style Modifies CSS styles div.style.color = "red"
 Creating & Removing DOM Elements
-Method	Description	Example
-document.createElement()	Creates a new element	const newDiv = document.createElement("div")
-element.appendChild()	Adds a child element	body.appendChild(newDiv)
-element.removeChild()	Removes a child element	body.removeChild(oldDiv)
-element.replaceChild()	Replaces a child element	body.replaceChild(newP, oldP)
+Method Description Example
+document.createElement() Creates a new element const newDiv = document.createElement("div")
+element.appendChild() Adds a child element body.appendChild(newDiv)
+element.removeChild() Removes a child element body.removeChild(oldDiv)
+element.replaceChild() Replaces a child element body.replaceChild(newP, oldP)
 4. DOM Events
 Events allow JavaScript to respond to user actions (clicks, key presses, etc.).
 
@@ -131,11 +131,11 @@ window.addEventListener("resize", debounce(() => {
     console.log("Window resized!");
 }, 300));
 6. Virtual DOM vs. Real DOM
-Feature	Real DOM	Virtual DOM
-Definition	Actual browser DOM structure	Lightweight copy of the DOM
-Performance	Slow updates (reflows & repaints)	Faster (batched updates)
-Used by	Vanilla JS, jQuery	React, Vue, Angular
-Manipulation	Directly modifies the DOM	Computes diff and updates efficiently
+Feature Real DOM Virtual DOM
+Definition Actual browser DOM structure Lightweight copy of the DOM
+Performance Slow updates (reflows & repaints) Faster (batched updates)
+Used by Vanilla JS, jQuery React, Vue, Angular
+Manipulation Directly modifies the DOM Computes diff and updates efficiently
 Conclusion
 The DOM is a tree-like structure representing an HTML/XML document.
 
@@ -152,5 +152,4 @@ MDN DOM Documentation
 
 JavaScript.info - DOM Manipulation
 
-React Virtual DOM Explained     
-    
+React Virtual DOM Explained
