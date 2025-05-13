@@ -10,7 +10,7 @@ const element = document.getElementById('myElement');
 const classes = element.classList;
 
 // Number of classes
-console.log(classes.length); 
+console.log(classes.length);
 
 // Access class by index
 console.log(classes[0]);
@@ -68,7 +68,7 @@ input.addEventListener('blur', () => {
 const themeSwitcher = document.querySelector('.theme-switcher');
 themeSwitcher.addEventListener('click', () => {
   document.body.classList.toggle('dark-theme');
-  localStorage.setItem('darkMode', 
+  localStorage.setItem('darkMode',
     document.body.classList.contains('dark-theme'));
 });
 // Performance Tips
