@@ -32,3 +32,77 @@ window // Window object
 // Viewing the document object again
 document // #document
 // Shows the current state of the document after our changes
+
+
+
+
+
+
+// Live reload is enabled (development feature that refreshes page automatically)
+
+// Get the image element with id "mainImg"
+document.getElementById("mainImg");
+// Returns: <img src="assets/spiderman_img.png" id="mainImg" alt="spiderman" class="abc, xyz">
+
+// Assuming imgObj was assigned to the image element (though not shown in the code)
+console.dir(imgObj);
+// Shows all properties of the img element including:
+// - src: current image source
+// - id: "mainImg"
+// - classList: contains classes "abc," and "xyz"
+// - dimensions: naturalHeight, naturalWidth, etc.
+
+// Accessing properties of the image object
+imgObj.src // Returns current source URL
+imgObj.tagName // Returns "IMG" (the HTML tag name)
+imgObj.id // Returns "mainImg" (the element's ID)
+
+// Changing the image source to a different file
+imgObj.src = "assets/creation_3.jpeg";
+// This will immediately update the image displayed on the page
+
+// Get the paragraph element with id "description"
+document.getElementById("description");
+// Returns the <p> element containing text about Spider-Man's creation
+
+// View all properties of the description paragraph
+console.dir(document.getElementById("description"));
+// Shows:
+// - id: "description"
+// - innerText: The visible text content
+// - innerHTML: The raw HTML content (with whitespace)
+// - clientHeight/Width: The rendered dimensions
+// - And hundreds of other DOM properties and methods
+
+
+
+// This shows the detailed properties of the paragraph element with id "description"
+console.dir(document.getElementById("description"));
+// Returns a complete DOM object representation of the <p> element including:
+// - All standard HTML element properties
+// - ARIA accessibility attributes
+// - Dimension and position information (clientHeight, offsetTop, etc.)
+// - Event handlers (all null in this case)
+// - Text content properties (innerText, textContent, innerHTML)
+
+// Attempting to use a non-existent method (typo)
+document.getElementByClassName("oldImg");
+// Error: Uncaught TypeError: document.getElementByClassName is not a function
+// This occurs because the correct method name is getElementsByClassName (with an 's')
+
+// Correct usage with getElementsByClassName (returns a live HTMLCollection)
+document.getElementsByClassName("oldImg");
+// Returns: HTMLCollection(3) [img.oldImg, img.oldImg, img.oldImg]
+// This collection contains all three image elements with class "oldImg"
+
+// The HTMLCollection has:
+// - length: 3 (number of matching elements)
+// - Indexed access to each element (0, 1, 2)
+// - Live updates - changes in the DOM are reflected automatically
+
+// Each image element in the collection has properties like:
+// - src: "assets/spiderman_img.png"
+// - className: "oldImg"
+// - alt: "Spider-Man creation image 1"
+// - Dimensions: width/height = 200px, naturalWidth/naturalHeight = original size
+// - Position: offsetTop, offsetLeft relative to offsetParent

@@ -14,6 +14,7 @@
 // Corrected Examples:
 // javascript
 // Selects first <p> element in document
+
 document.querySelector('p');
 
 // Selects first element with id="myId"
@@ -49,3 +50,17 @@ javascript
 const container = document.getElementById('app');
 container.querySelector('.item'); // Only searches within #app
 // Would you like me to explain any specific aspect of query selectors in more detail?
+
+
+
+console.dir(document.querySelector("h1"));
+
+console.dir(document.querySelectorAll("#description"));
+
+console.dir(document.querySelector(".oldImg"));
+
+console.dir(document.querySelectorAll("div a"));
+
+
+
+alert(document.querySelector("h1").innerText);

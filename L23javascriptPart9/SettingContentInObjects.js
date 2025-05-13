@@ -209,6 +209,10 @@ const config = {
 
 
 
+let para = document.querySelector('p');
+
+console.dir(para);
+
 
 
 
