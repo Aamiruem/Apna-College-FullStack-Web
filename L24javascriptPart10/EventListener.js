@@ -23,7 +23,7 @@
 //this is a button event listener example
 let btns = document.querySelectorAll("button");
 console.dir(btns);
-btns.addEventListener("click, sayHello");
+btns.addEventListener(click, "sayHello");
 
 function sayHello() {
     console.log("Hello");
