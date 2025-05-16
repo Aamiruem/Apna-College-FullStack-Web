@@ -39,7 +39,7 @@ document.getElementsByTagName() Gets elements by tag name document.getElementsBy
 document.getElementsByClassName() Gets elements by class name document.getElementsByClassName("myClass")
 Modifying DOM Elements
 Method Description Example
-element.innerHTML Gets/sets HTML content inside an element div.innerHTML = "<p>New content</p>"
+element.innerHTML Gets/sets HTML content inside an element
 element.textContent Gets/sets text content (no HTML parsing) p.textContent = "New text"
 element.setAttribute() Sets an attribute img.setAttribute("src", "image.jpg")
 element.style Modifies CSS styles div.style.color = "red"
