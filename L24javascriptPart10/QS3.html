@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q3 Name Input</title>
+</head>
+<body>
+
+  <input type="text" id="nameInput" placeholder="Enter your name" />
+  <h2 id="nameDisplay"></h2>
+
+  <script>
+    const input = document.getElementById('nameInput');
+    const display = document.getElementById('nameDisplay');
+
+    input.addEventListener('input', function () {
+      // Replace all characters NOT a-z, A-Z, or space with empty string
+      const filtered = this.value.replace(/[^a-zA-Z ]/g, '');
+      this.value = filtered; // Update input with filtered value
+      display.textContent = filtered; // Show in heading
+    });
+  </script>
+
+</body>
+</html>

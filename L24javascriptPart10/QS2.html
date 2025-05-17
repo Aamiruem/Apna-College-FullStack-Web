@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q2 Button</title>
+</head>
+<body>
+
+  <div id="container"></div>
+
+  <script>
+    // Create button element
+    let btn = document.createElement('button');
+    btn.innerText = 'Click me';
+    document.getElementById('container').appendChild(btn);
+
+    // Add click event to change color to green
+    btn.addEventListener('click', function () {
+      this.style.backgroundColor = 'green';
+      this.style.color = 'white';
+    });
+  </script>
+
+</body>
+</html>

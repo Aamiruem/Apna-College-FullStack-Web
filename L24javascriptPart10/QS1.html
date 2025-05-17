@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q1 Events Demo</title>
+</head>
+<body style="height:2000px;">
+
+  <div id="box" style="width:200px; height:200px; background:#f0f0f0; margin:20px;">
+    Hover and move mouse out of this box
+  </div>
+
+  <input id="inputBox" placeholder="Press any key here" />
+
+  <h1 id="heading">Scroll the page or reload the page</h1>
+
+  <script>
+    let box = document.getElementById('box');
+    box.addEventListener('mouseout', () => alert('Mouse left the box!'));
+
+    let input = document.getElementById('inputBox');
+    input.addEventListener('keypress', (e) => console.log(`Key pressed: ${e.key}`));
+
+    window.addEventListener('scroll', () => console.log('Page scrolled'));
+
+    window.addEventListener('load', () => console.log('Page fully loaded'));
+  </script>
+
+</body>
+</html>
