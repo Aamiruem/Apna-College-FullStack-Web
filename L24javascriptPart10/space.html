@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="this?element"></div>
+
+<button id="no-escape">No escape</button>
+<button id="css-escape">CSS.escape()</button>
+<button id="manual-escape">Manual escape</button>
+
+<pre id="log"></pre>
+<script>
+    const log = document.getElementById('log');
+
+    function logMessage(message) {
+        log.innerHTML += message + '<br>';
+    }
+
+    document.getElementById('no-escape').addEventListener('click', () => {
+        const element = document.getElementById('this?element');
+        element.innerHTML = 'No escape';
+        logMessage('No escape: ' + element.innerHTML);
+    });
+
+    document.getElementById('css-escape').addEventListener('click', () => {
+        const element = document.getElementById('this?element');
+        element.innerHTML = CSS.escape('this?element');
+        logMessage('CSS.escape(): ' + element.innerHTML);
+    });
+
+    document.getElementById('manual-escape').addEventListener('click', () => {
+        const element = document.getElementById('this?element');
+        element.innerHTML = 'Manual escape';
+        logMessage('Manual escape: ' + element.innerHTML);
+    });
+</script>
+
+<script src="space.js"></script>
+</body>
+</html>

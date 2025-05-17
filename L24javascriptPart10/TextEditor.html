@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Text Editor</title>
+  <style>
+    #editor {
+      border: 1px solid #ccc;
+      padding: 10px;
+      min-height: 150px;
+      max-width: 600px;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+    }
+    button {
+      margin-right: 5px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Custom Text Editor</h2>
+
+  <div>
+    <button onclick="formatText('bold')"><b>Bold</b></button>
+    <button onclick="formatText('italic')"><i>Italic</i></button>
+    <button onclick="formatText('underline')"><u>Underline</u></button>
+    <button onclick="formatText('strikeThrough')"><s>Strike</s></button>
+    <button onclick="formatText('insertOrderedList')">OL</button>
+    <button onclick="formatText('insertUnorderedList')">UL</button>
+    <button onclick="formatText('undo')">Undo</button>
+    <button onclick="formatText('redo')">Redo</button>
+  </div>
+
+  <div id="editor" contenteditable="true" spellcheck="true">
+    Start editing here...
+  </div>
+
+
+
+  <input type="text" id="text" placeholder="Type here..." />
+<p></p>
+
+
+  <script>
+    function formatText(command) {
+      document.execCommand(command, false, null);
+      document.getElementById("editor").focus();
+    }
+  </script>
+
+</body>
+</html>
