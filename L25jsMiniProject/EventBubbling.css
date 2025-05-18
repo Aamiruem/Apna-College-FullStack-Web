@@ -1,0 +1,15 @@
+div{
+    height: 200px;
+    width: 400px;
+    background-color: rgb(109, 120, 110);
+    margin: 10px;
+    display: inline-block;
+}
+
+ul{
+    background-color: blue;
+}
+
+li{
+    background-color: green;
+}
