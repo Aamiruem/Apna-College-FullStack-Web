@@ -64,3 +64,8 @@ changeColor("red", 1000, () => {
         
     });
 });
+
+//callback nesting => is called callback hell
+
+// This is an example of callback hell, where we have nested callbacks.
+// It can make the code hard to read and maintain.

@@ -55,3 +55,15 @@ console.log("End");
 // It uses asynchronous patterns and the event loop to handle tasks efficiently without blocking.
 
 // Tools like Promises, async/await, setTimeout, etc., work with this system.
+
+// synchronous nature => single threaded matlab lagtara hoga
+
+// asynchronous nature => lagtara nahi hoga // but it is not lagging, it is just waiting for the task to complete
+
+setTimeout(() => {
+  console.log("This is an asynchronous message.");
+}, 2000);
+
+setTimeout((handlers) =>{
+  console.log("This is another asynchronous message after 3 seconds.");
+})

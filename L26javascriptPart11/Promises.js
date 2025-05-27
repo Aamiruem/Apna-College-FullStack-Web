@@ -1,4 +1,4 @@
-// function savetoDb(data){
+// function savetoDB(data){
 //     let internetSpeed = Math.floor(Math.random() * 10) + 1;
 //     if(internetSpeed > 4){
 //         console.log("your data was saved: ", data);
@@ -10,9 +10,53 @@
 
 
 
+function savetoDB(data, success, failure){
+    let internetSpeed = Math.floor(Math.random() * 10) + 1;
+    if(internetSpeed > 4){
+        success();
+    } else{
+        failure();
+    }
+}
+
+savetoDB("My Data", 
+    () => {
+        console.log("Data saved successfully!");
+    }, 
+    () => {
+        console.log("Failed to save data. Check internet connection.");
+    }
+);
 
 
-// function savetoDb(data, success, failure){
+
+// function savetoDB(data, success, failure) {
+//     let internetSpeed = Math.floor(Math.random() * 10) + 1;
+//     setTimeout(() => {
+//         if (internetSpeed > 4) {
+//             success();
+//         } else {
+//             failure();
+//         }
+//     }, 1000); // simulate 1-second network delay
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function savetoDB(data, success, failure){
 //     let internetSpeed = Math.floor(Math.random() * 10) + 1;
 //     if(internetSpeed > 4){
 //         success();
@@ -22,15 +66,18 @@
 //     }
 // }
 
-// savetoDb(
+
+
+
+// savetoDB(
 //     "apna college", 
 //     ()=> {
 //     console.log("success: your data was saved: ");
-//     savetoDb(
+//     savetoDB(
 //         "Hello world",
 //         ()=> {
 //         console.log("success2: your data2 was saved: ");
-//         savetoDb(
+//         savetoDB(
 //             "Hello kamran",
 //             ()=> {
 //             console.log("success3: your data3 was saved: ");
@@ -86,43 +133,41 @@
 // });
 // }
 
-// let request = savetoDb("apna college");// request = promises object
+let request = savetoDb("apna college");// request = promises object
 
-// request
-//     .then((data)=> {
-//         console.log("promise was resolved");
-//         console.log(request)
-//     })
-//     .catch((data)=> {
-//         console.log("promise was rejected");
-//         console.log(request)
-//     })
-
-
+request
+    .then((data)=> {
+        console.log("promise was resolved");
+        console.log(request)
+    })
+    .catch((data)=> {
+        console.log("promise was rejected");
+        console.log(request)
+    })
 
 
 
-// function savetoDb(data){
-//     return new Promise((resolve, reject) => {
-//     let internetSpeed = Math.floor(Math.random() * 10) + 1;
-//     if(internetSpeed > 4){
-//         resolve("success: data was saved");
+
+
+function savetoDb(data){
+    return new Promise((resolve, reject) => {
+    let internetSpeed = Math.floor(Math.random() * 10) + 1;
+    if(internetSpeed > 4){
+        resolve("success: data was saved");
         
-//     } else{
-//         reject("failure: week connection");
-//     }
-// });
-// }
+    } else{
+        reject("failure: week connection");
+    }
+});
+}
 
-// savetoDb("apna college") // request = promises object
-//     .then(()=> {
-//         console.log("promise was resolved");
-//     })
-//     .catch(()=> {
-//         console.log("promise was rejected");
-//     })
-
-
+savetoDb("apna college") // request = promises object
+    .then(()=> {
+        console.log("promise was resolved");
+    })
+    .catch(()=> {
+        console.log("promise was rejected");
+    })
 
 
 
@@ -131,34 +176,36 @@
 
 
 
-// function savetoDb(data){
-//     return new Promise((resolve, reject) => {
-//     let internetSpeed = Math.floor(Math.random() * 10) + 1;
-//     if(internetSpeed > 4){
-//         resolve("success: data was saved");
+
+
+function savetoDb(data){
+    return new Promise((resolve, reject) => {
+    let internetSpeed = Math.floor(Math.random() * 10) + 1;
+    if(internetSpeed > 4){
+        resolve("success: data was saved");
         
-//     } else{
-//         reject("failure: week connection");
-//     }
-// });
-// }
+    } else{
+        reject("failure: week connection");
+    }
+});
+}
 
-// savetoDb("apna college") // request = promises object
-//     .then(()=> {
-//         console.log("data1 saved");
-//         return savetoDb("kamran");
+savetoDb("apna college") // request = promises object
+    .then(()=> {
+        console.log("data1 saved");
+        return savetoDb("kamran");
     
-//     })
-//     .then(() =>{
-//         console.log("data2 saved");
-//         return savetoDb("kamran");
-//     })
-//     .then(() =>{
-//         console.log("data3 saved");
-//     })
-//     .catch(()=> {
-//         console.log("promise was rejected");
-//     })
+    })
+    .then(() =>{
+        console.log("data2 saved");
+        return savetoDb("kamran");
+    })
+    .then(() =>{
+        console.log("data3 saved");
+    })
+    .catch(()=> {
+        console.log("promise was rejected");
+    })
 
 
 
@@ -168,38 +215,38 @@
 
 
 
-// function savetoDb(data){
-//     return new Promise((resolve, reject) => {
-//     let internetSpeed = Math.floor(Math.random() * 10) + 1;
-//     if(internetSpeed > 4){
-//         resolve("success: data was saved");
+function savetoDb(data){
+    return new Promise((resolve, reject) => {
+    let internetSpeed = Math.floor(Math.random() * 10) + 1;
+    if(internetSpeed > 4){
+        resolve("success: data was saved");
         
-//     } else{
-//         reject("failure: week connection");
-//     }
-// });
-// }
+    } else{
+        reject("failure: week connection");
+    }
+});
+}
 
-// savetoDb("apna college") // request = promises object
-//     .then((result)=> {
-//         console.log("data1 saved");
-//         console.log("result of promise: " , result);
-//         return savetoDb("kamran");
+savetoDb("apna college") // request = promises object
+    .then((result)=> {
+        console.log("data1 saved");
+        console.log("result of promise: " , result);
+        return savetoDb("kamran");
     
-//     })
-//     .then((result) =>{
-//         console.log("data2 saved");
-//         console.log("result of promise: " , result);
-//         return savetoDb("kamran");
-//     })
-//     .then((result) =>{
-//         console.log("data3 saved");
-//         console.log("result of promise: " , result);
-//     })
-//     .catch((error)=> {
-//         console.log("promise was rejected");
-//         console.log("error of promise: " ,error);
-//     })
+    })
+    .then((result) =>{
+        console.log("data2 saved");
+        console.log("result of promise: " , result);
+        return savetoDb("kamran");
+    })
+    .then((result) =>{
+        console.log("data3 saved");
+        console.log("result of promise: " , result);
+    })
+    .catch((error)=> {
+        console.log("promise was rejected");
+        console.log("error of promise: " ,error);
+    })
 
 
 

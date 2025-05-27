@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 100px;
+        }
+        script {
+            display: none; /* Hide the script tag */
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello Kamran</h1>
+<script>
+const h1 = document.querySelector("h1");
+
+const colors = ["red", "green", "orange", "yellow", "blue"];
+let index = 0;
+
+function changeColorLoop() {
+    h1.style.color = colors[index];
+    index = (index + 1) % colors.length; // cycle through colors
+    setTimeout(changeColorLoop, 1000); // change every 1 second
+}
+
+changeColorLoop();
+</script>
+
+</body>
+</html>
