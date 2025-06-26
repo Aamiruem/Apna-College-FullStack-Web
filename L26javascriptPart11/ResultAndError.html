@@ -3,31 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promise Chaining Result</title>
+    <title>Promise Chaining Demo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .log-box {
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        #status {
             margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: 400px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             background-color: #f9f9f9;
+            min-height: 200px;
         }
-        #success {
-            color: green;
+        .success {
+            color: #28a745;
         }
-        #error {
-            color: red;
+        .error {
+            color: #dc3545;
+        }
+        .loading {
+            color: #17a2b8;
+        }
+        .status-message {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid;
         }
     </style>
 </head>
 <body>
-    <h1>Results and Error Demo</h1>
-    <div class="log-box" id="success">✅ Success Log:<br></div>
-    <div class="log-box" id="error">❌ Error Log:<br></div>
+    <h1>Promise Chaining Demo</h1>
+    <div id="status"></div>
 
-    <script src="promiseChaining.js"></script>
+    <script>
+        function saveToDBPromise(data) {
+            return new Promise((resolve, reject) => {
+                const internetSpeed = Math.floor(Math.random() * 10) + 1;
+                console.log(`Internet speed: ${internetSpeed}`);
+
+                const statusDiv = document.getElementById("status");
+                
+                // Show loading message
+                const loadingMsg = document.createElement('div');
+                loadingMsg.className = 'status-message loading';
+                loadingMsg.innerHTML = `⏳ Trying to save "${data}"... (Speed: ${internetSpeed}/10)`;
+                statusDiv.appendChild(loadingMsg);
+
+                setTimeout(() => {
+                    if (internetSpeed > 4) {
+                        const successMsg = document.createElement('div');
+                        successMsg.className = 'status-message success';
+                        successMsg.innerHTML = `✅ Success: "${data}" saved.`;
+                        statusDiv.appendChild(successMsg);
+                        resolve({data, internetSpeed});
+                    } else {
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'status-message error';
+                        errorMsg.innerHTML = `❌ Failure: Could not save "${data}" (Speed: ${internetSpeed}/10)`;
+                        statusDiv.appendChild(errorMsg);
+                        reject(new Error(`Failed to save "${data}" due to weak connection (Speed: ${internetSpeed}/10)`));
+                    }
+                }, 1000);
+            });
+        }
+
+        // Enhanced promise chaining with better logging
+        saveToDBPromise("apnacollege")
+            .then((result) => {
+                console.log('First save successful:', result);
+                return saveToDBPromise("hello world");
+            })
+            .then((result) => {
+                console.log('Second save successful:', result);
+                return saveToDBPromise("final save");
+            })
+            .then((result) => {
+                console.log('All saves completed successfully:', result);
+                const statusDiv = document.getElementById("status");
+                const completionMsg = document.createElement('div');
+                completionMsg.className = 'status-message success';
+                completionMsg.innerHTML = '🎉 All operations completed successfully!';
+                statusDiv.appendChild(completionMsg);
+            })
+            .catch((err) => {
+                console.error("Chain failed:", err);
+                const statusDiv = document.getElementById("status");
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'status-message error';
+                errorMsg.innerHTML = `⚠️ Operation stopped: ${err.message}`;
+                statusDiv.appendChild(errorMsg);
+            })
+            .finally(() => {
+                console.log("Save operations completed");
+                const statusDiv = document.getElementById("status");
+                const finalMsg = document.createElement('div');
+                finalMsg.className = 'status-message';
+                finalMsg.innerHTML = '🏁 Process completed';
+                statusDiv.appendChild(finalMsg);
+            });
+    </script>
 </body>
 </html>

@@ -58,7 +58,12 @@ changeColor("red", 1000, () => {
     changeColor("green", 1000, () => {
         changeColor("orange", 1000, () => {
             changeColor("yellow", 1000, () => {
-                changeColor("blue", 1000,);
+                changeColor("blue", 1000, () => {
+                    changeColor("purple", 1000, () => {
+                        console.log("All colors changed");
+                    });
+                });
+
             });
         });
         
