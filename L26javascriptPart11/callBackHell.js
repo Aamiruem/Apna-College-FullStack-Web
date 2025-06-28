@@ -74,3 +74,6 @@ changeColor("red", 1000, () => {
 
 // This is an example of callback hell, where we have nested callbacks.
 // It can make the code hard to read and maintain.
+
+
+

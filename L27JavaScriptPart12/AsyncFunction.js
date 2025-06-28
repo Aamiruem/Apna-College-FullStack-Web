@@ -2,7 +2,6 @@ async function greet(){
     // throw "some random error";
     throw "week connection"
     return "hello world!";
-
 }
 // let hello = async() => {}; //return a promise
 
@@ -21,3 +20,5 @@ let demo = async()=> {
     return "apna college";
     return 5;
 }
+demo()
+    
