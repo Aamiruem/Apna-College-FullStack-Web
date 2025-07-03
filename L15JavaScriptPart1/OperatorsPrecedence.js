@@ -1,7 +1,7 @@
 // operator precedence
 
 // ()> **> *> /> %
-let x = (2+1) * 3
+let x = (2 + 1) * 3
 console.log(x);
 // **> %
 let y = 8 ** 2 / 4
@@ -39,3 +39,13 @@ console.log(g);
 
 
 
+// Operator Precendence
+// This is the general order of solving an expression.
+//     amirhussainazad7 & 20gmail.com
+//     ()
+
+//     **
+
+//    *, /,%
+
+//    +,=

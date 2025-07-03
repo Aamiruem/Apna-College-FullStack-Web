@@ -1,4 +1,5 @@
-Operator Precedence in JavaScript
+# Operator Precedence in JavaScript
+
 Operator precedence determines the order in which operations are evaluated in an expression. JavaScript follows a specific hierarchy, where operators with higher precedence are executed first.
 
 1. Operator Precedence Table (Highest to Lowest)
@@ -19,8 +20,8 @@ Precedence Operator Type Operators Example
 16 typeof typeof typeof x
 16 void void void(0)
 16 delete delete delete obj.x
-15 Exponentiation ** 2** 3 (8)
-14 Multiplication * 2 * 3
+15 Exponentiation **2**3(8)
+14 Multiplication* 2 * 3
 14 Division / 6 / 2
 14 Remainder % 5 % 2 (1)
 13 Addition + 2 + 3
@@ -48,19 +49,17 @@ Precedence Operator Type Operators Example
 2 Assignment =, +=, -=, etc. x = 5
 1 Comma , (x=1, y=2)
 2. Examples of Precedence in Action
-Example 1: Arithmetic Operators
+<!-- Example 1: Arithmetic Operators -->
 javascript
 Copy
 let result = 2 + 3 *4; // 14 (not 20, because* has higher precedence)
 3 * 4 is evaluated first (12), then 2 + 12 → 14.
 
-Example 2: Logical Operators
-javascript
-Copy
+<!-- Example 2: Logical Operators -->
 let x = true || false && false; // true (&& has higher precedence)
 false && false → false, then true || false → true.
 
-Example 3: Assignment vs Comparison
+<!-- Example 3: Assignment vs Comparison -->
 javascript
 Copy
 let a = 5;
@@ -68,7 +67,7 @@ let b = 10;
 if (a = b) console.log("Equal"); // "Equal" (assignment happens first)
 a = b assigns 10 to a, then if (10) evaluates to true.
 
-Example 4: Grouping Overrides Precedence
+<!-- Example 4: Grouping Overrides Precedence -->
 javascript
 Copy
 let value = (2 + 3) *4; // 20 (grouping forces addition first)

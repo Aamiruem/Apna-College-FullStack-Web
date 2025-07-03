@@ -1,4 +1,5 @@
-let, var, and const in JavaScript: Key Differences & Usage
+# let, var, and const in JavaScript: Key Differences & Usage
+
 In JavaScript, let, var, and const are used to declare variables, but they behave differently in terms of scope, hoisting, and reassignment. Here’s a detailed breakdown:
 
 1. var (Legacy, Avoid in Modern JS)
