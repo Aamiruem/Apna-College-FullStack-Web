@@ -1,13 +1,10 @@
 let name = "Tony Stark";
-
 console.log(name);
 
 let role = "ironman"
-
 console.log(role);
 
 let age = 45;
-
 console.log(age);
 
 
@@ -23,8 +20,9 @@ console.log(bool);
 
 
 let empty = "";
-
-
-
 "this is 'apple'"
-let sentence =  "this is 'apple'";
+console.log(empty);
+
+
+let sentence = "this is 'apple'";
+console.log(sentence);
