@@ -1,3 +1,21 @@
+// Operators in JS
+// • Arithmetic（4， ，*，1，%， **）
+// • Unary(++, --)
+// • Assignment(s, +=, -=, *=, I =,%= etc.)
+// • Comparison (>, <, >=, <=, ==, !=, ===, !==)
+// • Logical(&&, ||, !)
+// • Bitwise(&, |, ^, ~, <<, >>)
+// • Ternary(?, :)
+// • Type(,)
+
+
+
+
+
+
+
+
+
 /**
  * operators.js
  * A complete demonstration of JavaScript operators with examples
@@ -10,11 +28,19 @@ let a = 10, b = 3;
 console.log(a + b);   // 13 (Addition)
 console.log(a - b);   // 7 (Subtraction)
 console.log(a * b);   // 30 (Multiplication)
+
 console.log(a / b);   // 3.333... (Division)
+
 console.log(a % b);   // 1 (Modulus/Remainder)
+
 console.log(a ** b);  // 1000 (Exponentiation)
+
 console.log(++a);     // 11 (Pre-increment)
+
 console.log(b--);     // 3 (Post-decrement, then b becomes 2)
+
+
+
 
 // 2. ASSIGNMENT OPERATORS
 console.log("\n=== ASSIGNMENT OPERATORS ===");

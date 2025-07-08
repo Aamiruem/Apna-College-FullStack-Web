@@ -59,3 +59,23 @@ console.log(userName); // "Alice"
 // Nullish coalescing operator (??) to provide default value
 let greeting = null ?? "Hello, Guest!";
 console.log(greeting); // "Hello, Guest!"
+
+
+
+
+// null & undefined in JS
+// undefined
+// A variable that has not been assigned a value is of
+// type undefined.
+// › let a;
+// ‹ undefined
+// › a
+// ‹ undefined
+// null —
+// The null value represents the intentional absence of
+// any object value.
+// To be explicitly assigned.
+// › let a = null;
+// ‹ undefined
+// ＞
+// a
