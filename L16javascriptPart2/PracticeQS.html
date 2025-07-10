@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Simulation</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .traffic-light {
+            width: 100px;
+            background: #333;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 50px auto;
+        }
+
+        .light {
+            width: 60px;
+            height: 60px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background-color: #444;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Traffic Light Simulation</h1>
+
+    <div class="traffic-light">
+        <div id="red" class="light"></div>
+        <div id="yellow" class="light"></div>
+        <div id="green" class="light"></div>
+    </div>
+
+    <div>
+        <button onclick="turnRed()">Red</button>
+        <button onclick="turnYellow()">Yellow</button>
+        <button onclick="turnGreen()">Green</button>
+        <button onclick="startTraffic()">Start</button>
+        <button onclick="stopTraffic()">Stop</button>
+    </div>
+
+    <script>
+        let intervalId;
+
+        function resetLights() {
+            document.getElementById("red").className = "light";
+            document.getElementById("yellow").className = "light";
+            document.getElementById("green").className = "light";
+        }
+
+        function turnRed() {
+            resetLights();
+            document.getElementById("red").classList.add("red");
+        }
+
+        function turnYellow() {
+            resetLights();
+            document.getElementById("yellow").classList.add("yellow");
+        }
+
+        function turnGreen() {
+            resetLights();
+            document.getElementById("green").classList.add("green");
+        }
+
+        function startTraffic() {
+            let current = 0;
+            stopTraffic(); // Clear if already running
+
+            intervalId = setInterval(() => {
+                if (current === 0) {
+                    turnRed();
+                } else if (current === 1) {
+                    turnYellow();
+                } else if (current === 2) {
+                    turnGreen();
+                }
+                current = (current + 1) % 3;
+            }, 2000); // change light every 2 seconds
+        }
+
+        function stopTraffic() {
+            clearInterval(intervalId);
+        }
+    </script>
+
+</body>
+
+</html>

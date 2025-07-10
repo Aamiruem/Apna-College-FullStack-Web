@@ -9,7 +9,7 @@ console.log("pass");
 
 
 let marks2 = 90;
-if((marks2>=90 && marks2<=100) || !false){ //!false = true
+if((marks2>=90 && marks2<=100) || !false){ // !false(not as false) = true
 console.log("pass");
 }
 

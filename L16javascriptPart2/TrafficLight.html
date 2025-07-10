@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .traffic-light {
+            width: 120px;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .light {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px auto;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        
+        .red {
+            background-color: red;
+        }
+        
+        .yellow {
+            background-color: yellow;
+        }
+        
+        .green {
+            background-color: green;
+        }
+        
+        .active {
+            opacity: 1;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .mode-selector {
+            margin: 20px 0;
+        }
+        
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+        
+        .pedestrian-button {
+            background-color: #ff9800;
+            padding: 15px 25px;
+            font-size: 18px;
+        }
+        
+        .pedestrian-button:hover {
+            background-color: #e68a00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Traffic Light Simulation</h1>
+    
+    <div class="traffic-light">
+        <div class="light red" id="red-light"></div>
+        <div class="light yellow" id="yellow-light"></div>
+        <div class="light green" id="green-light"></div>
+    </div>
+    
+    <div class="timer" id="timer">00</div>
+    
+    <div class="mode-selector">
+        <label for="mode">Select Mode:</label>
+        <select id="mode">
+            <option value="auto">Automatic</option>
+            <option value="manual">Manual</option>
+            <option value="night">Night Mode</option>
+        </select>
+    </div>
+    
+    <div class="controls" id="manual-controls" style="display: none;">
+        <button id="red-btn">Red</button>
+        <button id="yellow-btn">Yellow</button>
+        <button id="green-btn">Green</button>
+    </div>
+    
+    <button class="pedestrian-button" id="pedestrian-btn">Pedestrian Crossing</button>
+    
+    <script>
+        // DOM Elements
+        const redLight = document.getElementById('red-light');
+        const yellowLight = document.getElementById('yellow-light');
+        const greenLight = document.getElementById('green-light');
+        const timerDisplay = document.getElementById('timer');
+        const modeSelect = document.getElementById('mode');
+        const manualControls = document.getElementById('manual-controls');
+        const redBtn = document.getElementById('red-btn');
+        const yellowBtn = document.getElementById('yellow-btn');
+        const greenBtn = document.getElementById('green-btn');
+        const pedestrianBtn = document.getElementById('pedestrian-btn');
+        
+        // Traffic light states
+        const states = {
+            RED: 'red',
+            RED_YELLOW: 'red_yellow',
+            GREEN: 'green',
+            YELLOW: 'yellow',
+            BLINK_YELLOW: 'blink_yellow',
+            PEDESTRIAN: 'pedestrian'
+        };
+        
+        // Timing settings (in seconds)
+        const timings = {
+            [states.RED]: 10,
+            [states.RED_YELLOW]: 3,
+            [states.GREEN]: 15,
+            [states.YELLOW]: 3,
+            [states.PEDESTRIAN]: 20
+        };
+        
+        // Variables
+        let currentState = states.RED;
+        let timeLeft = timings[states.RED];
+        let intervalId = null;
+        let blinkInterval = null;
+        let isBlinking = false;
+        let mode = 'auto';
+        
+        // Initialize
+        updateLights();
+        startTimer();
+        
+        // Event Listeners
+        modeSelect.addEventListener('change', (e) => {
+            mode = e.target.value;
+            if (mode === 'manual') {
+                manualControls.style.display = 'block';
+                stopTimer();
+                resetLights();
+            } else if (mode === 'night') {
+                manualControls.style.display = 'none';
+                stopTimer();
+                startBlinkingYellow();
+            } else {
+                manualControls.style.display = 'none';
+                stopBlinkingYellow();
+                resetToAuto();
+            }
+        });
+        
+        redBtn.addEventListener('click', () => {
+            if (mode === 'manual') {
+                changeState(states.RED);
+                timeLeft = timings[states.RED];
+                updateTimerDisplay();
+            }
+        });
+        
+        yellowBtn.addEventListener('click', () => {
+            if (mode === 'manual') {
+                changeState(states.YELLOW);
+                timeLeft = timings[states.YELLOW];
+                updateTimerDisplay();
+            }
+        });
+        
+        greenBtn.addEventListener('click', () => {
+            if (mode === 'manual') {
+                changeState(states.GREEN);
+                timeLeft = timings[states.GREEN];
+                updateTimerDisplay();
+            }
+        });
+        
+        pedestrianBtn.addEventListener('click', () => {
+            if (mode === 'auto' && currentState !== states.PEDESTRIAN) {
+                // Interrupt normal cycle for pedestrian crossing
+                changeState(states.PEDESTRIAN);
+                timeLeft = timings[states.PEDESTRIAN];
+                updateTimerDisplay();
+                stopTimer();
+                startTimer();
+            }
+        });
+        
+        // Functions
+        function updateLights() {
+            // Reset all lights
+            redLight.classList.remove('active');
+            yellowLight.classList.remove('active');
+            greenLight.classList.remove('active');
+            
+            // Activate current state lights
+            switch(currentState) {
+                case states.RED:
+                    redLight.classList.add('active');
+                    break;
+                case states.RED_YELLOW:
+                    redLight.classList.add('active');
+                    yellowLight.classList.add('active');
+                    break;
+                case states.GREEN:
+                    greenLight.classList.add('active');
+                    break;
+                case states.YELLOW:
+                    yellowLight.classList.add('active');
+                    break;
+                case states.PEDESTRIAN:
+                    // For pedestrian, we'll blink green
+                    greenLight.classList.add('active');
+                    break;
+            }
+        }
+        
+        function changeState(newState) {
+            currentState = newState;
+            updateLights();
+        }
+        
+        function startTimer() {
+            stopTimer(); // Ensure no other timer is running
+            updateTimerDisplay();
+            
+            intervalId = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    transitionToNextState();
+                }
+            }, 1000);
+        }
+        
+        function stopTimer() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        }
+        
+        function updateTimerDisplay() {
+            timerDisplay.textContent = timeLeft.toString().padStart(2, '0');
+        }
+        
+        function transitionToNextState() {
+            if (mode !== 'auto' && currentState !== states.PEDESTRIAN) return;
+            
+            if (currentState === states.PEDESTRIAN) {
+                // After pedestrian crossing, return to red
+                changeState(states.RED);
+                timeLeft = timings[states.RED];
+            } else {
+                // Normal automatic cycle
+                switch(currentState) {
+                    case states.RED:
+                        changeState(states.RED_YELLOW);
+                        timeLeft = timings[states.RED_YELLOW];
+                        break;
+                    case states.RED_YELLOW:
+                        changeState(states.GREEN);
+                        timeLeft = timings[states.GREEN];
+                        break;
+                    case states.GREEN:
+                        changeState(states.YELLOW);
+                        timeLeft = timings[states.YELLOW];
+                        break;
+                    case states.YELLOW:
+                        changeState(states.RED);
+                        timeLeft = timings[states.RED];
+                        break;
+                }
+            }
+            
+            updateTimerDisplay();
+        }
+        
+        function startBlinkingYellow() {
+            isBlinking = true;
+            changeState(states.YELLOW);
+            
+            let isOn = true;
+            blinkInterval = setInterval(() => {
+                if (isOn) {
+                    yellowLight.classList.remove('active');
+                } else {
+                    yellowLight.classList.add('active');
+                }
+                isOn = !isOn;
+            }, 500);
+        }
+        
+        function stopBlinkingYellow() {
+            if (blinkInterval) {
+                clearInterval(blinkInterval);
+                blinkInterval = null;
+            }
+            isBlinking = false;
+            yellowLight.classList.remove('active');
+        }
+        
+        function resetLights() {
+            stopBlinkingYellow();
+            redLight.classList.remove('active');
+            yellowLight.classList.remove('active');
+            greenLight.classList.remove('active');
+        }
+        
+        function resetToAuto() {
+            changeState(states.RED);
+            timeLeft = timings[states.RED];
+            startTimer();
+        }
+    </script>
+</body>
+</html>
