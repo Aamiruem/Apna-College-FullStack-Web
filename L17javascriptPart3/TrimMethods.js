@@ -22,6 +22,7 @@ console.log(spaced.trim()); // Output: "Hello   World!"
 
 // Importing the prompt-sync package to take user input in Node.js.
 // { sigint: true } allows the user to exit with Ctrl+C safely.
+
 const prompt = require('prompt-sync')({ sigint: true });
 
 // Asking the user to set a password
