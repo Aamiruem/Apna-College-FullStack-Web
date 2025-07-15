@@ -1,4 +1,4 @@
-// SORT=> ASCENDING OR DESCENDING ORDER
+// SORT=> ASCENDING OR DESCENDING ORDER OF ARRAY IN USING ALPHABETICAL ORDERS
 let days = ["monday", " Tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
 console.log(days);
@@ -9,7 +9,9 @@ console.log(days.sort().reverse());
 
 console.log(days.sort().reverse().reverse());  
 // sort() method is used to sort the array in ascending order by default and reverse() method is used to reverse the array.
+
 // if we want to sort the array in descending order then we have to use sort() method and reverse() method together.
+
 // if we want to sort the array in ascending order then we have to use sort() method and reverse() method together.
 
 

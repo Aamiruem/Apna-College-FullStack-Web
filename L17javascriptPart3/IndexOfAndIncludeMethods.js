@@ -1,3 +1,7 @@
+// includes() => It returns true if the string contains the specified value, otherwise false
+
+
+
 let primary = ["red", "yellow", "blue"];
 
 primary.indexOf("yellow"); // returns 1

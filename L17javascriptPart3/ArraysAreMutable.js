@@ -30,6 +30,8 @@ console.log(fruits);
 
 fruits[3] = "orange";
 
+fruits[10] = "kiwi";
+
 console.log(fruits);
 
 fruits[fruits.length] = "grapes";

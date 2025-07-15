@@ -12,21 +12,21 @@ console.log(cars);
 
 
 
-cars.push("Toyota");
+cars.push("Toyota");// add to end
 console.log(cars);
 
-cars.unshift("Toyota");
+cars.unshift("Toyota");// add to start
 console.log(cars);
 
 
 cars.unshift("Ferrari");
 console.log(cars);
 
-cars.shift();
+cars.shift();// delete from start
 console.log(cars);
 
 
-cars.pop("xuv");
+cars.pop("xuv");// delete from end
 console.log(cars);
 // splice(start, deleteCount, item1, item2, item3, ...)
 // console.log(cars.pop("xuv"));
@@ -38,7 +38,7 @@ console.log(followers);
 
 console.log(followers.length);
 
-let blocked = followers.shift();
+let blocked = followers.shift();// delete from start
 console.log(blocked);
 
 
