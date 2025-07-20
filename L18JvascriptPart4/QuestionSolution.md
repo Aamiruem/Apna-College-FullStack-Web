@@ -1,4 +1,4 @@
-Q1. Delete all occurrences of an element 'num' in a given array
+Q1.Delete all occurrences of an element 'num' in a given array
 javascript
 function removeAllOccurrences(arr, num) {
     return arr.filter(item => item !== num);
@@ -75,4 +75,3 @@ Q3	number.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0)
 Q4	Loop from 2 to n and multiply
 Q5	Math.max(...arr) or loop to compare
 These solutions cover all your requirements efficiently. Let me know if you need any modifications! 🚀
-
