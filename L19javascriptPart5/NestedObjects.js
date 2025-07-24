@@ -10,20 +10,25 @@ let classInfo = {
     name: "kamran",
     age: 22,
     city: "Delhi",  
-    printInfo: function () { console.log(this.name, this.age, this.city); 
+    printInfo: function () {
+        console.log(this.name, this.age, this.city); 
         
     },
     Afroz: {
         name: "Afroz",
         age: 22,
         city: "Delhi",
-        printInfo: function () { console.log(this.name, this.age, this.city); }
+        printInfo: function () {
+            console.log(this.name, this.age, this.city);
+        }
     },
     Aamir: {
         name: "Aamir",
         age: 22,
         city: "Delhi",
-        printInfo: function () { console.log(this.name, this.age, this.city); }
+        printInfo: function () {
+            console.log(this.name, this.age, this.city);
+        }
     }
 
 };

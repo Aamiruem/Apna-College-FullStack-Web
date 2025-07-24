@@ -82,29 +82,29 @@ console.log(student2);
 
 
 
-let student = {
-    name: "shradha",
+let students = {
+    name: "kamran",
     age: 23,
     marks: 94.4,
     city: "Delhi"
 };
 
-console.log(student.city);        // Output: 'Delhi'
+console.log(students.city);        // Output: 'Delhi'
 
 // 🔁 Update existing property
-student.city = "Mumbai";          // city updated to 'Mumbai'
+students.city = "Mumbai";          // city updated to 'Mumbai'
 
 // ➕ Add a new property
-student.gender = "female";        // gender added
+students.gender = "female";        // gender added
 
-console.log(student.gender);      // Output: 'female'
+console.log(students.gender);      // Output: 'female'
 
 // ✅ Final object after update and addition
-console.log(student);
+console.log(students);
 
 /*
 {
-  name: "shradha",
+  name: "kamran",
   age: 23,
   marks: 94.4,
   city: "Mumbai",     // updated

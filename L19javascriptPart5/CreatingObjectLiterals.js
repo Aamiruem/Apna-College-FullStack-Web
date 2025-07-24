@@ -2,10 +2,23 @@
 
 // Basic Object Literal Syntax
 // javascript
-const person = {
-    firstName: 'John',
-    lastName: 'Doe',
+const student = {
+    firstName: 'Amir',
+    lastName: 'Hussain',
     age: 30,
+    grade: 'A',
+    subjects: ['Math', 'Science', 'Computer Science'],
+    marks: {
+        Math: 95,
+        Science: 90,
+        Computer: 95
+    },
+    address: {
+        street: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        zip: '12345'
+    },
     isEmployed: true
 };
 // Property Types

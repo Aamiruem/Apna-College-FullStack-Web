@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Creating an object literal
+        const person = {
+            name: "John",
+            age: 30,
+            greet: function() {
+                console.log("Hello, my name is " + this.name);
+            }
+        };
+
+        // Accessing object properties
+        console.log(person.name); // Output: John
+        console.log(person.age);  // Output: 30
+
+        // Calling object method
+        person.greet(); // Output: Hello, my name is John
+    </script>
+
+    <h1>Creating Object Literals in JavaScript</h1>
+    <p>This example demonstrates how to create an object literal in JavaScript, access its properties, and call its methods.</p>
+    <script src="CreatingObjectLiterals.js"></script>
+        
+</body>
+</html>
