@@ -80,7 +80,7 @@
 
 
 
-let prompt = require("prompt-sync")();
+// let prompt = require("prompt-sync")();
 
 const max = parseInt(prompt("Enter the max number: ")); // Convert input to number
 

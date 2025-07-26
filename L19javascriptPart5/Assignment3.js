@@ -4,7 +4,10 @@ const Person = {
     city: "Delhi",
 
 };
-Person.city = "Delhi";
-Person.country = "India";
+console.log(Person);  
+
+
+Person.city = "New York City"; // Update city property
+Person.country = "United States"; // Add country property 
 
 console.log(Person);
