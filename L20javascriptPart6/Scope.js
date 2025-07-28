@@ -43,7 +43,7 @@
 
 
 function claSum(a, b){
-    let sum = a+b;
+    let sum = a+b; //function scope
     return sum;
 }
 

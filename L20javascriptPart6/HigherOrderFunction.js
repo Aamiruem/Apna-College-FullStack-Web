@@ -89,3 +89,28 @@ let request = "odd"; //even
 let oddFunction = oddOrEvenFactory(request);
 
 oddFunction(5);
+
+
+
+
+
+
+
+function multipleGreet(func, count) { // higher-order function
+    for (let i = 1; i <= count; i++) {
+        func(); // call the function passed in
+    }
+
+    // This function is defined but not used
+    let greet = function () {
+        console.log("hello");
+    };
+}
+
+// Call multipleGreet with an anonymous function
+multipleGreet(function () {
+    console.log("Namaste");
+}, 3);
+
+
+multipleGreet(function () { console.log("Namaste") }, 1000);

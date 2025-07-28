@@ -21,7 +21,7 @@ function sum(a, b){
     console.log("Hello");
     console.log("Hello");
     return a+b;
-    console.log("Bye"); // this will not be executed because return keyword is used.
+    console.log("Bye"); // this will not be executed because return keyword is used. above return print any task not executed 
     console.log("Hello2");
     console.log("Hello2");
 }
