@@ -1,21 +1,107 @@
-function multipleGreet(func, n){
-    for(let i = 0; i < n; i++){
+// Higher Order Function
+//Takes one or multiple functions as arguments or returns a function
+
+function multipleGreet(func, count) {
+    for (let i = 0; i < count; i++) {
         func();
-        func(`Hello, World! ${i+1}`);
+        func(`Hello, World! ${i + 1}`);
     }
 }
 
-let greet = function(){
-    console.log('Hello, World!');
+
+// function multipleGreet(func, n) {
+//     for(let i = 0; i < n; i++){
+//         func();
+//         func(`Hello, World! ${i+1}`);
+//     }
+// }
+
+// let greet = function(){
+//     console.log('Hello, World!');
+// }
+// multipleGreet(greet, 2);
+
+
+
+
+
+
+// explain above code
+// ✅ Code with Explanation
+// javascript
+// Copy
+// Edit
+// Function 'multipleGreet' takes a function 'func' and a number 'n'
+function multipleGreet(func, n) {
+    // Loop runs 'n' times
+    for (let i = 0; i < n; i++) {
+        func(); // 🔁 Call the function without any arguments
+        func(`Hello, World! ${i + 1}`); // 🔁 Call the function with a string argument
+        // This will only work if 'func' can accept a parameter
+    }
 }
+javascript
+Copy
+Edit
+// Function expression assigned to 'greet'
+let greet1 = function () {
+    console.log('Hello, World!');
+    // ⚠️ This function takes no parameters, so any passed argument is ignored
+};
+javascript
+Copy
+Edit
+// Call 'multipleGreet' with 'greet' function and count = 2
 multipleGreet(greet, 2);
+// Loop will run 2 times
+// Each time, greet() will be called twice:
+//    - once with no argument
+//    - once with a string (but it will still ignore the string)
+// 🧠 What Actually Happens:
+// Even though func() is being called with a string(func("Hello, World! 1")), your greet function is defined without parameters, so it ignores any arguments.
 
+// 🔄 Output:
+// text
+// Copy
+// Edit
+// Hello, World!   // from func()
+// Hello, World!   // from func('Hello, World! 1')
+// Hello, World!   // from func()
+// Hello, World!   // from func('Hello, World! 2')
+// ✅ Total: 4 times "Hello, World!" printed(2 iterations × 2 calls)
 
+// ⚠️ If you want to use the argument, change greet to accept a parameter:
+// javascript
+// Copy
+// Edit
+let greet2 = function (message) {
+    console.log(message);
+};
+// Then output would be:
+// text
+// Copy
+// Edit
+// undefined
+// Hello, World! 1
+// undefined
+// Hello, World! 2
+// Or better yet:
 
+// javascript
+// Copy
+// Edit
+let greet3 = function (message = "Hello, World!") {
+    console.log(message);
+};
+// Now it prints:
 
-
-
-
+// text
+// Copy
+// Edit
+// Hello, World!
+// Hello, World! 1
+// Hello, World!
+// Hello, World! 2
 
 
 
@@ -27,6 +113,7 @@ multipleGreet(greet, 2);
 //         return number * factor;
 //     }
 // }
+
 
 
 
