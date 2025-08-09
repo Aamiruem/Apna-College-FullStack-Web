@@ -1,3 +1,4 @@
+6
 // return function
 
 const add = (a, b) => {
