@@ -16,6 +16,7 @@ console.log(sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 
 // function min(){
 //     console.log(args);
+//      console.log(arguments);
 //     console.log(arguments.length);
 //     arguments.push(1);
 // }

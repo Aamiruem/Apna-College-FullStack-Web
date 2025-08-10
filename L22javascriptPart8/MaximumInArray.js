@@ -23,3 +23,7 @@ for(let i = 0; i < arr.length; i++){
 }
 
 console.log("This is a max number of over all given array = ", max);
+
+
+
+ 

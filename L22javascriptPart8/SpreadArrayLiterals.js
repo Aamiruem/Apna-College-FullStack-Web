@@ -37,3 +37,8 @@ const numbers = [8, 4, 6];
 const max = Math.max(...numbers);
 
 console.log(max); // 8
+
+
+
+
+

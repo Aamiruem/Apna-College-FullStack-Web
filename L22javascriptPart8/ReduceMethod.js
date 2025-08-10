@@ -129,3 +129,20 @@ console.log(reversed); // ['mango', 'orange', 'banana', 'apple']
 // All arrays inherit these methods from Array.prototype
 
 // This comprehensive set of methods makes JavaScript arrays extremely powerful for data manipulation.
+
+
+
+
+
+
+
+console.log("this is last value ")
+
+
+let nums1 = [1, 2, 3, 4, 5];
+let finalValue = nums1.reduce(function (res, ele) {
+    console.log("this is res " + res)
+    return res + ele;
+    
+});
+console.log("this is final value " + finalValue); // Output: 15

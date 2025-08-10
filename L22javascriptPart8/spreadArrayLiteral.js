@@ -16,3 +16,29 @@ let odd = [1, 3, 5, 7, 9];
 let even = [2, 4, 6, 8, 10];
 let nums = [...odd, ...even];
 console.log(nums);
+
+
+
+
+
+
+const data = {
+    name: "aamir",
+    email: "aamir123@gmail.com",
+    age: 22,
+    city: "New York",
+    country: "USA"
+};
+
+console.log(data);
+
+const dataCopy = {
+    ...data,
+    id: 123,
+    age: 23,
+    name: "John Doe",
+    country: "India"
+};
+
+
+console.log(dataCopy);
