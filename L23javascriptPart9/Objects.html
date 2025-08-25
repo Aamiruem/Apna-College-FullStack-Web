@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Object Properties</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .method {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+        h3 {
+            color: #3498db;
+            margin-top: 0;
+        }
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e8f4fc;
+            border-radius: 4px;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Setting Content in JavaScript Objects</h1>
+    
+    <div class="container">
+        <div class="method">
+            <h3>1. Dot Notation</h3>
+            <p>Setting properties using dot notation</p>
+            <pre>const obj = {};
+obj.name = "John";
+obj.age = 30;</pre>
+            <button onclick="demoDotNotation()">Run Example</button>
+            <div id="output1" class="output"></div>
+        </div>
+        
+        <div class="method">
+            <h3>2. Bracket Notation</h3>
+            <p>Setting properties using bracket notation</p>
+            <pre>const obj = {};
+obj["first name"] = "Jane"; // Works with spaces
+obj["age"] = 25;</pre>
+            <button onclick="demoBracketNotation()">Run Example</button>
+            <div id="output2" class="output"></div>
+        </div>
+        
+        <div class="method">
+            <h3>3. Computed Property Names</h3>
+            <p>Using expressions as property names (ES6 feature)</p>
+            <pre>const dynamicKey = "score";
+const obj = {
+    name: "Alex",
+    [dynamicKey]: 95,  // Correct usage
+    ["grade" + dynamicKey.slice(5)]: "A" // Another example
+};</pre>
+            <button onclick="demoComputedProperties()">Run Example</button>
+            <div id="output3" class="output"></div>
+        </div>
+        
+        <div class="method">
+            <h3>4. Object.defineProperty</h3>
+            <p>Defining properties with specific attributes</p>
+            <pre>const obj = {};
+Object.defineProperty(obj, 'readOnlyProp', {
+    value: "Can't change me",
+    writable: false,
+    enumerable: true
+});</pre>
+            <button onclick="demoDefineProperty()">Run Example</button>
+            <div id="output4" class="output"></div>
+        </div>
+        
+        <div class="method">
+            <h3>5. Object.assign</h3>
+            <p>Copying properties from one or more source objects</p>
+            <pre>const obj1 = { a: 1, b: 2 };
+const obj2 = { b: 3, c: 4 };
+const result = Object.assign({}, obj1, obj2);</pre>
+            <button onclick="demoObjectAssign()">Run Example</button>
+            <div id="output5" class="output"></div>
+        </div>
+        
+        <div class="method">
+            <h3>6. Spread Operator (ES6)</h3>
+            <p>Merging objects using the spread operator</p>
+            <pre>const obj1 = { a: 1, b: 2 };
+const obj2 = { b: 3, c: 4 };
+const result = { ...obj1, ...obj2 };</pre>
+            <button onclick="demoSpreadOperator()">Run Example</button>
+            <div id="output6" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        function demoDotNotation() {
+            const output = document.getElementById('output1');
+            output.innerHTML = '';
+            
+            const obj = {};
+            obj.name = "John";
+            obj.age = 30;
+            
+            output.innerHTML = `<pre>${JSON.stringify(obj, null, 2)}</pre>`;
+        }
+        
+        function demoBracketNotation() {
+            const output = document.getElementById('output2');
+            output.innerHTML = '';
+            
+            const obj = {};
+            obj["first name"] = "Jane"; // Works with spaces
+            obj["age"] = 25;
+            
+            output.innerHTML = `<pre>${JSON.stringify(obj, null, 2)}</pre>`;
+        }
+        
+        function demoComputedProperties() {
+            const output = document.getElementById('output3');
+            output.innerHTML = '';
+            
+            // This is the correct way to use computed property names
+            const dynamicKey = "score";
+            const obj = {
+                name: "Alex",
+                [dynamicKey]: 95,  // Correct usage - dynamicKey is defined
+                ["grade" + dynamicKey.slice(5)]: "A" // Another example
+            };
+            
+            output.innerHTML = `<pre>${JSON.stringify(obj, null, 2)}</pre>`;
+            output.innerHTML += `<p>Notice how the computed property names work: 'score' and 'grade'</p>`;
+        }
+        
+        function demoDefineProperty() {
+            const output = document.getElementById('output4');
+            output.innerHTML = '';
+            
+            const obj = {};
+            Object.defineProperty(obj, 'readOnlyProp', {
+                value: "Can't change me",
+                writable: false,
+                enumerable: true
+            });
+            
+            let result = `<pre>${JSON.stringify(obj, null, 2)}</pre>`;
+            
+            // Try to change the read-only property
+            try {
+                obj.readOnlyProp = "I'm trying to change this";
+                result += `<p>After trying to change readOnlyProp: ${obj.readOnlyProp}</p>`;
+            } catch (e) {
+                result += `<p>Error: ${e.message}</p>`;
+            }
+            
+            output.innerHTML = result;
+        }
+        
+        function demoObjectAssign() {
+            const output = document.getElementById('output5');
+            output.innerHTML = '';
+            
+            const obj1 = { a: 1, b: 2 };
+            const obj2 = { b: 3, c: 4 };
+            const result = Object.assign({}, obj1, obj2);
+            
+            output.innerHTML = `<pre>obj1: ${JSON.stringify(obj1)}
+obj2: ${JSON.stringify(obj2)}
+result: ${JSON.stringify(result)}</pre>`;
+            output.innerHTML += `<p>Notice how property 'b' from obj2 overwrites 'b' from obj1</p>`;
+        }
+        
+        function demoSpreadOperator() {
+            const output = document.getElementById('output6');
+            output.innerHTML = '';
+            
+            const obj1 = { a: 1, b: 2 };
+            const obj2 = { b: 3, c: 4 };
+            const result = { ...obj1, ...obj2 };
+            
+            output.innerHTML = `<pre>obj1: ${JSON.stringify(obj1)}
+obj2: ${JSON.stringify(obj2)}
+result: ${JSON.stringify(result)}</pre>`;
+            output.innerHTML += `<p>Spread operator produces the same result as Object.assign</p>`;
+        }
+        
+        // Initialize with some examples
+        window.onload = function() {
+            demoDotNotation();
+            demoBracketNotation();
+            demoComputedProperties();
+        };
+    </script>
+</body>
+</html>

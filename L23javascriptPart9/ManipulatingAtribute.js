@@ -55,12 +55,12 @@ const allPresent = requiredAttrs.every(attr => img.hasAttribute(attr));
 const customElement = {
     _attributes: {},
 
-    // Getter
+    // Getter => return value of attribute if exists else undefined
     getAttribute(attr) {
         return this._attributes[attr];
     },
 
-    // Setter
+    // Setter => set value and trigger side effects on change of attribute
     setAttribute(attr, value) {
         this._attributes[attr] = value;
         this.onAttributeChange(attr, value);

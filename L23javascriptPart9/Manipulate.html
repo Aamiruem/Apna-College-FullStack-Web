@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Manipulation Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #2575fc;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6a11cb;
+            margin-bottom: 20px;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #2575fc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6a11cb;
+        }
+        
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        input[type="range"], select, button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            background: white;
+        }
+        
+        button {
+            background: #6a11cb;
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 5px;
+        }
+        
+        button:hover {
+            background: #2575fc;
+        }
+        
+        .demo-element {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        #styleTarget {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .code-sample {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        .color-box {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .selected {
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #000;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Style Manipulation Demo</h1>
+            <p class="subtitle">See how JavaScript can dynamically manipulate CSS styles</p>
+        </header>
+        
+        <section class="demo-section">
+            <h2>Background Color</h2>
+            <div class="demo-container">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="bgColor">Select Background Color:</label>
+                        <input type="color" id="bgColor" value="#ffffff">
+                    </div>
+                    <div class="control-group">
+                        <label>Or choose from presets:</label>
+                        <div class="color-box">
+                            <div class="color-option selected" style="background: #e9ecef;" data-color="#e9ecef"></div>
+                            <div class="color-option" style="background: #ff9999;" data-color="#ff9999"></div>
+                            <div class="color-option" style="background: #99ff99;" data-color="#99ff99"></div>
+                            <div class="color-option" style="background: #9999ff;" data-color="#9999ff"></div>
+                            <div class="color-option" style="background: #ffff99;" data-color="#ffff99"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-element">
+                    <div id="styleTarget">
+                        <p>This element's background color will change based on your selection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="demo-section">
+            <h2>Size & Dimensions</h2>
+            <div class="demo-container">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="widthRange">Width: <output id="widthValue">100%</output></label>
+                        <input type="range" id="widthRange" min="50" max="100" value="100">
+                    </div>
+                    <div class="control-group">
+                        <label for="heightRange">Height: <output id="heightValue">300px</output></label>
+                        <input type="range" id="heightRange" min="100" max="500" value="300">
+                    </div>
+                    <div class="control-group">
+                        <label for="borderRadius">Border Radius: <output id="radiusValue">10px</output></label>
+                        <input type="range" id="borderRadius" min="0" max="50" value="10">
+                    </div>
+                </div>
+                <div class="demo-element">
+                    <div id="sizeTarget">
+                        <p>Adjust my size and roundness using the controls!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="demo-section">
+            <h2>Text Styling</h2>
+            <div class="demo-container">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="fontFamily">Font Family:</label>
+                        <select id="fontFamily">
+                            <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Default</option>
+                            <option value="'Courier New', Courier, monospace">Courier New</option>
+                            <option value="Georgia, serif">Georgia</option>
+                            <option value="Arial, Helvetica, sans-serif">Arial</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="fontSize">Font Size: <output id="sizeValue">16px</output></label>
+                        <input type="range" id="fontSize" min="12" max="32" value="16">
+                    </div>
+                    <div class="control-group">
+                        <label for="textColor">Text Color:</label>
+                        <input type="color" id="textColor" value="#000000">
+                    </div>
+                    <div class="control-group">
+                        <button id="toggleShadow">Toggle Text Shadow</button>
+                    </div>
+                </div>
+                <div class="demo-element">
+                    <div id="textTarget">
+                        <p>Watch how my text style changes with your selections!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="demo-section">
+            <h2>JavaScript Code Example</h2>
+            <div class="code-sample">
+                <pre><code>// Changing background color
+const bgColorPicker = document.getElementById('bgColor');
+const targetElement = document.getElementById('styleTarget');
+
+bgColorPicker.addEventListener('input', () => {
+    targetElement.style.backgroundColor = bgColorPicker.value;
+});
+
+// Adjusting width
+const widthSlider = document.getElementById('widthRange');
+const widthValue = document.getElementById('widthValue');
+const sizeTarget = document.getElementById('sizeTarget');
+
+widthSlider.addEventListener('input', () => {
+    sizeTarget.style.width = `${widthSlider.value}%`;
+    widthValue.textContent = `${widthSlider.value}%`;
+});
+
+// Changing font family
+const fontSelector = document.getElementById('fontFamily');
+const textTarget = document.getElementById('textTarget');
+
+fontSelector.addEventListener('change', () => {
+    textTarget.style.fontFamily = fontSelector.value;
+});</code></pre>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Created with HTML, CSS, and JavaScript | Style Manipulation Demo</p>
+    </footer>
+
+    <script>
+        // Background color manipulation
+        const bgColorPicker = document.getElementById('bgColor');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const styleTarget = document.getElementById('styleTarget');
+        
+        bgColorPicker.addEventListener('input', () => {
+            styleTarget.style.backgroundColor = bgColorPicker.value;
+            
+            // Update selected color option
+            colorOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+        });
+        
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const color = option.getAttribute('data-color');
+                styleTarget.style.backgroundColor = color;
+                bgColorPicker.value = color;
+                
+                // Update selected color option
+                colorOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+            });
+        });
+        
+        // Size manipulation
+        const widthSlider = document.getElementById('widthRange');
+        const widthValue = document.getElementById('widthValue');
+        const heightSlider = document.getElementById('heightRange');
+        const heightValue = document.getElementById('heightValue');
+        const borderRadiusSlider = document.getElementById('borderRadius');
+        const radiusValue = document.getElementById('radiusValue');
+        const sizeTarget = document.getElementById('sizeTarget');
+        
+        widthSlider.addEventListener('input', () => {
+            sizeTarget.style.width = `${widthSlider.value}%`;
+            widthValue.textContent = `${widthSlider.value}%`;
+        });
+        
+        heightSlider.addEventListener('input', () => {
+            sizeTarget.style.height = `${heightSlider.value}px`;
+            heightValue.textContent = `${heightSlider.value}px`;
+        });
+        
+        borderRadiusSlider.addEventListener('input', () => {
+            sizeTarget.style.borderRadius = `${borderRadiusSlider.value}px`;
+            radiusValue.textContent = `${borderRadiusSlider.value}px`;
+        });
+        
+        // Text styling manipulation
+        const fontSelector = document.getElementById('fontFamily');
+        const fontSizeSlider = document.getElementById('fontSize');
+        const sizeValue = document.getElementById('sizeValue');
+        const textColorPicker = document.getElementById('textColor');
+        const toggleShadowBtn = document.getElementById('toggleShadow');
+        const textTarget = document.getElementById('textTarget');
+        
+        fontSelector.addEventListener('change', () => {
+            textTarget.style.fontFamily = fontSelector.value;
+        });
+        
+        fontSizeSlider.addEventListener('input', () => {
+            textTarget.style.fontSize = `${fontSizeSlider.value}px`;
+            sizeValue.textContent = `${fontSizeSlider.value}px`;
+        });
+        
+        textColorPicker.addEventListener('input', () => {
+            textTarget.style.color = textColorPicker.value;
+        });
+        
+        let shadowEnabled = false;
+        toggleShadowBtn.addEventListener('click', () => {
+            shadowEnabled = !shadowEnabled;
+            if (shadowEnabled) {
+                textTarget.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+            } else {
+                textTarget.style.textShadow = 'none';
+            }
+        });
+        
+        // Initialize values
+        widthValue.textContent = `${widthSlider.value}%`;
+        heightValue.textContent = `${heightSlider.value}px`;
+        radiusValue.textContent = `${borderRadiusSlider.value}px`;
+        sizeValue.textContent = `${fontSizeSlider.value}px`;
+    </script>
+</body>
+</html>

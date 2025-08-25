@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removing DOM Elements</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #6dd5ed;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #6dd5ed;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6dd5ed;
+        }
+        
+        .method-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .method-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .controls {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #6dd5ed;
+        }
+        
+        select, button, input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        button {
+            background: #6dd5ed;
+            color: #0f2027;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+        
+        button:hover {
+            background: #0f2027;
+            color: #6dd5ed;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-element {
+            min-height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .demo-element h3 {
+            color: #6dd5ed;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+        
+        .element-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            min-height: 200px;
+        }
+        
+        .element-item {
+            background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+            color: #0f2027;
+            padding: 20px;
+            border-radius: 8px;
+            width: 150px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .element-id {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.8); }
+        }
+        
+        .code-sample {
+            background: rgba(0, 0, 0, 0.3);
+            color: #6dd5ed;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #6dd5ed;
+            font-weight: 600;
+        }
+        
+        .copy-btn {
+            background: #6dd5ed;
+            color: #0f2027;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            width: auto;
+        }
+        
+        .method-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .method-explanation h4 {
+            color: #6dd5ed;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .method-explanation p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #fff;
+        }
+        
+        .method-explanation ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .method-explanation li {
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        .highlight {
+            background: #6dd5ed;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #0f2027;
+        }
+        
+        .info-box {
+            background: rgba(109, 213, 237, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #6dd5ed;
+            border: 1px solid rgba(109, 213, 237, 0.3);
+        }
+        
+        .element-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .element-btn {
+            width: auto;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .removed-list {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+        
+        .removed-list h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .removed-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .removed-item {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Removing DOM Elements</h1>
+            <p class="subtitle">Learn how to remove elements from the DOM with JavaScript</p>
+        </header>
+        
+        <section class="demo-section">
+            <h2>Element Removal Methods</h2>
+            
+            <div class="method-container">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="removeMethod">Select Removal Method:</label>
+                        <select id="removeMethod">
+                            <option value="remove">remove()</option>
+                            <option value="removeChild">removeChild()</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="elementSelect">Select Element to Remove:</label>
+                        <select id="elementSelect">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <button id="removeElement">Remove Element</button>
+                    <button id="resetElements" style="background: #ff6b6b;">Reset All Elements</button>
+                    
+                    <div class="info-box" id="removalInfo">
+                        Select an element and method to remove it
+                    </div>
+                </div>
+                
+                <div class="demo-element">
+                    <h3>DOM Elements</h3>
+                    <div class="element-list" id="elementContainer">
+                        <!-- Elements will be added here -->
+                    </div>
+                    
+                    <div class="removed-list">
+                        <h4>Recently Removed Elements</h4>
+                        <div class="removed-items" id="removedContainer">
+                            <!-- Removed elements will be shown here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="code-sample">
+                <div class="code-header">
+                    <span>JavaScript Code: Removing Elements</span>
+                    <button class="copy-btn">Copy Code</button>
+                </div>
+                <pre><code>// Using remove() method
+function removeElementWithRemove() {
+    const element = document.getElementById('element-to-remove');
+    element.remove(); // Directly removes the element
+}
+
+// Using removeChild() method
+function removeElementWithRemoveChild() {
+    const parent = document.getElementById('parent-element');
+    const child = document.getElementById('child-element');
+    parent.removeChild(child); // Removes the child from parent
+}
+
+// Remove with animation
+function removeWithAnimation(element) {
+    element.style.animation = 'fadeOut 0.5s ease forwards';
+    setTimeout(() => {
+        element.remove();
+    }, 500);
+}
+
+// Check if element exists before removing
+function safeRemove(element) {
+    if (element && element.parentNode) {
+        element.parentNode.removeChild(element);
+    }
+}</code></pre>
+            </div>
+            
+            <div class="method-explanation">
+                <h4>DOM Removal Methods</h4>
+                <p>JavaScript provides two primary methods for removing elements from the DOM:</p>
+                <ul>
+                    <li><span class="highlight">remove()</span>: Removes the element directly from the DOM. This is a newer method that doesn't require reference to the parent element.</li>
+                    <li><span class="highlight">removeChild()</span>: Removes a child element from the DOM. Requires reference to both the parent element and the child element to be removed.</li>
+                </ul>
+                <p><strong>Key differences:</strong></p>
+                <p><code>remove()</code> is more straightforward and doesn't require access to the parent element. <code>removeChild()</code> is older but still widely used, and it returns a reference to the removed node.</p>
+            </div>
+        </section>
+        
+        <section class="demo-section">
+            <h2>Practical Examples</h2>
+            
+            <div class="method-container">
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="dynamicElements">Number of Elements to Create:</label>
+                        <input type="range" id="elementCount" min="1" max="10" value="5">
+                        <output id="countOutput">5 elements</output>
+                    </div>
+                    
+                    <button id="createElements">Create Elements</button>
+                    <button id="removeLast">Remove Last Element</button>
+                    <button id="removeRandom">Remove Random Element</button>
+                    
+                    <div class="info-box" id="exampleInfo">
+                        Create elements and practice removing them
+                    </div>
+                </div>
+                
+                <div class="demo-element">
+                    <h3>Dynamic Elements</h3>
+                    <div class="element-list" id="dynamicContainer">
+                        <!-- Dynamic elements will be added here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="code-sample">
+                <div class="code-header">
+                    <span>JavaScript Code: Practical Examples</span>
+                    <button class="copy-btn">Copy Code</button>
+                </div>
+                <pre><code>// Create multiple elements
+function createMultipleElements(count) {
+    const container = document.getElementById('dynamicContainer');
+    container.innerHTML = ''; // Clear existing elements
+    
+    for (let i = 0; i < count; i++) {
+        const element = document.createElement('div');
+        element.className = 'element-item';
+        element.textContent = `Element ${i+1}`;
+        element.id = `dynamic-${i+1}`;
+        container.appendChild(element);
+    }
+}
+
+// Remove the last element
+function removeLastElement() {
+    const container = document.getElementById('dynamicContainer');
+    if (container.lastChild) {
+        container.lastChild.remove();
+    }
+}
+
+// Remove a random element
+function removeRandomElement() {
+    const container = document.getElementById('dynamicContainer');
+    const children = container.children;
+    
+    if (children.length > 0) {
+        const randomIndex = Math.floor(Math.random() * children.length);
+        children[randomIndex].remove();
+    }
+}
+
+// Remove with animation
+function removeWithAnimation(element) {
+    element.style.animation = 'fadeOut 0.5s ease forwards';
+    setTimeout(() => {
+        element.remove();
+    }, 500);
+}</code></pre>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Created with HTML, CSS, and JavaScript | DOM Element Removal Demo</p>
+    </footer>
+
+    <script>
+        // Initialize elements
+        const elements = [
+            { id: 'elem1', text: 'Element 1' },
+            { id: 'elem2', text: 'Element 2' },
+            { id: 'elem3', text: 'Element 3' },
+            { id: 'elem4', text: 'Element 4' },
+            { id: 'elem5', text: 'Element 5' }
+        ];
+        
+        const elementContainer = document.getElementById('elementContainer');
+        const elementSelect = document.getElementById('elementSelect');
+        const removedContainer = document.getElementById('removedContainer');
+        const dynamicContainer = document.getElementById('dynamicContainer');
+        const countOutput = document.getElementById('countOutput');
+        const elementCount = document.getElementById('elementCount');
+        
+        // Create initial elements
+        function createInitialElements() {
+            elementContainer.innerHTML = '';
+            elementSelect.innerHTML = '';
+            removedContainer.innerHTML = '';
+            
+            elements.forEach(elem => {
+                // Create element for display
+                const elementItem = document.createElement('div');
+                elementItem.className = 'element-item';
+                elementItem.id = elem.id;
+                elementItem.innerHTML = `${elem.text}<span class="element-id">${elem.id}</span>`;
+                elementContainer.appendChild(elementItem);
+                
+                // Create option for select
+                const option = document.createElement('option');
+                option.value = elem.id;
+                option.textContent = elem.text;
+                elementSelect.appendChild(option);
+            });
+        }
+        
+        // Remove element based on selected method
+        document.getElementById('removeElement').addEventListener('click', function() {
+            const method = document.getElementById('removeMethod').value;
+            const elementId = document.getElementById('elementSelect').value;
+            
+            if (!elementId) {
+                document.getElementById('removalInfo').textContent = 'Please select an element to remove';
+                return;
+            }
+            
+            const element = document.getElementById(elementId);
+            
+            if (!element) {
+                document.getElementById('removalInfo').textContent = 'Element not found';
+                return;
+            }
+            
+            // Add removal animation
+            element.style.animation = 'fadeOut 0.5s ease forwards';
+            
+            setTimeout(() => {
+                if (method === 'remove') {
+                    // Using remove() method
+                    element.remove();
+                    document.getElementById('removalInfo').textContent = `Used remove() method on ${elementId}`;
+                } else {
+                    // Using removeChild() method
+                    if (element.parentNode) {
+                        element.parentNode.removeChild(element);
+                        document.getElementById('removalInfo').textContent = `Used removeChild() method on ${elementId}`;
+                    }
+                }
+                
+                // Add to removed list
+                const removedItem = document.createElement('div');
+                removedItem.className = 'removed-item';
+                removedItem.textContent = elementId;
+                removedContainer.appendChild(removedItem);
+                
+                // Update select options
+                const optionToRemove = document.querySelector(`#elementSelect option[value="${elementId}"]`);
+                if (optionToRemove) {
+                    optionToRemove.remove();
+                }
+            }, 500);
+        });
+        
+        // Reset elements
+        document.getElementById('resetElements').addEventListener('click', function() {
+            createInitialElements();
+            removedContainer.innerHTML = '';
+            document.getElementById('removalInfo').textContent = 'All elements have been reset';
+        });
+        
+        // Update element count output
+        elementCount.addEventListener('input', function() {
+            countOutput.textContent = `${this.value} elements`;
+        });
+        
+        // Create dynamic elements
+        document.getElementById('createElements').addEventListener('click', function() {
+            const count = parseInt(elementCount.value);
+            dynamicContainer.innerHTML = '';
+            
+            for (let i = 0; i < count; i++) {
+                const element = document.createElement('div');
+                element.className = 'element-item';
+                element.textContent = `Dynamic ${i+1}`;
+                element.id = `dynamic-${i+1}`;
+                dynamicContainer.appendChild(element);
+            }
+            
+            document.getElementById('exampleInfo').textContent = `Created ${count} elements`;
+        });
+        
+        // Remove last element
+        document.getElementById('removeLast').addEventListener('click', function() {
+            if (dynamicContainer.lastChild) {
+                dynamicContainer.lastChild.style.animation = 'fadeOut 0.5s ease forwards';
+                setTimeout(() => {
+                    dynamicContainer.lastChild.remove();
+                    document.getElementById('exampleInfo').textContent = 'Removed last element';
+                }, 500);
+            } else {
+                document.getElementById('exampleInfo').textContent = 'No elements to remove';
+            }
+        });
+        
+        // Remove random element
+        document.getElementById('removeRandom').addEventListener('click', function() {
+            const children = dynamicContainer.children;
+            
+            if (children.length > 0) {
+                const randomIndex = Math.floor(Math.random() * children.length);
+                const randomElement = children[randomIndex];
+                
+                randomElement.style.animation = 'fadeOut 0.5s ease forwards';
+                setTimeout(() => {
+                    randomElement.remove();
+                    document.getElementById('exampleInfo').textContent = 'Removed random element';
+                }, 500);
+            } else {
+                document.getElementById('exampleInfo').textContent = 'No elements to remove';
+            }
+        });
+        
+        // Copy code functionality
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const codeBlock = this.parentElement.nextElementSibling;
+                const textArea = document.createElement('textarea');
+                textArea.value = codeBlock.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Show feedback
+                const originalText = this.textContent;
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            });
+        });
+        
+        // Initialize the page
+        createInitialElements();
+        
+        // Create initial dynamic elements
+        const createBtn = document.getElementById('createElements');
+        createBtn.click();
+    </script>
+</body>
+</html>
