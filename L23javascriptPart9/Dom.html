@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -62,4 +62,115 @@
 
     <script src="Dom.js"></script>
   </body>
+</html>
+ -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn about Spider-Man, the iconic Marvel Comics superhero created by Stan Lee and Steve Ditko">
+  <title>Spider-Man: The Amazing Superhero | Marvel Comics</title>
+  <link rel="stylesheet" href="Dom.css" />
+  <link rel="preload" href="assets/spiderman_img.png" as="image">
+</head>
+<body>
+  <header>
+    <h1>Spider-Man</h1>
+    <figure>
+      <img src="assets/spiderman_img.png" id="mainImg" alt="Spider-Man in classic red and blue suit swinging between buildings" 
+           class="hero-image" width="800" height="450" loading="lazy" />
+      <figcaption>Spider-Man, Marvel's iconic wall-crawler</figcaption>
+    </figure>
+  </header>
+
+  <main>
+    <article>
+      <section aria-labelledby="about-heading">
+        <h2 id="about-heading">About Spider-Man</h2>
+        <p>
+          <strong>Spider-Man</strong> is a superhero appearing in American comic books
+          published by
+          <a href="https://www.marvel.com/comics" target="_blank" rel="noopener noreferrer">Marvel Comics</a>.
+          Created by writer-editor <strong>Stan Lee</strong> and artist <strong>Steve Ditko</strong>, he
+          first appeared in the anthology comic book
+          <a href="https://www.marvel.com/comics/issue/1272/amazing_fantasy_1962_15" 
+             target="_blank" rel="noopener noreferrer">Amazing Fantasy #15</a>
+          (August 1962) during the <a href="#silver-age">Silver Age of Comic Books</a>. 
+          Spider-Man has since been featured in comic books, television shows, films, 
+          video games, novels, and plays.
+        </p>
+      </section>
+
+      <aside class="publication-info" aria-labelledby="pub-info-heading">
+        <h3 id="pub-info-heading">Publication Info</h3>
+        <ul class="info-list">
+          <li><a href="#publisher" class="info-link">Publisher: Marvel Comics</a></li>
+          <li><a href="#first-appearance" class="info-link">First Appearance: Amazing Fantasy #15</a></li>
+          <li>
+            Created by:
+            <ul class="creator-list">
+              <li><a href="#stan-lee" class="info-link">Stan Lee (Writer)</a></li>
+              <li><a href="#steve-ditko" class="info-link">Steve Ditko (Artist)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+
+      <section aria-labelledby="creation-heading">
+        <h2 id="creation-heading">Creation & Development</h2>
+        <p>
+          In 1962, with the success of the Fantastic Four, Marvel Comics editor and
+          head writer Stan Lee was developing a new superhero concept. The idea for 
+          Spider-Man originated from:
+        </p>
+        <ul>
+          <li>A surge in teenage demand for comic books</li>
+          <li>The desire to create a relatable teenage protagonist</li>
+          <li>Lee's observation of a spider climbing a wall (as frequently recounted)</li>
+          <li>Inspiration from the pulp magazine crime fighter "The Spider"</li>
+        </ul>
+        <p>
+          In his autobiography, Lee noted that Spider-Man allowed him to address what 
+          he felt was missing in comic books at the time - a hero with everyday problems 
+          who wasn't perfect.
+        </p>
+
+        <div class="image-gallery" role="group" aria-label="Spider-Man creation images">
+          <figure>
+            <img src="assets/creation_1.png" class="historical-image" 
+                 alt="Original Spider-Man concept art by Steve Ditko" 
+                 width="300" height="450" loading="lazy" />
+            <figcaption>Ditko's original concept art</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/creation_2.jpeg" class="historical-image" 
+                 alt="Stan Lee and Steve Ditko working together" 
+                 width="300" height="450" loading="lazy" />
+            <figcaption>Lee and Ditko collaborating</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/creation_3.jpeg" class="historical-image" 
+                 alt="Early Spider-Man comic book cover" 
+                 width="300" height="450" loading="lazy" />
+            <figcaption>First appearance cover</figcaption>
+          </figure>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Marvel Comics. All rights reserved.</p>
+    <p>Spider-Man and all related characters are trademarks of Marvel.</p>
+  </footer>
+
+  <script src="Dom.js"></script>
+</body>
 </html>

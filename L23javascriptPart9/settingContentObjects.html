@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Objects in JavaScript</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .content-display {
+            margin-top: 20px;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Working with Content Objects in JavaScript</h1>
+    
+    <div class="container">
+        <div class="controls">
+            <button id="createBtn">Create Content</button>
+            <button id="updateBtn">Update Content</button>
+            <button id="deleteBtn">Delete Content</button>
+        </div>
+        
+        <div id="contentDisplay" class="content-display">
+            <!-- Content will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample content objects
+        const contentObjects = [
+            { id: 1, title: "Introduction to JavaScript", text: "JavaScript is a powerful scripting language for the web." },
+            { id: 2, title: "DOM Manipulation", text: "The Document Object Model represents the structure of a web page." },
+            { id: 3, title: "Event Handling", text: "Events are actions that occur in the browser, like clicks or key presses." },
+            { id: 4, title: "Async Programming", text: "JavaScript uses promises and async/await for asynchronous operations." }
+        ];
+
+        // DOM elements
+        const contentDisplay = document.getElementById('contentDisplay');
+        const createBtn = document.getElementById('createBtn');
+        const updateBtn = document.getElementById('updateBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+
+        // Function to create and display content
+        function createContent() {
+            // Clear existing content
+            contentDisplay.innerHTML = '';
+            
+            // Create elements for each content object
+            contentObjects.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = `card-${item.id}`;
+                
+                const title = document.createElement('h3');
+                title.textContent = item.title;
+                
+                const text = document.createElement('p');
+                text.textContent = item.text;
+                
+                card.appendChild(title);
+                card.appendChild(text);
+                contentDisplay.appendChild(card);
+            });
+        }
+
+        // Function to update content
+        function updateContent() {
+            // Update the first content object
+            if (contentObjects.length > 0) {
+                contentObjects[0].title = "Updated JavaScript Intro";
+                contentObjects[0].text = "JavaScript is a versatile language used for both front-end and back-end development.";
+                
+                // Update the DOM
+                const firstCard = document.getElementById('card-1');
+                if (firstCard) {
+                    firstCard.querySelector('h3').textContent = contentObjects[0].title;
+                    firstCard.querySelector('p').textContent = contentObjects[0].text;
+                    
+                    // Visual feedback for update
+                    firstCard.style.backgroundColor = '#e8f4fc';
+                    setTimeout(() => {
+                        firstCard.style.backgroundColor = '#f9f9f9';
+                    }, 1000);
+                }
+            }
+        }
+
+        // Function to delete content
+        function deleteContent() {
+            if (contentObjects.length > 0) {
+                // Remove the last content object
+                const removedItem = contentObjects.pop();
+                
+                // Remove from DOM
+                const lastCard = document.getElementById(`card-${removedItem.id}`);
+                if (lastCard) {
+                    // Animate removal
+                    lastCard.style.transition = 'opacity 0.5s';
+                    lastCard.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        lastCard.remove();
+                    }, 500);
+                }
+            }
+        }
+
+        // Event listeners
+        createBtn.addEventListener('click', createContent);
+        updateBtn.addEventListener('click', updateContent);
+        deleteBtn.addEventListener('click', deleteContent);
+
+        // Initialize with some content
+        createContent();
+    </script>
+</body>
+</html>

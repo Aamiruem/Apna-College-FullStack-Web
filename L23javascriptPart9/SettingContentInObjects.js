@@ -12,20 +12,27 @@ person['occupation'] = 'Developer';
 
 console.log(person);
 // { name: 'John', age: 30, occupation: 'Developer' }
+
+
 // 2. Counting Properties in an Object
 // Method 1: Object.keys().length
 // javascript
-// const count = Object.keys(person).length;
-// console.log(count); // 3
+const count = Object.keys(person).length;
+console.log(count); // 3
+
+
+
 // Method 2: for...in loop
 // javascript
-let count = 0;
+// let count = 0;
 for (let key in person) {
   if (person.hasOwnProperty(key)) {
     count++;
   }
 }
 console.log(count); // 3
+
+
 // 3. Setting Multiple Properties at Once
 // javascript
 // Using Object.assign()
@@ -37,6 +44,9 @@ const newProperties = {
 Object.assign(person, newProperties);
 console.log(person);
 // { name: 'John', age: 30, occupation: 'Developer', city: 'New York', hobby: 'Reading' }
+
+
+
 // 4. Counting Specific Types of Properties
 // javascript
 // Count string properties
@@ -47,6 +57,11 @@ for (let key in person) {
   }
 }
 console.log(stringCount); // 4 (name, occupation, city, hobby)
+
+
+
+
+
 // 5. Using Property Descriptors
 // javascript
 // Set property with configuration
@@ -58,6 +73,10 @@ Object.defineProperty(person, 'id', {
 });
 
 console.log(Object.keys(person).length); // Now 6
+
+
+
+
 // 6. Dynamic Property Counting
 // javascript
 function addProperty(obj, key, value) {
@@ -67,6 +86,9 @@ function addProperty(obj, key, value) {
 
 const newCount = addProperty(person, 'language', 'English');
 console.log(newCount); // 7
+
+
+
 // Important Notes:
 // Object.keys() only returns enumerable properties
 
@@ -123,6 +145,10 @@ const product = {
   price: 999.99,
   inStock: true
 };
+
+
+
+
 // 3. Modifying Multiple Properties
 // javascript
 // // Using Object.assign()
@@ -131,8 +157,11 @@ const updates = {
   discount: true,
   color: 'silver'
 };
-
 Object.assign(product, updates);
+
+
+
+
 // 4. Computed Property Names
 // javascript
 // const dynamicKey = 'rating';
@@ -141,6 +170,13 @@ const item = {
   [dynamicKey]: 4.5, // Computed property name
   ['is' + 'OnSale']: false // Expression as property name
 };
+console.log(item);
+// { id: 202, rating: 4.5, isOnSale: false }
+
+
+
+
+
 // 5. Nested Objects
 // javascript
 const account = {
@@ -154,6 +190,12 @@ const account = {
 // Setting nested properties
 account.preferences.theme = 'light';
 account['preferences']['notifications'] = false;
+console.log(account);
+// { username: 'jsmith', preferences: { theme: 'light', notifications: false } }
+
+
+
+
 // 6. Advanced Techniques
 // Using Spread Operator
 // javascript
@@ -162,6 +204,12 @@ const updatedUser = {
   age: 29, // Override existing property
   country: 'USA' // Add new property
 };
+console.log(updatedUser);
+// { name: 'Alice', age: 29, email: 'alice@example.com', country: 'USA' }
+
+
+
+
 // Using Object.defineProperty()
 // javascript
 Object.defineProperty(user, 'status', {
@@ -169,6 +217,13 @@ Object.defineProperty(user, 'status', {
   writable: false, // Cannot be changed
   enumerable: true // Will show up in loops
 });
+
+console.log(user);
+// { name: 'Alice', age: 28, email: 'alice@example.com', status: 'active' }
+
+
+
+
 // 7. Deleting Properties
 // javascript
 // delete user.email; // Remove property

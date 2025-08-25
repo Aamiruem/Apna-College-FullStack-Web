@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Selection by ID</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <p id="myParagraph">Hello, world!</p>
+    <button id="changeTextBtn">Click Me</button>
+
+    <script>
+        // Best practice: Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to elements
+            const paragraph = document.getElementById('myParagraph');
+            const button = document.getElementById('changeTextBtn');
+            
+            // Add event listener programmatically (better than inline onclick)
+            button.addEventListener('click', changeText);
+            
+            function changeText() {
+                // Validate element exists before manipulation
+                if (paragraph) {
+                    paragraph.textContent = "You clicked the button!";
+                    
+                    // Bonus: Add visual feedback
+                    paragraph.style.color = "#4CAF50";
+                    paragraph.style.fontWeight = "bold";
+                    
+                    // Disable button after click to prevent multiple changes
+                    button.disabled = true;
+                    button.textContent = "Clicked!";
+                } else {
+                    console.error("Paragraph element not found");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getElementsByTagName Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        form {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    <h1>getElementsByTagName Examples</h1>
+    
+    <section>
+        <h2>Paragraph Examples</h2>
+        <p>First paragraph</p>
+        <p>Second paragraph</p>
+        <div>
+            <p>Nested paragraph</p>
+        </div>
+        <div id="container">
+            <p>Paragraph inside container</p>
+        </div>
+        <p>Paragraph outside container</p>
+    </section>
+
+    <section>
+        <h2>Form Example</h2>
+        <form id="myForm">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="pwd" placeholder="Password">
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Basic paragraph manipulation
+            const paragraphs = document.getElementsByTagName('p');
+            console.log(`Total paragraphs found: ${paragraphs.length}`);
+            
+            for (let i = 0; i < paragraphs.length; i++) {
+                paragraphs[i].style.color = "blue";
+                if (i % 2 === 0) {
+                    paragraphs[i].classList.add('highlight');
+                }
+            }
+
+            // 2. Scoped to specific element
+            const container = document.getElementById('container');
+            const innerParagraphs = container.getElementsByTagName('p');
+            console.log(`Paragraphs in container: ${innerParagraphs.length}`);
+            innerParagraphs[0].textContent += " (modified)";
+
+            // 3. Form inputs example
+            const formInputs = document.getElementsByTagName('input');
+            console.log(`Found ${formInputs.length} input elements`);
+            
+            Array.from(formInputs).forEach(input => {
+                console.log(`Input type: ${input.type}, name: ${input.name || 'no name'}`);
+                input.addEventListener('focus', () => {
+                    input.style.border = "2px solid blue";
+                });
+                input.addEventListener('blur', () => {
+                    input.style.border = "";
+                });
+            });
+
+            // 4. Live collection demonstration
+            const divs = document.getElementsByTagName('div');
+            console.log(`Initial div count: ${divs.length}`);
+            
+            const newDiv = document.createElement('div');
+            newDiv.textContent = "Newly added div";
+            document.body.appendChild(newDiv);
+            console.log(`Updated div count: ${divs.length}`);
+
+            // 5. Comparison with querySelectorAll
+            const allParagraphs = document.querySelectorAll('p');
+            console.log(`querySelectorAll found ${allParagraphs.length} paragraphs`);
+        });
+    </script>
+</body>
+</html>
