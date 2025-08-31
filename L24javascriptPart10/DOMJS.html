@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM in JavaScript - Complete Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        header {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 15px 0;
+            color: #6e8efb;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .interactive-demo {
+            background: #eef5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        button {
+            background: #6e8efb;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #5a7de3;
+        }
+        
+        input, select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        
+        .element-list {
+            list-style-type: none;
+        }
+        
+        .element-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f0f4ff;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .highlight {
+            background: #fff8e1;
+            border-left: 4px solid #ffd54f;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .dom-tree {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background: white;
+            margin: 15px 0;
+        }
+        
+        .node {
+            margin-left: 20px;
+            padding: 5px;
+        }
+        
+        .tag {
+            color: #e06c75;
+        }
+        
+        .text-node {
+            color: #98c379;
+        }
+        
+        .comment {
+            color: #5c6370;
+        }
+        
+        footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JavaScript DOM Manipulation</h1>
+            <p>Complete Guide to the Document Object Model</p>
+        </header>
+        
+        <div class="card">
+            <h2>What is the DOM?</h2>
+            <p>The Document Object Model (DOM) is a programming interface for HTML and XML documents. It represents the page so that programs can change the document structure, style, and content.</p>
+            
+            <div class="highlight">
+                <p>The DOM represents a document as a tree of nodes. The nodes are objects that can be manipulated programmatically with JavaScript.</p>
+            </div>
+            
+            <h3>DOM Tree Structure</h3>
+            <div class="dom-tree">
+                <div class="node"><span class="tag">html</span>
+                    <div class="node"><span class="tag">head</span>
+                        <div class="node"><span class="tag">title</span><span class="text-node">DOM Example</span></div>
+                    </div>
+                    <div class="node"><span class="tag">body</span>
+                        <div class="node"><span class="tag">h1</span><span class="text-node">Hello World</span></div>
+                        <div class="node"><span class="tag">p</span><span class="text-node">This is a paragraph.</span></div>
+                        <div class="node"><span class="comment">&lt;!-- This is a comment --&gt;</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Selecting DOM Elements</h2>
+            <p>JavaScript provides several methods to select elements from the DOM:</p>
+            
+            <div class="code-example">
+                <pre>
+// Select by ID
+const header = document.getElementById('header');
+
+// Select by class name
+const items = document.getElementsByClassName('item');
+
+// Select by tag name
+const paragraphs = document.getElementsByTagName('p');
+
+// CSS selector (returns first match)
+const element = document.querySelector('.container');
+
+// CSS selector (returns all matches)
+const elements = document.querySelectorAll('.item');
+                </pre>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Try it out:</h3>
+                <p id="demo-text">This text will change when you click the button.</p>
+                <button onclick="changeText()">Change Text</button>
+                <button onclick="resetText()">Reset Text</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Manipulating Elements</h2>
+            <p>Once you've selected elements, you can manipulate their content and attributes:</p>
+            
+            <div class="code-example">
+                <pre>
+// Change text content
+element.textContent = 'New text';
+
+// Change HTML content
+element.innerHTML = '&lt;strong&gt;Bold text&lt;/strong&gt;';
+
+// Change attributes
+imageElement.src = 'new-image.jpg';
+
+// Change styles
+element.style.color = 'blue';
+element.style.fontSize = '20px';
+
+// Add/remove CSS classes
+element.classList.add('highlight');
+element.classList.remove('old-class');
+                </pre>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Style Manipulation</h3>
+                <p id="style-demo">Watch my style change!</p>
+                <button onclick="changeColor()">Change Color</button>
+                <button onclick="changeSize()">Change Size</button>
+                <button onclick="resetStyle()">Reset Style</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Creating and Removing Elements</h2>
+            <p>You can dynamically create new elements and add them to the DOM, or remove existing ones:</p>
+            
+            <div class="code-example">
+                <pre>
+// Create new element
+const newElement = document.createElement('div');
+newElement.textContent = 'I am a new div!';
+
+// Add to the DOM
+parentElement.appendChild(newElement);
+
+// Insert at specific position
+parentElement.insertBefore(newElement, referenceElement);
+
+// Remove element
+parentElement.removeChild(elementToRemove);
+
+// Replace element
+parentElement.replaceChild(newElement, oldElement);
+                </pre>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Element Creation</h3>
+                <input type="text" id="new-element-text" placeholder="Enter text for new element">
+                <button onclick="addNewElement()">Add New Element</button>
+                <button onclick="removeLastElement()">Remove Last Element</button>
+                <div id="element-container"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Event Handling</h2>
+            <p>JavaScript allows you to handle user interactions through events:</p>
+            
+            <div class="code-example">
+                <pre>
+// Inline event handling
+&lt;button onclick="handleClick()"&gt;Click me&lt;/button&gt;
+
+// Using event listeners
+const button = document.querySelector('button');
+button.addEventListener('click', function() {
+    console.log('Button clicked!');
+});
+
+// Common events: click, mouseover, mouseout, keydown, keyup, change, submit
+                </pre>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Event Demo</h3>
+                <div id="event-area" style="height: 100px; background: #e0e0e0; display: flex; justify-content: center; align-items: center; margin: 15px 0; border-radius: 5px;">
+                    Hover or click me!
+                </div>
+                <p>Event count: <span id="event-counter">0</span></p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>DOM Traversal</h2>
+            <p>Once you have a reference to an element, you can navigate to related elements:</p>
+            
+            <div class="code-example">
+                <pre>
+// Get parent element
+const parent = element.parentNode;
+
+// Get children
+const children = element.children;
+const firstChild = element.firstElementChild;
+const lastChild = element.lastElementChild;
+
+// Get siblings
+const nextSibling = element.nextElementSibling;
+const previousSibling = element.previousElementSibling;
+                </pre>
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Traversal Example</h3>
+                <div class="traversal-demo">
+                    <ul class="element-list">
+                        <li>First item <button onclick="traverse(this)">Select</button></li>
+                        <li>Second item <button onclick="traverse(this)">Select</button></li>
+                        <li>Third item <button onclick="traverse(this)">Select</button></li>
+                        <li>Fourth item <button onclick="traverse(this)">Select</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>DOM in JavaScript - Interactive Tutorial</p>
+            <p>Try experimenting with the examples to deepen your understanding!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Interactive functionality for the DOM tutorial
+        
+        // Text manipulation
+        function changeText() {
+            const demoText = document.getElementById('demo-text');
+            demoText.textContent = "The text has been changed using JavaScript!";
+            demoText.style.color = "#6e8efb";
+        }
+        
+        function resetText() {
+            const demoText = document.getElementById('demo-text');
+            demoText.textContent = "This text will change when you click the button.";
+            demoText.style.color = "#333";
+        }
+        
+        // Style manipulation
+        function changeColor() {
+            const styleDemo = document.getElementById('style-demo');
+            const colors = ['#e06c75', '#98c379', '#61afef', '#c678dd', '#d19a66'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            styleDemo.style.color = randomColor;
+        }
+        
+        function changeSize() {
+            const styleDemo = document.getElementById('style-demo');
+            const sizes = ['16px', '20px', '24px', '28px', '32px'];
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            styleDemo.style.fontSize = randomSize;
+        }
+        
+        function resetStyle() {
+            const styleDemo = document.getElementById('style-demo');
+            styleDemo.style.color = '#333';
+            styleDemo.style.fontSize = '16px';
+        }
+        
+        // Element creation and removal
+        function addNewElement() {
+            const textInput = document.getElementById('new-element-text');
+            const container = document.getElementById('element-container');
+            
+            if (textInput.value) {
+                const newElement = document.createElement('div');
+                newElement.textContent = textInput.value;
+                newElement.classList.add('new-element');
+                newElement.style.padding = '10px';
+                newElement.style.margin = '5px 0';
+                newElement.style.background = '#f0f4ff';
+                newElement.style.borderRadius = '5px';
+                
+                container.appendChild(newElement);
+                textInput.value = '';
+            }
+        }
+        
+        function removeLastElement() {
+            const container = document.getElementById('element-container');
+            if (container.lastElementChild) {
+                container.removeChild(container.lastElementChild);
+            }
+        }
+        
+        // Event handling
+        const eventArea = document.getElementById('event-area');
+        const eventCounter = document.getElementById('event-counter');
+        let count = 0;
+        
+        eventArea.addEventListener('click', function() {
+            count++;
+            eventCounter.textContent = count;
+            eventArea.textContent = "Clicked!";
+            eventArea.style.background = '#ffd54f';
+        });
+        
+        eventArea.addEventListener('mouseover', function() {
+            eventArea.textContent = "Mouse over!";
+            eventArea.style.background = '#a777e3';
+        });
+        
+        eventArea.addEventListener('mouseout', function() {
+            eventArea.textContent = "Hover or click me!";
+            eventArea.style.background = '#e0e0e0';
+        });
+        
+        // DOM traversal
+        function traverse(button) {
+            // Reset all items
+            const allItems = document.querySelectorAll('.element-list li');
+            allItems.forEach(item => {
+                item.style.background = '#f0f4ff';
+            });
+            
+            // Highlight selected item
+            const selectedItem = button.parentElement;
+            selectedItem.style.background = '#ffd54f';
+            
+            // Demonstrate traversal
+            const previous = selectedItem.previousElementSibling;
+            const next = selectedItem.nextElementSibling;
+            
+            if (previous) previous.style.background = '#c8e6c9';
+            if (next) next.style.background = '#bbdefb';
+        }
+    </script>
+</body>
+</html>
