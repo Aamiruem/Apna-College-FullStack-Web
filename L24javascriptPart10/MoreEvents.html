@@ -27,3 +27,414 @@
     <script src="MoreEvents.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Events Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: #ffcc00;
+        }
+        
+        p {
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #ffcc00;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        #submitBtn {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+        }
+        
+        .output {
+            min-height: 50px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+        
+        .event-log {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .event-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .event-time {
+            color: #ffcc00;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>More JavaScript Events Demo</h1>
+            <p>Explore different JavaScript events and how they work</p>
+        </header>
+        
+        <div class="demo-section">
+            <h2>1. Input and Click Events</h2>
+            <p>Enter your name and click the button to see the events in action.</p>
+            
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            
+            <button id="btn">Submit</button>
+            
+            <div class="output" id="output">Your name will appear here...</div>
+            
+            <div class="event-log" id="clickEventsLog">
+                <div class="event-item">Event log will appear here...</div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Form Submit Event</h2>
+            <p>Try submitting the form to see how the submit event works.</p>
+            
+            <form id="userForm">
+                <div class="input-group">
+                    <input type="text" id="user" placeholder="Type something">
+                </div>
+                
+                <button type="submit">Submit Form</button>
+            </form>
+            
+            <div class="output" id="formOutput">Form submission results will appear here...</div>
+            
+            <div class="event-log" id="formEventsLog">
+                <div class="event-item">Form events will appear here...</div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Input Events</h2>
+            <p>Type in the input field to see various input events in real-time.</p>
+            
+            <div class="input-group">
+                <input type="text" id="liveInput" placeholder="Start typing here...">
+            </div>
+            
+            <div class="output" id="preview">Live preview will appear here...</div>
+            
+            <div class="event-log" id="inputEventsLog">
+                <div class="event-item">Input events will appear here...</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>Events Demonstrated:</h2>
+            <ul>
+                <li><span class="highlight">click</span> - When a button is clicked</li>
+                <li><span class="highlight">submit</span> - When a form is submitted</li>
+                <li><span class="highlight">input</span> - When the value of an input changes</li>
+                <li><span class="highlight">keydown</span> - When a key is pressed down</li>
+                <li><span class="highlight">keyup</span> - When a key is released</li>
+                <li><span class="highlight">focus</span> - When an input receives focus</li>
+                <li><span class="highlight">blur</span> - When an input loses focus</li>
+                <li><span class="highlight">change</span> - When an input value is committed</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>JavaScript Events Demo | Created with HTML, CSS, and JavaScript</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const nameInput = document.getElementById('name');
+            const btn = document.getElementById('btn');
+            const output = document.getElementById('output');
+            const clickEventsLog = document.getElementById('clickEventsLog');
+            
+            const userForm = document.getElementById('userForm');
+            const userInput = document.getElementById('user');
+            const formOutput = document.getElementById('formOutput');
+            const formEventsLog = document.getElementById('formEventsLog');
+            
+            const liveInput = document.getElementById('liveInput');
+            const preview = document.getElementById('preview');
+            const inputEventsLog = document.getElementById('inputEventsLog');
+            
+            // Log event function
+            function logEvent(logElement, message) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item';
+                eventItem.innerHTML = `<span class="event-time">[${timeString}]</span> ${message}`;
+                logElement.prepend(eventItem);
+                
+                // Keep only the last 6 events
+                if (logElement.children.length > 6) {
+                    logElement.removeChild(logElement.lastChild);
+                }
+            }
+            
+            // 1. Input and Click Events
+            nameInput.addEventListener('focus', function() {
+                logEvent(clickEventsLog, 'Name input <span class="highlight">focused</span>');
+            });
+            
+            nameInput.addEventListener('blur', function() {
+                logEvent(clickEventsLog, 'Name input <span class="highlight">blurred</span>');
+            });
+            
+            nameInput.addEventListener('input', function() {
+                logEvent(clickEventsLog, `Name input <span class="highlight">changed</span>: "${this.value}"`);
+            });
+            
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (nameInput.value.trim() === '') {
+                    output.textContent = 'Please enter your name first!';
+                    output.style.color = '#ff6b6b';
+                    logEvent(clickEventsLog, '<span class="highlight" style="color: #ff6b6b;">Button clicked with empty name</span>');
+                } else {
+                    output.textContent = `Hello, ${nameInput.value}! Welcome to the events demo.`;
+                    output.style.color = '#96c93d';
+                    logEvent(clickEventsLog, `<span class="highlight">Button clicked</span> with name: "${nameInput.value}"`);
+                    
+                    // Add visual feedback
+                    this.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
+                    setTimeout(() => {
+                        this.style.background = 'linear-gradient(45deg, #ff6b6b, #ff8e53)';
+                    }, 500);
+                }
+            });
+            
+            // 2. Form Submit Event
+            userInput.addEventListener('focus', function() {
+                logEvent(formEventsLog, 'Form input <span class="highlight">focused</span>');
+            });
+            
+            userInput.addEventListener('blur', function() {
+                logEvent(formEventsLog, 'Form input <span class="highlight">blurred</span>');
+            });
+            
+            userForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (userInput.value.trim() === '') {
+                    formOutput.textContent = 'Please type something before submitting!';
+                    formOutput.style.color = '#ff6b6b';
+                    logEvent(formEventsLog, '<span class="highlight" style="color: #ff6b6b;">Form submitted with empty input</span>');
+                } else {
+                    formOutput.textContent = `Form submitted with: "${userInput.value}"`;
+                    formOutput.style.color = '#96c93d';
+                    logEvent(formEventsLog, `<span class="highlight">Form submitted</span> with: "${userInput.value}"`);
+                    
+                    // Add visual feedback
+                    const submitBtn = this.querySelector('button');
+                    submitBtn.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
+                    setTimeout(() => {
+                        submitBtn.style.background = 'linear-gradient(45deg, #ff6b6b, #ff8e53)';
+                    }, 500);
+                }
+            });
+            
+            // 3. Input Events (Live typing)
+            liveInput.addEventListener('focus', function() {
+                logEvent(inputEventsLog, 'Live input <span class="highlight">focused</span>');
+            });
+            
+            liveInput.addEventListener('blur', function() {
+                logEvent(inputEventsLog, 'Live input <span class="highlight">blurred</span>');
+            });
+            
+            liveInput.addEventListener('keydown', function(e) {
+                logEvent(inputEventsLog, `Key <span class="highlight">down</span>: "${e.key}" (Code: ${e.code})`);
+            });
+            
+            liveInput.addEventListener('keyup', function(e) {
+                logEvent(inputEventsLog, `Key <span class="highlight">up</span>: "${e.key}" (Code: ${e.code})`);
+            });
+            
+            liveInput.addEventListener('input', function() {
+                preview.textContent = this.value;
+                
+                if (this.value.trim() === '') {
+                    preview.textContent = 'Live preview will appear here...';
+                    preview.style.color = 'inherit';
+                } else {
+                    preview.style.color = '#ffcc00';
+                }
+                
+                logEvent(inputEventsLog, `Input <span class="highlight">changed</span>: "${this.value}"`);
+            });
+            
+            // Initial log messages
+            logEvent(clickEventsLog, 'Page loaded. Start interacting with the name input and button.');
+            logEvent(formEventsLog, 'Page loaded. Try submitting the form.');
+            logEvent(inputEventsLog, 'Page loaded. Start typing in the live input field.');
+        });
+    </script>
+</body>
+</html>

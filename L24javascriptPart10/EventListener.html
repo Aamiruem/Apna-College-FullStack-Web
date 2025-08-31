@@ -12,3 +12,383 @@
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listener Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            color: #ffcc00;
+        }
+        
+        p {
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .interactive-area {
+            min-height: 150px;
+            border: 2px dashed #ffcc00;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .color-box {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 10px;
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .output {
+            min-height: 50px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+        
+        .key-box {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin: 0 3px;
+            font-weight: bold;
+        }
+        
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffcc00;
+            margin: 0 10px;
+        }
+        
+        .code-example {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+        
+        .event-log {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .interactive-area {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JavaScript Event Listeners</h1>
+            <p>Event listeners are functions that wait for a specific event to occur on an element, then execute code in response.</p>
+        </header>
+        
+        <div class="demo-section">
+            <h2>1. Click Event</h2>
+            <p>The most common event listener - responds to mouse clicks.</p>
+            <div class="interactive-area">
+                <button id="clickButton">Click Me!</button>
+                <div class="color-box" id="clickBox">Click Me Too!</div>
+            </div>
+            <div class="output" id="clickOutput">Waiting for click event...</div>
+            
+            <div class="code-example">
+                // JavaScript code for click event<br>
+                document.getElementById('clickButton').addEventListener('click', function() {<br>
+                &nbsp;&nbsp;console.log('Button was clicked!');<br>
+                &nbsp;&nbsp;clickOutput.textContent = 'Button was clicked at: ' + new Date().toLocaleTimeString();<br>
+                });
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Double-Click Event</h2>
+            <p>Responds to double-click actions.</p>
+            <div class="interactive-area">
+                <div class="color-box" id="doubleClickBox">Double Click Me!</div>
+            </div>
+            <div class="output" id="doubleClickOutput">Waiting for double-click event...</div>
+            
+            <div class="code-example">
+                // JavaScript code for double-click event<br>
+                doubleClickBox.addEventListener('dblclick', function() {<br>
+                &nbsp;&nbsp;this.style.transform = 'rotate(45deg)';<br>
+                &nbsp;&nbsp;doubleClickOutput.textContent = 'Double-click detected!';<br>
+                });
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Mouse Events</h2>
+            <p>Events related to mouse movements and actions.</p>
+            <div class="interactive-area">
+                <div class="color-box" id="mouseBox">Hover Over Me!</div>
+            </div>
+            <div class="output" id="mouseOutput">Mouse events will appear here...</div>
+            
+            <div class="code-example">
+                // JavaScript code for mouse events<br>
+                mouseBox.addEventListener('mouseenter', function() {<br>
+                &nbsp;&nbsp;mouseOutput.textContent = 'Mouse entered the box';<br>
+                });<br><br>
+                
+                mouseBox.addEventListener('mouseleave', function() {<br>
+                &nbsp;&nbsp;mouseOutput.textContent = 'Mouse left the box';<br>
+                });
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>4. Keyboard Events</h2>
+            <p>Events triggered by keyboard actions.</p>
+            <div class="interactive-area">
+                <input type="text" id="keyInput" placeholder="Click here and type something..." style="padding: 10px; width: 300px; border-radius: 5px; border: none;">
+            </div>
+            <div class="output" id="keyOutput">Keyboard events will appear here...</div>
+            
+            <div class="code-example">
+                // JavaScript code for keyboard events<br>
+                keyInput.addEventListener('keydown', function(event) {<br>
+                &nbsp;&nbsp;keyOutput.textContent = `Key pressed: ${event.key} (Key code: ${event.code})`;<br>
+                });
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>5. Event Object Properties</h2>
+            <p>Every event listener receives an event object with useful properties.</p>
+            <div class="interactive-area">
+                <div class="color-box" id="eventObjectBox">Click Anywhere</div>
+            </div>
+            <div class="output" id="eventObjectOutput">Event details will appear here...</div>
+            
+            <div class="code-example">
+                // JavaScript code for event object<br>
+                document.addEventListener('click', function(event) {<br>
+                &nbsp;&nbsp;eventObjectOutput.innerHTML = `Clicked at X:${event.clientX}, Y:${event.clientY}<br>
+                &nbsp;&nbsp;Target: ${event.target.tagName}`;<br>
+                });
+            </div>
+        </div>
+        
+        <footer>
+            <p>JavaScript Event Listeners Demo | Created with HTML, CSS, and JavaScript</p>
+        </footer>
+    </div>
+
+    <script>
+        // Click Event
+        document.getElementById('clickButton').addEventListener('click', function() {
+            const output = document.getElementById('clickOutput');
+            output.textContent = 'Button was clicked at: ' + new Date().toLocaleTimeString();
+            output.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
+        });
+        
+        document.getElementById('clickBox').addEventListener('click', function() {
+            this.style.background = 'linear-gradient(45deg, ' + getRandomColor() + ', ' + getRandomColor() + ')';
+            document.getElementById('clickOutput').textContent = 'Color box was clicked!';
+        });
+        
+        // Double-Click Event
+        const doubleClickBox = document.getElementById('doubleClickBox');
+        const doubleClickOutput = document.getElementById('doubleClickOutput');
+        
+        doubleClickBox.addEventListener('dblclick', function() {
+            this.style.transform = this.style.transform === 'rotate(45deg)' ? 'rotate(0deg)' : 'rotate(45deg)';
+            this.style.background = 'linear-gradient(45deg, ' + getRandomColor() + ', ' + getRandomColor() + ')';
+            doubleClickOutput.textContent = 'Double-click detected at: ' + new Date().toLocaleTimeString();
+            doubleClickOutput.style.background = 'linear-gradient(45deg, #ff6b6b, #ff8e53)';
+        });
+        
+        // Mouse Events
+        const mouseBox = document.getElementById('mouseBox');
+        const mouseOutput = document.getElementById('mouseOutput');
+        
+        mouseBox.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            mouseOutput.textContent = 'Mouse entered the box at: ' + new Date().toLocaleTimeString();
+            mouseOutput.style.background = 'linear-gradient(45deg, #4A00E0, #8E2DE2)';
+        });
+        
+        mouseBox.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            mouseOutput.textContent = 'Mouse left the box at: ' + new Date().toLocaleTimeString();
+            mouseOutput.style.background = 'linear-gradient(45deg, #E44D26, #F16529)';
+        });
+        
+        mouseBox.addEventListener('mousedown', function() {
+            this.style.transform = 'scale(0.95)';
+            mouseOutput.textContent = 'Mouse button pressed on the box';
+        });
+        
+        mouseBox.addEventListener('mouseup', function() {
+            this.style.transform = 'scale(1.1)';
+            mouseOutput.textContent = 'Mouse button released';
+        });
+        
+        // Keyboard Events
+        const keyInput = document.getElementById('keyInput');
+        const keyOutput = document.getElementById('keyOutput');
+        
+        keyInput.addEventListener('keydown', function(event) {
+            keyOutput.innerHTML = `Key <span class="key-box">${event.key}</span> pressed (Key code: <span class="key-box">${event.code}</span>) at: ${new Date().toLocaleTimeString()}`;
+            keyOutput.style.background = 'linear-gradient(45deg, #3A7BD5, #00D2FF)';
+        });
+        
+        keyInput.addEventListener('focus', function() {
+            keyOutput.textContent = 'Text input is focused. Start typing...';
+            keyOutput.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
+        });
+        
+        keyInput.addEventListener('blur', function() {
+            keyOutput.textContent = 'Text input lost focus. Total characters: ' + this.value.length;
+            keyOutput.style.background = 'linear-gradient(45deg, #FF5F6D, #FFC371)';
+        });
+        
+        // Event Object Properties
+        const eventObjectOutput = document.getElementById('eventObjectOutput');
+        
+        document.addEventListener('click', function(event) {
+            eventObjectOutput.innerHTML = `Clicked at X: <span class="key-box">${event.clientX}</span>, Y: <span class="key-box">${event.clientY}</span><br>
+            Target: <span class="key-box">${event.target.tagName}</span><br>
+            Event type: <span class="key-box">${event.type}</span> at ${new Date().toLocaleTimeString()}`;
+            eventObjectOutput.style.background = 'linear-gradient(45deg, #8E2DE2, #4A00E0)';
+        });
+        
+        // Utility function to generate random colors
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>

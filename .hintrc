@@ -10,6 +10,7 @@
       }
     ],
     "compat-api/css": "off",
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "button-type": "off"
   }
 }
