@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listeners Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 20px 0 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-box {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        #mouseout-box {
+            background-color: #ffebee;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        #keypress-box {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        #scroll-box {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            height: 150px;
+            overflow-y: auto;
+        }
+        
+        .scroll-content {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #load-info {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        #color-button {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .green {
+            background-color: #2ecc71 !important;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+        }
+        
+        .name-output {
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .event-status {
+            margin-top: 10px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        .instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .code {
+            font-family: 'Courier New', monospace;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .demo-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event Listeners Demonstration</h1>
+        
+        <div class="demo-section">
+            <h2>1. Mouseout Event</h2>
+            <div class="instructions">
+                <p>Move your mouse into the box below and then out of it to trigger the <span class="code">mouseout</span> event.</p>
+            </div>
+            <div id="mouseout-box" class="demo-box">
+                <p>Move your mouse out of this box</p>
+                <p class="event-status">No mouseout event detected yet</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Keypress Event</h2>
+            <div class="instructions">
+                <p>Click inside the box below and press any key to trigger the <span class="code">keypress</span> event.</p>
+            </div>
+            <div id="keypress-box" class="demo-box">
+                <p>Press any key while focused here</p>
+                <p class="event-status">No keypress detected yet</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Scroll Event</h2>
+            <div class="instructions">
+                <p>Scroll the content inside the box below to trigger the <span class="code">scroll</span> event.</p>
+            </div>
+            <div id="scroll-box" class="demo-box">
+                <div class="scroll-content">
+                    <p>Scroll me!</p>
+                    <p>⬆️ Keep scrolling ⬇️</p>
+                    <p>You are doing great!</p>
+                    <p>Almost there...</p>
+                    <p>✅ Scroll event detected!</p>
+                </div>
+                <p class="event-status">No scroll event detected yet</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>4. Load Event</h2>
+            <div class="instructions">
+                <p>The <span class="code">load</span> event is triggered when the page has finished loading.</p>
+            </div>
+            <div id="load-info" class="demo-box">
+                <p class="event-status">Page loading status will appear here</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>5. Button Color Change</h2>
+            <div class="instructions">
+                <p>Click the button below to change its color to green using a click event listener.</p>
+            </div>
+            <div class="demo-box">
+                <button id="color-button">Click to Change My Color</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>6. Name Input Validation</h2>
+            <div class="instructions">
+                <p>Enter your name in the input below. Only letters (a-z, A-Z) and spaces are allowed.</p>
+            </div>
+            <div class="demo-box">
+                <input type="text" id="name-input" placeholder="Enter your name">
+                <h2 id="name-output" class="name-output">Your name will appear here</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load event
+        window.addEventListener('load', function() {
+            document.getElementById('load-info').innerHTML = 
+                '<p>✅ Page has finished loading!</p><p>All resources are now available.</p>';
+        });
+        
+        // Mouseout event
+        const mouseoutBox = document.getElementById('mouseout-box');
+        mouseoutBox.addEventListener('mouseout', function() {
+            this.style.backgroundColor = '#ffcdd2';
+            this.style.transform = 'scale(1.02)';
+            this.querySelector('.event-status').textContent = 'Mouseout event detected!';
+            
+            // Reset after a short time
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 300);
+        });
+        
+        // Keypress event
+        const keypressBox = document.getElementById('keypress-box');
+        keypressBox.addEventListener('keypress', function(e) {
+            this.style.backgroundColor = '#bbdefb';
+            this.querySelector('.event-status').textContent = 
+                `Key pressed: ${e.key} (Key code: ${e.keyCode || e.which})`;
+                
+            // Reset after a short time
+            setTimeout(() => {
+                this.style.backgroundColor = '#e3f2fd';
+            }, 500);
+        });
+        
+        // Make keypress box focusable
+        keypressBox.setAttribute('tabindex', '0');
+        
+        // Scroll event
+        const scrollBox = document.getElementById('scroll-box');
+        scrollBox.addEventListener('scroll', function() {
+            this.querySelector('.event-status').textContent = 
+                `Scroll position: ${this.scrollTop}px`;
+        });
+        
+        // Button color change
+        const colorButton = document.getElementById('color-button');
+        colorButton.addEventListener('click', function() {
+            this.classList.toggle('green');
+            this.textContent = this.classList.contains('green') 
+                ? 'Color Changed to Green!' 
+                : 'Click to Change My Color';
+        });
+        
+        // Name input validation
+        const nameInput = document.getElementById('name-input');
+        const nameOutput = document.getElementById('name-output');
+        
+        nameInput.addEventListener('input', function() {
+            // Remove any non-alphabet and non-space characters
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            
+            // Update the output
+            nameOutput.textContent = this.value || 'Your name will appear here';
+        });
+        
+        // Prevent pasting of invalid characters
+        nameInput.addEventListener('paste', function(e) {
+            // Get the pasted data
+            const pastedData = e.clipboardData.getData('text');
+            
+            // Check if pasted data contains invalid characters
+            if (/[^a-zA-Z\s]/.test(pastedData)) {
+                e.preventDefault();
+                alert('Only letters and spaces are allowed');
+            }
+        });
+    </script>
+</body>
+</html>
