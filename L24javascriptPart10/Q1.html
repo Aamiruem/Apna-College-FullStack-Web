@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listener Examples</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 150vh;
+            /* To ensure scrolling is possible */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-header {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        .event-content {
+            padding: 20px;
+        }
+
+        .event-demo {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .event-explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f4fc;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        #box {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 15px auto;
+            text-align: center;
+            line-height: 100px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        #box:hover {
+            background-color: #64b5f6;
+        }
+
+        #inputBox {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .console {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-family: 'Courier New', monospace;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .console-title {
+            color: #3498db;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .clear-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .events-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>JavaScript Event Listeners</h1>
+            <p class="subtitle">Interactive examples of common DOM events</p>
+        </header>
+
+        <div class="events-container">
+            <div class="event-card">
+                <div class="event-header">mouseout Event</div>
+                <div class="event-content">
+                    <h3>Description</h3>
+                    <p>Triggered when the mouse pointer moves out of an element.</p>
+
+                    <div class="event-demo">
+                        <p>Move your cursor into the blue box and then move it out:</p>
+                        <div id="box">Hover & Move Out</div>
+                    </div>
+
+                    <div class="event-explanation">
+                        <p><strong>How it works:</strong> The mouseout event fires when the mouse pointer leaves the
+                            boundaries of the element. This is different from mouseleave, which doesn't bubble up the
+                            DOM tree.</p>
+                        <p><strong>Common use cases:</strong> Tooltip hiding, image zoom effects, hover menus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-header">keypress Event</div>
+                <div class="event-content">
+                    <h3>Description</h3>
+                    <p>Triggered when a key is pressed down and that key normally produces a character value.</p>
+
+                    <div class="event-demo">
+                        <p>Type something in the input field:</p>
+                        <input type="text" id="inputBox" placeholder="Type something...">
+                    </div>
+
+                    <div class="event-explanation">
+                        <p><strong>How it works:</strong> The keypress event fires when a key that produces a character
+                            value is pressed down. This is different from keydown, which fires for any key.</p>
+                        <p><strong>Common use cases:</strong> Form validation, live search, character counting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-header">scroll Event</div>
+                <div class="event-content">
+                    <h3>Description</h3>
+                    <p>Triggered when the document view or an element is scrolled.</p>
+
+                    <div class="event-demo">
+                        <p>Scroll anywhere on the page to see the event trigger.</p>
+                        <p>Current scroll position: <span id="scrollPosition">0</span>px</p>
+                    </div>
+
+                    <div class="event-explanation">
+                        <p><strong>How it works:</strong> The scroll event fires when the user scrolls the document or
+                            an element. It can be used to track scroll position and trigger actions at specific points.
+                        </p>
+                        <p><strong>Common use cases:</strong> Infinite scrolling, parallax effects, scroll-based
+                            animations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-header">load Event</div>
+                <div class="event-content">
+                    <h3>Description</h3>
+                    <p>Triggered when the whole page has loaded, including all dependent resources.</p>
+
+                    <div class="event-demo">
+                        <p>This event has already fired when the page finished loading.</p>
+                        <p id="loadStatus">Page loaded: <span id="loadTime"></span></p>
+                    </div>
+
+                    <div class="event-explanation">
+                        <p><strong>How it works:</strong> The load event fires when the entire page has loaded,
+                            including stylesheets, images, and other external resources.</p>
+                        <p><strong>Common use cases:</strong> Initialization scripts, preloader hiding,
+                            resource-dependent functionality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="console">
+            <div class="console-title">
+                <h3>Event Log</h3>
+                <button class="clear-btn" onclick="clearConsole()">Clear Log</button>
+            </div>
+            <div id="consoleOutput"></div>
+        </div>
+
+        <footer>
+            <p>Created with ❤️ for educational purposes | Refresh the page to see the load event again</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const box = document.getElementById("box");
+        const input = document.getElementById("inputBox");
+        const scrollPosition = document.getElementById("scrollPosition");
+        const loadTime = document.getElementById("loadTime");
+        const consoleOutput = document.getElementById("consoleOutput");
+
+        // Function to log events to the console
+        function logEvent(message) {
+            const now = new Date();
+            const timestamp = now.toLocaleTimeString();
+            const logEntry = document.createElement("p");
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            consoleOutput.appendChild(logEntry);
+            // Auto-scroll to the bottom
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        // Function to clear the console
+        function clearConsole() {
+            consoleOutput.innerHTML = '';
+            logEvent("Console cleared");
+        }
+
+        // 1. mouseout event
+        box.addEventListener("mouseout", () => {
+            logEvent("Mouse moved out of the box!");
+        });
+
+        // 2. keypress event
+        input.addEventListener("keypress", (event) => {
+            logEvent(`Key pressed: '${event.key}' (Key code: ${event.keyCode || event.which})`);
+        });
+
+        // 3. scroll event
+        window.addEventListener("scroll", () => {
+            scrollPosition.textContent = window.scrollY;
+            logEvent(`Page scrolling... Y Offset: ${window.scrollY}px`);
+        });
+
+        // 4. load event
+        window.addEventListener("load", () => {
+            const now = new Date();
+            loadTime.textContent = now.toLocaleTimeString();
+            logEvent("Page fully loaded with all resources!");
+        });
+
+        // Additional event for better user experience
+        document.addEventListener("DOMContentLoaded", () => {
+            logEvent("DOM content loaded - page structure is ready");
+        });
+    </script>
+</body>
+
+</html>
