@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Name Input</title>
+</head>
+
+<body>
+    <!-- Input box -->
+    <input type="text" id="nameInput" placeholder="enter your name">
+
+    <!-- Heading -->
+    <h2 id="nameHeading">Your name will appear here...</h2>
+
+    <script>
+        const input = document.getElementById("nameInput");
+        const heading = document.getElementById("nameHeading");
+
+        input.addEventListener("input", () => {
+            // Remove all characters except letters and space
+            const filtered = input.value.replace(/[^a-zA-Z\s]/g, "");
+            input.value = filtered;  // enforce allowed characters in input
+            heading.textContent = filtered; // show in heading
+        });
+    </script>
+</body>
+
+</html>

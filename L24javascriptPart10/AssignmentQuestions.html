@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Listener Examples</title>
+  <style>
+    body {
+      height: 1500px; /* so that scroll can happen */
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    #box {
+      width: 200px;
+      height: 100px;
+      background-color: lightblue;
+      margin: 20px 0;
+      text-align: center;
+      line-height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Event Listener Demo</h2>
+  <div id="box">Hover & Move Out</div>
+  <input type="text" id="inputBox" placeholder="Type something...">
+
+  <script>
+    // 1. mouseout
+    const box = document.getElementById("box");
+    box.addEventListener("mouseout", () => {
+      alert("Mouse moved out of the box!");
+    });
+
+    // 2. keypress
+    const input = document.getElementById("inputBox");
+    input.addEventListener("keypress", (event) => {
+      console.log("Key pressed:", event.key);
+    });
+
+    // 3. scroll
+    window.addEventListener("scroll", () => {
+      console.log("Page is scrolling, Y Offset:", window.scrollY);
+    });
+
+    // 4. load
+    window.addEventListener("load", () => {
+      console.log("Page fully loaded!");
+      alert("Page is loaded and ready!");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Event Example</title>
+</head>
+<body>
+
+  <script>
+    // 1. Create a button element
+    const btn = document.createElement("button");
+    btn.textContent = "Click Me!";
+
+    // 2. Add button to the page (inside body)
+    document.body.appendChild(btn);
+
+    // 3. Add event listener for click
+    btn.addEventListener("click", () => {
+      btn.style.backgroundColor = "green";
+      btn.style.color = "white"; // text color for better contrast
+    });
+  </script>
+
+</body>
+</html>
