@@ -2,6 +2,7 @@
     "editor.tabCompletion": "on",
     "AllAutocomplete.showCurrentDocument": true,
     "cSpell.words": [
+        "delbtn",
         "Deque"
     ]
 }

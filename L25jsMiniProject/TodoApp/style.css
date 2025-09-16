@@ -1,0 +1,55 @@
+body{
+    background-color: #65ea06;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 200px;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 10px 10px 8px 10px #888888;
+    height: 300px;
+    width: 400px;
+}
+.h3{
+    text-align: center;
+    color: white;
+}
+
+.li .delbtn{
+    /* text-align: center; */
+    display: flex;
+    justify-content: space-around;
+    background: #e7cece;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 2px 2px 8px 2px #888888;
+    transition: 0.3s;
+    height: 20px;
+    width: 70px;
+}
+
+.delbtn:hover{
+    background: red;
+    color: white;
+    box-shadow: 2px 2px 8px 2px #555555;
+}
+
+.delbtn{
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 30px;
+    width: 80px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 2px 8px 2px #888888;
+    outline: none;
+    width: 200px;
+}
+
+
