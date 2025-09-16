@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #fdbb2d;
+            text-shadow: 0 0 10px rgba(253, 187, 45, 0.5);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            color: #fff;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #fdbb2d;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .btn-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .btn {
+            width: 100%;
+            height: 150px;
+            border-radius: 15px;
+            border: 5px solid rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        
+        .btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .red {
+            background-color: #ff4757;
+        }
+        
+        .yellow {
+            background-color: #ffd700;
+        }
+        
+        .green {
+            background-color: #2ed573;
+        }
+        
+        .purple {
+            background-color: #a55eea;
+        }
+        
+        .flash {
+            opacity: 0.8;
+            box-shadow: 0 0 30px white;
+            border: 5px solid white;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        button {
+            background: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            min-width: 140px;
+        }
+        
+        button:hover {
+            background: #ffa500;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .score-item {
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+        
+        .score-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fdbb2d;
+        }
+        
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            display: none;
+        }
+        
+        .game-over h2 {
+            font-size: 3rem;
+            color: #ff4757;
+            margin-bottom: 20px;
+        }
+        
+        .game-over p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 500px) {
+            .btn {
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SIMON GAME</h1>
+        <h2 id="game-message">Press any key to start</h2>
+        
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li>Watch the sequence of colors that Simon shows</li>
+                <li>Repeat the sequence by clicking the colored buttons</li>
+                <li>The sequence gets longer each round</li>
+                <li>If you make a mistake, the game is over!</li>
+            </ul>
+        </div>
+        
+        <div class="btn-container">
+            <div class="btn red" id="red"></div>
+            <div class="btn yellow" id="yellow"></div>
+            <div class="btn green" id="green"></div>
+            <div class="btn purple" id="purple"></div>
+        </div>
+        
+        <div class="controls">
+            <button id="start-btn">Start Game</button>
+            <button id="reset-btn">Reset Game</button>
+        </div>
+        
+        <div class="score-board">
+            <div class="score-item">
+                <div>Level</div>
+                <div class="score-value" id="level">0</div>
+            </div>
+            <div class="score-item">
+                <div>Score</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div>High Score</div>
+                <div class="score-value" id="high-score">0</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-over" id="game-over">
+        <h2>GAME OVER</h2>
+        <p>You reached level <span id="final-level">0</span> with a score of <span id="final-score">0</span></p>
+        <button id="restart-btn">Play Again</button>
+    </div>
+
+    <script>
+        // Game variables
+        let gameSeq = [];
+        let userSeq = [];
+        let btns = ["red", "yellow", "purple", "green"];
+        let started = false;
+        let level = 0;
+        let score = 0;
+        let highScore = 0;
+        
+        // DOM elements
+        const gameMessage = document.getElementById("game-message");
+        const levelDisplay = document.getElementById("level");
+        const scoreDisplay = document.getElementById("score");
+        const highScoreDisplay = document.getElementById("high-score");
+        const startBtn = document.getElementById("start-btn");
+        const resetBtn = document.getElementById("reset-btn");
+        const restartBtn = document.getElementById("restart-btn");
+        const gameOverScreen = document.getElementById("game-over");
+        const finalLevel = document.getElementById("final-level");
+        const finalScore = document.getElementById("final-score");
+        const allBtns = document.querySelectorAll(".btn");
+        
+        // Start game on key press
+        document.addEventListener("keypress", function() {
+            if (!started) {
+                started = true;
+                levelUp();
+            }
+        });
+        
+        // Start game on button click
+        startBtn.addEventListener("click", function() {
+            if (!started) {
+                started = true;
+                levelUp();
+            }
+        });
+        
+        // Reset game
+        resetBtn.addEventListener("click", function() {
+            resetGame();
+        });
+        
+        // Restart game after game over
+        restartBtn.addEventListener("click", function() {
+            gameOverScreen.style.display = "none";
+            resetGame();
+            started = true;
+            levelUp();
+        });
+        
+        // Button flash function
+        function btnFlash(btn) {
+            btn.classList.add("flash");
+            setTimeout(function() {
+                btn.classList.remove("flash");
+            }, 300);
+        }
+        
+        // User button press
+        function btnPress() {
+            if (!started) return;
+            
+            let btn = this;
+            btnFlash(btn);
+            
+            let userColor = btn.getAttribute("id");
+            userSeq.push(userColor);
+            
+            checkAns(userSeq.length - 1);
+        }
+        
+        // Add event listeners to buttons
+        for (let btn of allBtns) {
+            btn.addEventListener("click", btnPress);
+        }
+        
+        // Level up function
+        function levelUp() {
+            userSeq = [];
+            level++;
+            score = level * 10;
+            gameMessage.innerText = `Level ${level}`;
+            levelDisplay.innerText = level;
+            scoreDisplay.innerText = score;
+            
+            let randIdx = Math.floor(Math.random() * 4);
+            let randColor = btns[randIdx];
+            let randBtn = document.querySelector(`#${randColor}`);
+            gameSeq.push(randColor);
+            
+            setTimeout(() => {
+                btnFlash(randBtn);
+            }, 500);
+        }
+        
+        // Check user's answer
+        function checkAns(idx) {
+            if (userSeq[idx] === gameSeq[idx]) {
+                if (userSeq.length === gameSeq.length) {
+                    setTimeout(levelUp, 1000);
+                }
+            } else {
+                gameOver();
+            }
+        }
+        
+        // Game over function
+        function gameOver() {
+            started = false;
+            gameMessage.innerText = "Game Over! Press any key to start again";
+            
+            // Update high score if needed
+            if (score > highScore) {
+                highScore = score;
+                highScoreDisplay.innerText = highScore;
+                localStorage.setItem("simonHighScore", highScore);
+            }
+            
+            // Show game over screen
+            finalLevel.innerText = level;
+            finalScore.innerText = score;
+            gameOverScreen.style.display = "flex";
+            
+            // Flash all buttons in red to indicate game over
+            document.body.style.backgroundColor = "#b21f1f";
+            setTimeout(() => {
+                document.body.style.backgroundColor = "";
+            }, 300);
+        }
+        
+        // Reset game function
+        function resetGame() {
+            started = false;
+            gameSeq = [];
+            userSeq = [];
+            level = 0;
+            score = 0;
+            levelDisplay.innerText = level;
+            scoreDisplay.innerText = score;
+            gameMessage.innerText = "Press any key to start";
+            gameOverScreen.style.display = "none";
+        }
+        
+        // Initialize high score from local storage if available
+        if (localStorage.getItem("simonHighScore")) {
+            highScore = parseInt(localStorage.getItem("simonHighScore"));
+            highScoreDisplay.innerText = highScore;
+        }
+    </script>
+</body>
+</html>
