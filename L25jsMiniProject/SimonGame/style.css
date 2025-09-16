@@ -1,38 +1,52 @@
-body{
+body {
     text-align: center;
+    font-family: Arial, sans-serif;
 }
-
-.btn{
-    height: 200px;
-    width: 200px;
-    border-radius: 20%;
-    border:10px solid black;
-    margin: 2rem;
-}
-
-.btn-container{
-    display: flex;
+.btn-container {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-gap: 2rem;
     justify-content: center;
 }
 
-.red{
+
+.btn {
+    height: 200px;
+    width: 200px;
+    border-radius: 20%;
+    border: 10px solid black;
+    transition: background-color 0.2s ease;
+    margin: 10px;
+}
+
+.btn-container {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    grid-gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.red {
     background-color: #d95980;
 }
 
-.yellow{
+.yellow {
     background-color: #f99b45;
 }
 
-.green{
+.green {
     background-color: #63aac0;
 }
 
-.purple{
+.purple {
     background-color: #819ff9;
 }
 
-
-.flash{
+.flash {
     background-color: white;
-    
+}
+
+.userFlash {
+    background-color: lightgray;
 }

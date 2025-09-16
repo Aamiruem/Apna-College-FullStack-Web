@@ -83,6 +83,13 @@ function btnFlash(btn) {
     }, 300);
 }
 
+function userFlash(btn) {
+    btn.classList.add("flash");
+    setTimeout(function () {
+        btn.classList.remove("userFlash");
+    }, 300);
+}
+
 function levelUp() {
     userSeq = []; // reset user sequence at new level
     level++;
