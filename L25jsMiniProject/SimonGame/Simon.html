@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Says</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #555;
+            margin-bottom: 30px;
+            min-height: 60px;
+        }
+        
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .line-one, .line-two {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            height: 150px;
+            width: 150px;
+            border-radius: 20%;
+            border: 8px solid black;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .red {
+            background-color: #d95980;
+        }
+        
+        .yellow {
+            background-color: #f99b45;
+        }
+        
+        .green {
+            background-color: #63aac0;
+        }
+        
+        .purple {
+            background-color: #819ff9;
+        }
+        
+        .flash {
+            background-color: white !important;
+        }
+        
+        .userFlash {
+            background-color: lightgray !important;
+        }
+        
+        .game-over {
+            background-color: red;
+        }
+        
+        @media (max-width: 600px) {
+            .btn {
+                height: 120px;
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Simon Says Game</h1>
+    <h2>Press any key to start the game</h2>
+
+    <div class="btn-container">
+        <div class="line-one">
+            <button class="btn red" id="red">1</button>
+            <button class="btn yellow" id="yellow">2</button>
+        </div>
+        <div class="line-two">
+            <button class="btn green" id="green">3</button>
+            <button class="btn purple" id="purple">4</button>
+        </div>
+    </div>
+
+    <script>
+        let gameSeq = [];
+        let userSeq = [];
+
+        let btns = ["yellow", "red", "purple", "green"];
+
+        let started = false;
+        let level = 0;
+
+        let h2 = document.querySelector("h2");
+
+        // Start game on key press
+        document.addEventListener("keypress", function() {
+            if (started == false) {
+                console.log("Game started");
+                started = true;
+                levelUp();
+            }
+        });
+
+        function gameFlash(btn) {
+            btn.classList.add("flash");
+            setTimeout(function() {
+                btn.classList.remove("flash");
+            }, 250);
+        }
+
+        function userFlash(btn) {
+            btn.classList.add("userFlash");
+            setTimeout(function() {
+                btn.classList.remove("userFlash");
+            }, 250);
+        }
+
+        function levelUp() {
+            userSeq = []; // reset user sequence at new level
+            level++;
+            h2.innerText = `Level ${level}`;
+
+            let randIdx = Math.floor(Math.random() * 4); // Fixed: should be 4, not 3
+            let randColor = btns[randIdx];
+            let randBtn = document.querySelector(`#${randColor}`);
+
+            gameSeq.push(randColor); // store game sequence
+            console.log("Game sequence:", gameSeq);
+
+            gameFlash(randBtn);
+        }
+
+        function checkAns(idx) {
+            if (userSeq[idx] === gameSeq[idx]) {
+                if (userSeq.length == gameSeq.length) {
+                    setTimeout(levelUp, 1000);
+                }
+            } else {
+                h2.innerHTML = `Game Over! Your score was <b>${level}</b><br>Press any key to restart.`;
+
+                playSound("wrong");
+                document.body.classList.add("game-over");
+                setTimeout(() => {
+                    document.body.classList.remove("game-over");
+                }, 200);
+                reset();
+            }
+        }
+
+        function btnPress() {
+            let btn = this;
+            userFlash(btn);
+
+            let userColor = btn.getAttribute("id");
+            userSeq.push(userColor);
+
+            checkAns(userSeq.length - 1);
+        }
+
+        // Attach click listeners to all buttons
+        let allBtns = document.querySelectorAll(".btn");
+        for (btn of allBtns) {
+            btn.addEventListener("click", btnPress);
+        }
+
+        // For sound use (placeholder - you'll need actual sound files)
+        function playSound(color) {
+            console.log(`Playing sound for ${color}`);
+            // Uncomment below when you have sound files
+            let audio = new Audio(`${color}.mp3`);
+            audio.play();
+        }
+
+        function reset() {
+            started = false;
+            gameSeq = [];
+            userSeq = [];
+            level = 0;
+            h2.innerHTML = "Press any key to start";
+        }
+    </script>
+</body>
+
+</html>
