@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Call Stack Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .explanation {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .explanation h2 {
+            margin-bottom: 15px;
+            color: #fdbb2d;
+        }
+        
+        .explanation p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .code-visualization {
+            flex: 2;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .code-container {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex: 1;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .code-title {
+            font-weight: bold;
+            color: #fdbb2d;
+        }
+        
+        .code {
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.5;
+            color: #f8f8f2;
+        }
+        
+        .stack-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stack-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .stack-title {
+            font-weight: bold;
+            color: #fdbb2d;
+        }
+        
+        .stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+            gap: 5px;
+            min-height: 300px;
+        }
+        
+        .stack-frame {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            width: 80%;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stack-frame.global {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+        }
+        
+        .stack-frame.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #fdbb2d;
+            z-index: 10;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            background: #7f8c8d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .console {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+        
+        .console-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fdbb2d;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .console-output {
+            color: #f8f8f2;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            background-color: rgba(253, 187, 45, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .current-line {
+            background-color: rgba(52, 152, 219, 0.3);
+            display: inline-block;
+            width: 100%;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .code-visualization {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JavaScript Call Stack Visualization</h1>
+            <p class="subtitle">See how function calls are managed in the call stack</p>
+        </header>
+        
+        <div class="content">
+            <div class="explanation">
+                <h2>What is the Call Stack?</h2>
+                <p>The call stack is a fundamental concept in JavaScript that keeps track of function calls in your code.</p>
+                <p>When a function is called, it's added (pushed) to the top of the stack. When a function returns, it's removed (popped) from the stack.</p>
+                <p>JavaScript has a single call stack, which is why it's referred to as a "single-threaded" language.</p>
+                
+                <h2>How It Works</h2>
+                <p>1. The <span class="highlight">global execution context</span> is always at the bottom of the stack</p>
+                <p>2. When a function is called, a new frame is pushed onto the stack</p>
+                <p>3. The function at the top of the stack is the one currently executing</p>
+                <p>4. When a function returns, its frame is popped from the stack</p>
+                <p>5. The stack follows the LIFO (Last In, First Out) principle</p>
+                
+                <h2>Stack Overflow</h2>
+                <p>If too many functions are called without returning, the stack can exceed its maximum size, resulting in a "stack overflow" error.</p>
+            </div>
+            
+            <div class="code-visualization">
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">JavaScript Code</div>
+                        <div>Step: <span id="step-counter">0</span>/12</div>
+                    </div>
+                    <pre class="code" id="code-display">// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();</pre>
+                </div>
+                
+                <div class="stack-container">
+                    <div class="stack-header">
+                        <div class="stack-title">Call Stack</div>
+                        <div>Frames: <span id="frame-counter">1</span></div>
+                    </div>
+                    <div class="stack" id="stack-visualization">
+                        <div class="stack-frame global">Global Execution Context</div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button id="prev-btn" disabled>Previous Step</button>
+                    <button id="next-btn">Next Step</button>
+                    <button id="reset-btn">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="console">
+            <div class="console-title">Console Output</div>
+            <div class="console-output" id="console-output"></div>
+        </div>
+    </div>
+
+    <script>
+        // Code steps with highlights
+        const codeSteps = [
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+<span class="current-line">first();</span>`,
+            `// Example function calls
+function first() {
+    <span class="current-line">console.log("Entering first()");</span>
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    <span class="current-line">second();</span>
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    <span class="current-line">console.log("Entering second()");</span>
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    <span class="current-line">third();</span>
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    <span class="current-line">console.log("Entering third()");</span>
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    <span class="current-line">console.log("Leaving third()");</span>
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    <span class="current-line">third();</span>
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    <span class="current-line">console.log("Leaving second()");</span>
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    <span class="current-line">second();</span>
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    <span class="current-line">console.log("Leaving first()");</span>
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+<span class="current-line">first();</span>`,
+            `// Example function calls
+function first() {
+    console.log("Entering first()");
+    second();
+    console.log("Leaving first()");
+}
+
+function second() {
+    console.log("Entering second()");
+    third();
+    console.log("Leaving second()");
+}
+
+function third() {
+    console.log("Entering third()");
+    console.log("Leaving third()");
+}
+
+// Start the call chain
+first();`
+        ];
+
+        // Stack states for each step
+        const stackStates = [
+            ["Global Execution Context"],
+            ["Global Execution Context", "first()"],
+            ["Global Execution Context", "first()"],
+            ["Global Execution Context", "first()", "second()"],
+            ["Global Execution Context", "first()", "second()"],
+            ["Global Execution Context", "first()", "second()", "third()"],
+            ["Global Execution Context", "first()", "second()", "third()"],
+            ["Global Execution Context", "first()", "second()"],
+            ["Global Execution Context", "first()", "second()"],
+            ["Global Execution Context", "first()"],
+            ["Global Execution Context", "first()"],
+            ["Global Execution Context"],
+            ["Global Execution Context"]
+        ];
+
+        // Console outputs for each step
+        const consoleOutputs = [
+            "",
+            "Entering first()",
+            "Entering first()",
+            "Entering first()\nEntering second()",
+            "Entering first()\nEntering second()",
+            "Entering first()\nEntering second()\nEntering third()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()\nLeaving second()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()\nLeaving second()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()\nLeaving second()\nLeaving first()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()\nLeaving second()\nLeaving first()",
+            "Entering first()\nEntering second()\nEntering third()\nLeaving third()\nLeaving second()\nLeaving first()"
+        ];
+
+        let currentStep = 0;
+        const maxSteps = codeSteps.length - 1;
+
+        // DOM elements
+        const codeDisplay = document.getElementById('code-display');
+        const stackVisualization = document.getElementById('stack-visualization');
+        const consoleOutput = document.getElementById('console-output');
+        const stepCounter = document.getElementById('step-counter');
+        const frameCounter = document.getElementById('frame-counter');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Initialize the visualization
+        function updateVisualization() {
+            // Update code display
+            codeDisplay.innerHTML = codeSteps[currentStep];
+            
+            // Update stack visualization
+            stackVisualization.innerHTML = '';
+            const currentStack = stackStates[currentStep];
+            
+            currentStack.forEach((frame, index) => {
+                const frameElement = document.createElement('div');
+                frameElement.className = `stack-frame ${frame === 'Global Execution Context' ? 'global' : ''} ${index === currentStack.length - 1 ? 'active' : ''}`;
+                frameElement.textContent = frame;
+                stackVisualization.appendChild(frameElement);
+            });
+            
+            // Update console output
+            consoleOutput.textContent = consoleOutputs[currentStep];
+            
+            // Update counters
+            stepCounter.textContent = currentStep;
+            frameCounter.textContent = currentStack.length;
+            
+            // Update button states
+            prevBtn.disabled = currentStep === 0;
+            nextBtn.disabled = currentStep === maxSteps;
+        }
+
+        // Event listeners for buttons
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateVisualization();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < maxSteps) {
+                currentStep++;
+                updateVisualization();
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            currentStep = 0;
+            updateVisualization();
+        });
+
+        // Initialize the visualization
+        updateVisualization();
+    </script>
+</body>
+</html>
