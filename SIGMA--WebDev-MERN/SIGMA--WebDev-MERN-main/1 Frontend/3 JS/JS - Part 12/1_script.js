@@ -1,8 +1,9 @@
 // Call Stack in JS
 function hello() {
     console.log("Inside hello function :");
-    console.log("Helo!");
+    console.log("Hello!");
 }
+
 function demo() {
     console.log("Inside demo function calling hello function :");
     hello(); // Function call
@@ -43,7 +44,7 @@ console.log(a + b);
 setTimeout( () => { // Here, JS will act Asynchronously (due to setTimeout)
     console.log("My name is Jack");
 }, 1000);
-console.log("Helo...");
+console.log("Hello...");
 
 
 /* Callback Hell => It is a situation where we have multiple asynchronous tasks and
@@ -137,7 +138,7 @@ changeBgColor("black", 1500).then((result) => {
 Async keyword => It is a way to handle Asynchronous tasks in a more better/cleaner way. */
 async function greet() { // Async function returns a promise
     // throw "Something went wrong";
-    return "Helo, Im Async Function";
+    return "Hello, Im Async Function";
 }
 greet().then((result) => {
     console.log("Greet result :", result);
