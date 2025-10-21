@@ -234,6 +234,29 @@ class DataService {
 // Common Patterns
 // javascript
 // Retry pattern
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async means “asynchronous” — it allows a function to run without blocking other code execution.
+
+// 👉 Short answer:
+// async lets a function run independently and return a promise.
 async function fetchWithRetry(url, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {

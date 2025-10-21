@@ -1,4 +1,27 @@
-function getNum(){
+// Await Keyword
+// pauses the execution of its surrounding async function until the promise is settled
+// (resolved or rejected)
+
+async function show() {
+    await colorChange("violet", 1000);
+    await colorChange("indigo", 1000);
+    await colorChange("blue", 1000);
+    await colorChange("green", 1000);
+    await colorChange("yellow", 1000);
+    await colorChange("orange", 1000);
+    return "done";
+}
+
+await colorChange("green", 1000);
+await colorChange("yellow", 1000);
+await colorChange("orange", 1000);
+return "done";
+
+
+
+
+
+function getNum() {
     return new Promise((resolve, rejected) => {
         setTimeout(() => {
             let num = Math.floor(Math.random() * 10) + 1;
