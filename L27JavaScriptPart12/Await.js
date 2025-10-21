@@ -2,6 +2,8 @@
 // pauses the execution of its surrounding async function until the promise is settled
 // (resolved or rejected)
 
+// async functions always return a Promise.
+
 async function show() {
     await colorChange("violet", 1000);
     await colorChange("indigo", 1000);
