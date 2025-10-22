@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog & Joke Generator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .joke-container {
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            width: 80%;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.5;
+            transition: opacity 0.5s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            img {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .container {
+                gap: 20px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.4/dist/axios.min.js"></script>
+    
+    <h1>Dog Image & Joke Generator</h1>
+    
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Random Dog Image</h2>
+            <img id="dogImage" alt="Random dog image" src="https://via.placeholder.com/400x400?text=Loading...">
+            <button id="dogBtn">Show New Dog</button>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Random Dad Joke</h2>
+            <div id="jokeText" class="joke-container">Click the button to get a joke!</div>
+            <button id="jokeBtn">Tell Me a Joke</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const dogBtn = document.getElementById("dogBtn");
+        const jokeBtn = document.getElementById("jokeBtn");
+        const dogImage = document.getElementById("dogImage");
+        const jokeText = document.getElementById("jokeText");
+
+        // API URLs
+        const DOG_API_URL = "https://dog.ceo/api/breeds/image/random";
+        const JOKE_API_URL = "https://icanhazdadjoke.com/";
+
+        // Event Listeners
+        dogBtn.addEventListener("click", fetchRandomDog);
+        jokeBtn.addEventListener("click", fetchRandomJoke);
+
+        // Fetch random dog image
+        async function fetchRandomDog() {
+            try {
+                dogBtn.disabled = true;
+                dogBtn.textContent = "Loading...";
+                
+                const response = await axios.get(DOG_API_URL);
+                dogImage.src = response.data.message;
+                
+                // Add fade-in effect
+                dogImage.style.opacity = 0;
+                setTimeout(() => dogImage.style.opacity = 1, 100);
+            } catch (error) {
+                console.error("Error fetching dog image:", error);
+                dogImage.alt = "Failed to load dog image";
+                dogImage.src = "https://via.placeholder.com/400x400?text=Error+Loading+Image";
+            } finally {
+                dogBtn.disabled = false;
+                dogBtn.textContent = "Show New Dog";
+            }
+        }
+
+        // Fetch random dad joke
+        async function fetchRandomJoke() {
+            try {
+                jokeBtn.disabled = true;
+                jokeBtn.textContent = "Loading...";
+                
+                const config = { headers: { Accept: "application/json" } };
+                const response = await axios.get(JOKE_API_URL, config);
+                
+                jokeText.textContent = response.data.joke;
+                
+                // Add fade-in effect
+                jokeText.style.opacity = 0;
+                setTimeout(() => jokeText.style.opacity = 1, 100);
+            } catch (error) {
+                console.error("Error fetching joke:", error);
+                jokeText.textContent = "Couldn't fetch a joke. Try again later!";
+            } finally {
+                jokeBtn.disabled = false;
+                jokeBtn.textContent = "Tell Me a Joke";
+            }
+        }
+
+        // Initial load
+        fetchRandomDog();
+        fetchRandomJoke();
+    </script>
+</body>
+</html>
