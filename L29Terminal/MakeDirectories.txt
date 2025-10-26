@@ -1,0 +1,66 @@
+Making Directories
+mkdir = make directory
+
+
+Exactly! ✅ You’re learning one of the most important basic commands: creating folders. Let’s break it down clearly.
+
+🏗 Creating Directories
+1️⃣ Basic Command
+mkdir folder_name
+
+
+Creates a folder called folder_name in your current directory.
+
+Example:
+
+mkdir Projects
+
+
+➡️ Creates a folder named Projects in your current directory.
+
+2️⃣ Creating Multiple Folders at Once
+mkdir folder1 folder2 folder3
+
+
+Example:
+
+mkdir HTML CSS JS
+
+
+➡️ Creates three folders: HTML, CSS, and JS.
+
+3️⃣ Creating Nested Folders
+mkdir -p parent/child/grandchild
+
+
+-p = make parent directories if they don’t exist
+
+Works in Linux / Git Bash / PowerShell (with slight difference)
+
+Example in Git Bash:
+
+mkdir -p Delta/js/css
+
+
+➡️ Creates Delta/js/css all at once, creating missing parent folders if needed.
+
+In Windows CMD, nested folders can be created like this:
+
+mkdir Delta\js\css
+
+4️⃣ Check If Folder Is Created
+ls       # Git Bash / Linux / PowerShell
+dir      # Windows CMD
+
+
+💡 Pro Tips:
+
+Folder names with spaces need quotes:
+
+mkdir "My Projects"
+
+
+Always check your current directory with:
+
+pwd       # Git Bash / PowerShell
+cd        # Windows CMD

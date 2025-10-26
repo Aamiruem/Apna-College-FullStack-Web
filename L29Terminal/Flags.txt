@@ -1,0 +1,151 @@
+Flags
+Flags are characters that we pass with commands to modify their behaviour
+manual Command
+man Is - give info about Is command
+man mkdir- give info about mkdir command
+with Flags
+Is -1
+Is -a
+Is -la
+
+
+
+
+
+Exactly! You’re now learning about flags (also called options or switches) — they modify the behavior of commands in the terminal. Let’s break this down clearly.
+
+🏷 What are Flags?
+
+Flags are additional characters or options passed with a command to change how it works.
+
+Usually start with a dash - (single - for short flags, double -- for long flags).
+
+Syntax:
+
+command -flag
+command -flag1 -flag2
+
+📖 Manual Command
+
+To see details about any command, you can use man (manual):
+
+man ls
+
+
+Shows all options, usage, and description of the command.
+
+man mkdir
+
+
+Explains mkdir usage and all possible flags.
+
+Tip: Press q to quit the manual page.
+
+🖥 Examples of Flags with ls
+Command	Meaning
+ls -1	List files one per line
+ls -a	List all files, including hidden files (those starting with .)
+ls -l	List files in long format (shows permissions, owner, size, date)
+ls -la	Combine flags: long format with hidden files
+
+Example Output:
+
+$ ls -la
+drwxr-xr-x  5 user staff  160 Oct 26 12:00 .
+drwxr-xr-x 10 user staff  320 Oct 25 09:00 ..
+-rw-r--r--  1 user staff  123 Oct 26 11:50 notes.txt
+-rw-r--r--  1 user staff   45 Oct 26 10:30 .hiddenfile
+
+⚡ Other Useful mkdir Flags
+mkdir -p parent/child
+
+
+-p = create parent directories if they don’t exist.
+
+mkdir -v foldername
+
+
+-v = verbose → shows what folders were created.
+
+💡 Summary
+
+Flags modify behavior of commands.
+
+You can combine multiple flags (ls -la = long format + show hidden files).
+
+Always check with man command to know all options.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Absolutely! Since you want a Windows equivalent of Linux/macOS commands like pwd, ls, cd, mkdir, clear, here’s a complete cheat sheet for beginners showing Windows CMD, PowerShell, and Git Bash usage.
+
+🖥 Basic File & Directory Commands on Windows
+Linux / Git Bash	Windows CMD	Windows PowerShell	What it Does
+pwd	cd (alone)	pwd	Show current directory
+ls	dir	ls or Get-ChildItem	List files & folders
+ls -a	dir /a	ls -Force	List all files including hidden
+ls -l	dir	ls -l	Detailed list (PowerShell)
+cd foldername	cd foldername	cd foldername	Move into folder
+cd ..	cd ..	cd ..	Move up one directory
+cd /absolute/path	cd C:\path\to\folder	cd C:\path\to\folder	Go to absolute path
+mkdir foldername	mkdir foldername	mkdir foldername	Create new folder
+mkdir -p parent/child	mkdir parent\child	mkdir parent\child -Force	Create nested folders
+clear	cls	Clear-Host or cls	Clear screen
+rm filename	del filename	Remove-Item filename	Delete a file
+rm -r foldername	rmdir /s foldername	Remove-Item foldername -Recurse	Delete a folder and its contents
+💡 Examples in Windows CMD
+C:\Users\aamir> cd Desktop
+C:\Users\aamir\Desktop> dir
+# Lists all files and folders
+
+C:\Users\aamir\Desktop> mkdir Projects
+# Creates Projects folder
+
+C:\Users\aamir\Desktop> cd Projects
+# Move into Projects folder
+
+C:\Users\aamir\Desktop\Projects> cd ..
+# Go back one directory
+
+C:\Users\aamir\Desktop> cls
+# Clear the screen
+
+💡 Examples in PowerShell
+PS C:\Users\aamir\Desktop> ls
+# List files/folders
+
+PS C:\Users\aamir\Desktop> mkdir "My Projects"
+# Creates folder with space in name
+
+PS C:\Users\aamir\Desktop> cd "My Projects"
+# Move into folder
+
+PS C:\Users\aamir\Desktop\My Projects> cd ..
+# Go back one folder
+
+PS C:\Users\aamir\Desktop> Clear-Host
+# Clear screen
+
+💡 Examples in Git Bash on Windows
+$ pwd
+/c/Users/aamir/Desktop
+
+$ ls -la
+# List all files including hidden
+
+$ mkdir Projects
+$ cd Projects
+$ cd ..
+$ clear

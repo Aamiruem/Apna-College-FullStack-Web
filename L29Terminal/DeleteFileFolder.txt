@@ -1,0 +1,60 @@
+Deleting Files & Folders
+rm - removes files
+rmdir -> removes empty folders
+rm -r -> removes any folders
+
+
+
+
+Exactly! You’re now learning how to delete files and folders, but on Windows, the commands differ depending on whether you use PowerShell, Command Prompt (CMD), or Git Bash. Let’s make it clear.
+
+🗑 Deleting Files & Folders
+1️⃣ Linux / Git Bash Commands
+Command	What it does
+rm filename	Deletes a file
+rmdir foldername	Deletes an empty folder
+rm -r foldername	Deletes a folder and all its contents recursively
+rm -rf foldername	Force deletes a folder and all contents without prompt
+
+Examples:
+
+rm abc.txt           # delete a single file
+rmdir oldfolder      # delete empty folder
+rm -r Projects       # delete folder with files inside
+rm -rf temp          # force delete without asking
+
+2️⃣ Windows Command Prompt (CMD)
+Linux Command	CMD Equivalent	Notes
+rm filename	del filename	Delete a file
+rmdir foldername	rmdir foldername	Delete an empty folder
+rm -r foldername	rmdir /s foldername	Delete folder with all contents
+rm -rf foldername	rmdir /s /q foldername	Force delete folder without confirmation
+
+Example in CMD:
+
+del abc.txt
+rmdir oldfolder
+rmdir /s Projects
+rmdir /s /q temp
+
+3️⃣ Windows PowerShell
+Linux Command	PowerShell Equivalent	Notes
+rm filename	Remove-Item filename	Delete a file
+rmdir foldername	Remove-Item foldername	Delete empty folder
+rm -r foldername	Remove-Item foldername -Recurse	Delete folder with contents
+rm -rf foldername	Remove-Item foldername -Recurse -Force	Force delete without prompt
+
+Example in PowerShell:
+
+Remove-Item abc.txt
+Remove-Item oldfolder
+Remove-Item Projects -Recurse
+Remove-Item temp -Recurse -Force
+
+⚡ Important Tips
+
+Always double-check the folder/file path before deleting with -r or -rf / -Recurse -Force.
+
+PowerShell aliases: rm works in PowerShell as an alias for Remove-Item, but parameters are different.
+
+Use ls / dir to confirm files/folders before deleting.

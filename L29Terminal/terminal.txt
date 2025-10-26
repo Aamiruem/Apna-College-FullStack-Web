@@ -1,0 +1,34 @@
+Different Terms
+• Command Line - any interface that is used by entering textual commands (gen. Windows centric)
+• Terminal - This is a type of command line (gen. Mac centric)
+• Console - A command-line interface used to work with your computer
+• Shell - A program running on terminal
+• Bash - A popular shell on Mac OS/ Linux
+• Z-Shell - Another shell (default)
+
+
+Perfect 👏
+Here’s a clear, structured explanation of all those related but often confusing terms — so you can easily remember them:
+
+🧩 Different Terms Explained
+Term	Meaning	Example / Notes
+Command Line	Any interface where you type text commands to control your computer.	Example: Command Prompt in Windows (cmd.exe)
+Terminal	A program (or window) that lets you access the command line. More common term on macOS or Linux.	Example: Terminal app on macOS
+Console	A command-line interface (CLI) used to interact with your computer system. It’s a more general term that can refer to both the physical device or the software.	Example: Windows Console, Linux TTY
+Shell	A program that runs inside a terminal — it interprets and executes your commands.	Example: Bash, Zsh, PowerShell
+Bash	Stands for “Bourne Again SHell” — a very popular shell in Linux/macOS systems.	Default shell on many Linux systems
+Z-Shell (Zsh)	An advanced shell, similar to Bash but with extra features like better auto-completion, themes, and customization.	Default shell on macOS (since Catalina)
+💡 How They Relate
+[Terminal / Console]
+        ↓
+     [Shell]
+        ↓
+   Executes your
+   [Commands]
+
+
+Example:
+When you open macOS Terminal, it launches Zsh (the shell).
+You then type a command like ls, which the shell executes.
+
+Would you like me to make a simple visual diagram (image) showing this hierarchy: Terminal → Shell → Command → OS?

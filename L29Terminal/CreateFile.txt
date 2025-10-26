@@ -1,0 +1,39 @@
+✅ Correct Way to Create Files in PowerShell
+1️⃣ Single File
+for windows: ni => it is a command to execute on the terminal. New-Item index.js -ItemType File
+
+
+Creates a new empty file called index.js.
+
+2️⃣ Multiple Files at Once
+New-Item index.html -ItemType File
+New-Item app.js -ItemType File
+New-Item abc.txt -ItemType File
+
+
+Or using a shortcut alias ni:
+
+ni index.html -type file
+ni app.js -type file
+ni abc.txt -type file
+
+3️⃣ Check Files
+ls
+
+
+Lists all files and folders in the current directory.
+
+4️⃣ Create Files Inside a Folder
+mkdir Project
+cd Project
+ni index.html -type file
+ni app.js -type file
+
+
+💡 Tip:
+If you want Linux-style touch commands, you can use Git Bash on Windows:
+
+touch index.html app.js abc.txt
+
+
+This works exactly like on Linux/Mac.

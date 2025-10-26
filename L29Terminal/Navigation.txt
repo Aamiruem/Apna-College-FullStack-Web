@@ -1,0 +1,40 @@
+Navigation
+Inside & Outside Directories
+cd = change directory
+cd Desktop
+cd .. = back button
+cd ../.. = back two levels button
+
+
+
+mkdir Delta = make directory (create folder)
+mkdir Projects
+mkdir Projects/Project1
+
+Perfect 👏 — you’re learning the navigation basics of the terminal!
+Here’s a clear and complete explanation of how to move inside and outside directories using cd.
+
+🧭 Navigation Commands in Terminal
+Command	Full Form / Meaning	What It Does	Example / Notes
+cd	Change Directory	Moves you into another folder.	cd Desktop → goes inside the “Desktop” folder.
+cd ..	Go Back One Level	Moves you up one directory (like a back button).	If you’re in /Users/aamir/Desktop, cd .. takes you to /Users/aamir.
+cd ../..	Go Back Two Levels	Moves up two directories.	From /Users/aamir/Desktop, it goes to /Users.
+cd /	Go to Root Directory	Takes you to the top-most folder in your system.	/
+cd ~	Go to Home Directory	Shortcut for your home folder.	/Users/aamir
+cd folder_name	Change into a specific folder.	cd Projects	
+cd -	Go to previous directory (toggle).	Like “back” and “forward” between two folders.	
+🧠 Example Workflow
+pwd
+# /Users/aamir
+
+cd Desktop
+# moves into Desktop folder
+
+pwd
+# /Users/aamir/Desktop
+
+cd ..
+# goes back to /Users/aamir
+
+cd -
+# back to Desktop again

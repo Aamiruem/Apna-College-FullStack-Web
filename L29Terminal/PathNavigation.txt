@@ -1,0 +1,169 @@
+
+Paths
+Absolute & Relative
+cd Desktop/Delta (relative path)
+cd/Users/aamir/Desktop (absolute path)
+/ = root directory
+- = home directory
+
+
+
+
+
+
+
+
+
+
+Perfect 👏 — you’re now learning one of the most important concepts in terminal navigation:
+Absolute vs Relative Paths 🔍
+
+Let’s make it super clear and easy to remember 👇
+
+🧭 PATHS in the Terminal
+1️⃣ Absolute Path
+
+The complete address from the root directory ( / or C:\ ) to the target folder/file.
+
+It always starts from the root.
+
+Works from anywhere in the system.
+
+✅ Examples
+
+On Windows PowerShell / CMD:
+
+cd C:\Users\aamir\Desktop\Delta
+
+
+On Mac / Linux:
+
+cd /Users/shradhakhapra/Desktop
+
+
+🧠 Think of it like:
+
+The full home address of your house (city, street, number).
+
+2️⃣ Relative Path
+
+The short path starting from your current location.
+
+It doesn’t start with / or a drive letter.
+
+It depends on where you currently are.
+
+✅ Examples
+If you are already in:
+
+C:\Users\aamir\
+
+
+then:
+
+cd Desktop\Delta
+
+
+➡️ will take you to
+C:\Users\aamir\Desktop\Delta
+
+🧠 Think of it like:
+
+Directions from where you currently stand (“Go right two blocks” instead of “Full address”).
+
+3️⃣ Special Symbols
+Symbol	Meaning	Example
+/	Root directory (top-most folder)	/Users, /home, or C:\
+~	Home directory (your user folder)	cd ~ → goes to /Users/aamir
+..	Parent directory (one level up)	cd ..
+.	Current directory	cd . (stays in same folder)
+🧠 Examples in Action
+pwd
+# /Users/aamir
+
+cd Desktop/Delta
+# relative path (from current folder)
+
+cd /Users/aamir/Desktop/Delta
+# absolute path (from root)
+
+cd ~
+# goes to home directory
+
+cd ..
+# goes back one level
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ah! I see exactly what’s happening — you’re in Git Bash on Windows (MINGW64), and the paths are slightly different from Linux or Windows CMD.
+
+Let’s fix this step by step 👇
+
+⚠️ Problem
+
+You tried commands like:
+
+/user/aamir/Desktop/Delta/js
+/c/user/aamir/Desktop/Delta/js
+
+
+…and got:
+
+bash: /user/aamir/Desktop/Delta/js: No such file or directory
+
+
+Why?
+
+Git Bash maps Windows drives to /c/, not /c/user/.
+
+The folder is probably js inside Delta, so the correct path uses capital U in Users: /c/Users/....
+
+You can’t just type a path — you need cd to change directory.
+
+✅ Correct Usage
+1. Using absolute path
+cd /c/Users/aamir/Desktop/Delta/js
+
+
+Make sure js folder actually exists.
+
+You can check by listing files in Delta:
+
+ls
+
+2. Using relative path
+
+If you’re already in /c/Users/aamir/Desktop/Delta:
+
+cd js
+
+
+This will take you into js folder relative to your current directory.
+
+3. If folder does not exist
+
+Create it first:
+
+mkdir js
+cd js
+
+🧠 Key Points for Git Bash on Windows
+Command / Path	Explanation
+/c/Users/aamir/...	Absolute path on Windows drive C:
+~/Desktop/Delta/js	Relative path from home (~ = C:/Users/aamir)
+cd foldername	Move into folder relative to current directory
+ls	List files/folders (works in Git Bash, unlike CMD)

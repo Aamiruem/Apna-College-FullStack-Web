@@ -1,0 +1,21 @@
+Perfect! You’re listing a bunch of basic file and directory commands across different shells. Let me make a complete Windows cheat sheet for you, showing Command Prompt (CMD), PowerShell, and Git Bash equivalents for all of them.
+
+🖥 Basic File & Directory Commands Cheat Sheet
+Command / Action	Git Bash / Linux	Windows CMD	Windows PowerShell	Description
+Show current directory	pwd	cd	pwd	Prints current working directory
+List files/folders	ls	dir	ls / Get-ChildItem	Lists all files and folders
+Create a folder	mkdir foldername	mkdir foldername	mkdir foldername	Make a new directory
+Delete a folder	rmdir foldername	rmdir foldername	Remove-Item foldername	Delete empty folder
+Delete a folder with contents	rm -r foldername	rmdir /s foldername	Remove-Item foldername -Recurse	Delete folder + files
+Change directory	cd foldername	cd foldername	cd foldername	Move into a folder
+Go up one directory	cd ..	cd ..	cd ..	Move to parent folder
+Go up two directories	cd ../..	cd ..\..	cd ../..	Move up two levels
+Create a file	touch filename	type nul > filename	New-Item filename -ItemType File / ni filename -type file	Create empty file
+Clear screen	clear	cls	Clear-Host / cls	Clears the terminal window
+⚡ Tips
+
+Git Bash supports Linux-style commands (pwd, ls, touch, rm) directly.
+
+PowerShell has aliases (ls, rm, ni) that work like Linux commands but with different parameters.
+
+CMD uses traditional Windows commands (dir, cd, del, rmdir, cls).
